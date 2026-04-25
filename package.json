@@ -1,0 +1,19 @@
+{
+  "name": "halal-tradepilot-ai",
+  "version": "0.1.0",
+  "private": true,
+  "workspaces": [
+    "apps/webapp",
+    "apps/admin"
+  ],
+  "scripts": {
+    "dev:webapp": "npm run dev --workspace @halal-tradepilot/webapp",
+    "dev:admin": "npm run dev --workspace @halal-tradepilot/admin",
+    "dev:backend": "uvicorn backend.app.main:app --host ${API_HOST:-0.0.0.0} --port ${API_PORT:-8000} --reload",
+    "build": "npm run build --workspaces --if-present",
+    "typecheck": "npm run typecheck --workspaces --if-present"
+  },
+  "devDependencies": {
+    "typescript": "^5.4.5"
+  }
+}
