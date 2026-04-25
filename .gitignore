@@ -1,9 +1,15 @@
 node_modules/
 dist/
+package-lock 2.json
 *.tsbuildinfo
 .venv/
 __pycache__/
+*.pyc
 *.py[cod]
+.pytest_cache/
+*.db
+*.sqlite
+*.sqlite3
 .env
 .DS_Store
 __MACOSX/

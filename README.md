@@ -6,7 +6,7 @@ Monorepo skeleton for the Halal TradePilot AI project.
 
 - `apps/webapp` - Vite React TypeScript Telegram Web App skeleton
 - `apps/admin` - Vite React TypeScript Admin Panel skeleton
-- `backend` - FastAPI backend skeleton
+- `backend` - FastAPI backend foundation
 - `infra` - infrastructure placeholders
 - `docs` - project documentation
 
@@ -29,6 +29,12 @@ pip install -r backend/requirements.txt
 
 ## Run Locally
 
+Default local ports:
+
+- Backend API: `8000`
+- Web App: `5173`
+- Admin Panel: `3001`
+
 Web App:
 
 ```bash
@@ -47,6 +53,8 @@ API:
 npm run dev:backend
 ```
 
+The backend uses SQLite for local development only. PostgreSQL is required for production and MVP deployment.
+
 All services with Docker Compose:
 
 ```bash
@@ -58,12 +66,14 @@ docker compose up --build
 ```bash
 npm run typecheck
 python -m compileall backend
+pytest backend/tests
 ```
 
 ## Known Limitations
 
-- This is only the Task 1 monorepo skeleton.
+- This is still an early backend foundation.
+- Task 2 contains no business logic.
 - No business logic is implemented.
 - No signals functionality is implemented.
 - No AI functionality is implemented.
-- No database, authentication, Telegram SDK integration, or deployment pipeline is configured.
+- No database models, authentication, Telegram SDK integration, or deployment pipeline is configured.

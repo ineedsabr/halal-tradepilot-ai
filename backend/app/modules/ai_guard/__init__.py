@@ -1,0 +1,1 @@
+"""AI guard module placeholder."""

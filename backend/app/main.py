@@ -1,15 +1,23 @@
 from fastapi import FastAPI
-from pydantic import BaseModel
+from fastapi.middleware.cors import CORSMiddleware
+
+from .api.router import api_router
+from .core.config import settings
 
 
-class HealthResponse(BaseModel):
-    status: str
-    service: str
+def create_app() -> FastAPI:
+    app = FastAPI(title=settings.project_name)
+
+    app.add_middleware(
+        CORSMiddleware,
+        allow_origins=settings.cors_origins,
+        allow_credentials=True,
+        allow_methods=["*"],
+        allow_headers=["*"],
+    )
+
+    app.include_router(api_router)
+    return app
 
 
-app = FastAPI(title="Halal TradePilot AI API")
-
-
-@app.get("/health", response_model=HealthResponse)
-def health() -> HealthResponse:
-    return HealthResponse(status="ok", service="backend")
+app = create_app()

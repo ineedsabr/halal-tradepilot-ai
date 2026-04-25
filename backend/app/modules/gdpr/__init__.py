@@ -1,0 +1,1 @@
+"""GDPR module placeholder."""
