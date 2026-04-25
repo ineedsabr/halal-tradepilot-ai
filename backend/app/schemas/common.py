@@ -71,3 +71,12 @@ class AssetSummary(OrmSchema):
     asset_type: str
     data_quality: DataQualityStatus | None = None
     data_freshness: DataFreshnessStatus | None = None
+
+
+class InstrumentSummary(OrmSchema):
+    id: str
+    code: str
+    name: str
+    category: str
+    is_absolute_restriction: bool
+    restriction_reason: str | None = None

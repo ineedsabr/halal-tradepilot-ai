@@ -1,8 +1,15 @@
 from enum import StrEnum
+from datetime import datetime
 
-from pydantic import Field
-
-from .common import AssetSummary, Confidence, DataFreshnessStatus, DataQualityStatus, OrmSchema, SoftDeleteReadMixin
+from .common import (
+    AssetSummary,
+    Confidence,
+    DataFreshnessStatus,
+    DataQualityStatus,
+    InstrumentSummary,
+    OrmSchema,
+    SoftDeleteReadMixin,
+)
 
 
 class HalalStatus(StrEnum):
@@ -17,9 +24,23 @@ class HalalStatus(StrEnum):
 
 class HalalAssessmentBase(OrmSchema):
     asset_id: str
-    status: HalalStatus
-    methodology_version: str | None = None
-    notes: str | None = None
+    methodology: str
+    asset_status: HalalStatus
+    business_screen_status: HalalStatus | None = None
+    financial_screen_status: HalalStatus | None = None
+    crypto_screen_status: HalalStatus | None = None
+    summary: str
+    detailed_reason: str | None = None
+    source_name: str
+    source_url: str | None = None
+    source_date: datetime | None = None
+    data_quality_status: DataQualityStatus
+    data_freshness_status: DataFreshnessStatus
+    confidence: Confidence
+    reviewed_by_admin_id: str | None = None
+    reviewed_at: datetime | None = None
+    next_review_at: datetime | None = None
+    is_current: bool
 
 
 class HalalAssessmentRead(HalalAssessmentBase, SoftDeleteReadMixin):
@@ -28,8 +49,16 @@ class HalalAssessmentRead(HalalAssessmentBase, SoftDeleteReadMixin):
 
 class HalalCheckResult(OrmSchema):
     asset: AssetSummary
-    status: HalalStatus
+    instrument: InstrumentSummary
+    asset_status: HalalStatus
+    instrument_status: HalalStatus
+    combined_status: HalalStatus
+    methodology: str
     confidence: Confidence
-    data_quality: DataQualityStatus
-    data_freshness: DataFreshnessStatus
-    reasons: list[str] = Field(default_factory=list)
+    data_quality_status: DataQualityStatus
+    data_freshness_status: DataFreshnessStatus
+    last_reviewed_at: datetime | None = None
+    next_review_at: datetime | None = None
+    summary: str
+    blocking_reason: str | None = None
+    disclaimer: str

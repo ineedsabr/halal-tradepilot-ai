@@ -1,6 +1,6 @@
 from functools import lru_cache
 
-from pydantic import Field
+from pydantic import Field, model_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -12,10 +12,19 @@ class Settings(BaseSettings):
     admin_url: str = Field(default="http://localhost:3001", alias="ADMIN_URL")
     telegram_bot_token: str = Field(default="replace_me", alias="TELEGRAM_BOT_TOKEN")
     jwt_secret: str = Field(default="replace_me", alias="JWT_SECRET")
+    jwt_expires_minutes: int = Field(default=30, alias="JWT_EXPIRES_MINUTES")
     database_url: str = Field(default="sqlite:///./dev.db", alias="DATABASE_URL")
     project_name: str = "Halal TradePilot AI API"
 
     model_config = SettingsConfigDict(env_file=".env", extra="ignore")
+
+    @model_validator(mode="after")
+    def validate_production_secrets(self) -> "Settings":
+        if self.app_env.lower() == "production":
+            jwt_secret = self.jwt_secret.strip()
+            if jwt_secret == "replace_me" or len(jwt_secret) < 32:
+                raise ValueError("JWT_SECRET must be configured for production")
+        return self
 
     @property
     def cors_origins(self) -> list[str]:

@@ -1,8 +1,7 @@
 from enum import StrEnum
+from decimal import Decimal
 
-from pydantic import Field
-
-from .common import Confidence, OrmSchema
+from .common import OrmSchema
 
 
 class RiskVerdict(StrEnum):
@@ -13,6 +12,10 @@ class RiskVerdict(StrEnum):
 
 
 class RiskCalculationResult(OrmSchema):
+    position_size: Decimal
+    max_loss: Decimal
+    risk_reward: Decimal | None = None
     verdict: RiskVerdict
-    confidence: Confidence
-    reasons: list[str] = Field(default_factory=list)
+    blocked_reason: str | None = None
+    caution_reason: str | None = None
+    explanation: str

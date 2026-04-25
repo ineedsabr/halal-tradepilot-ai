@@ -8,6 +8,7 @@ type TelegramThemeParams = {
 
 export type TelegramWebApp = {
   colorScheme?: 'light' | 'dark';
+  initData?: string;
   themeParams?: TelegramThemeParams;
   ready?: () => void;
   expand?: () => void;

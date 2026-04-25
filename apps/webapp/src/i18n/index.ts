@@ -16,6 +16,10 @@ export const resources = {
         description: 'Coming soon',
       },
       loading: 'Loading',
+      sessionExpired: {
+        title: 'Session expired',
+        description: 'Please reopen the Mini App from Telegram.',
+      },
       nav: {
         home: 'Home',
         check: 'Check',
@@ -48,6 +52,10 @@ export const resources = {
         description: 'Скоро',
       },
       loading: 'Загрузка',
+      sessionExpired: {
+        title: 'Сессия истекла',
+        description: 'Пожалуйста, откройте Mini App заново из Telegram.',
+      },
       nav: {
         home: 'Главная',
         check: 'Проверка',
@@ -80,6 +88,10 @@ export const resources = {
         description: 'Demnaechst',
       },
       loading: 'Laden',
+      sessionExpired: {
+        title: 'Sitzung abgelaufen',
+        description: 'Bitte oeffne die Mini App erneut aus Telegram.',
+      },
       nav: {
         home: 'Home',
         check: 'Check',

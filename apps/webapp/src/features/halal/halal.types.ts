@@ -1,4 +1,10 @@
-import type { AssetSummary, Confidence, DataFreshnessStatus, DataQualityStatus } from '../../types/common';
+import type {
+  AssetSummary,
+  Confidence,
+  DataFreshnessStatus,
+  DataQualityStatus,
+  InstrumentSummary,
+} from '../../types/common';
 
 export type HalalStatus =
   | 'HALAL'
@@ -11,9 +17,17 @@ export type HalalStatus =
 
 export type HalalCheckResult = {
   asset: AssetSummary;
-  status: HalalStatus;
+  instrument: InstrumentSummary;
+  assetStatus: HalalStatus;
+  instrumentStatus: HalalStatus;
+  combinedStatus: HalalStatus;
+  methodology: string;
   confidence: Confidence;
-  dataQuality: DataQualityStatus;
-  dataFreshness: DataFreshnessStatus;
-  reasons: string[];
+  dataQualityStatus: DataQualityStatus;
+  dataFreshnessStatus: DataFreshnessStatus;
+  lastReviewedAt?: string;
+  nextReviewAt?: string;
+  summary: string;
+  blockingReason?: string;
+  disclaimer: string;
 };

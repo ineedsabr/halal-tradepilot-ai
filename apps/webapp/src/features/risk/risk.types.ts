@@ -1,9 +1,11 @@
-import type { Confidence } from '../../types/common';
-
 export type RiskVerdict = 'ALLOWED_FOR_PAPER' | 'CAUTION' | 'BLOCKED' | 'INVALID_INPUT';
 
 export type RiskCalculationResult = {
+  positionSize: string;
+  maxLoss: string;
+  riskReward?: string;
   verdict: RiskVerdict;
-  confidence: Confidence;
-  reasons: string[];
+  blockedReason?: string;
+  cautionReason?: string;
+  explanation: string;
 };

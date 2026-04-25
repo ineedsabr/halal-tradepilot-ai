@@ -1,11 +1,13 @@
 """Pydantic schemas package."""
 
 from .ai import AIOutputLogBase, AIGuardResponse, AIValidationStatus
+from .auth import AuthTokenResponse, TelegramAuthRequest
 from .common import (
     AssetSummary,
     Confidence,
     DataFreshnessStatus,
     DataQualityStatus,
+    InstrumentSummary,
     Language,
     RiskProfile,
     Theme,
@@ -22,6 +24,7 @@ __all__ = [
     "AIOutputLogBase",
     "AIValidationStatus",
     "AssetSummary",
+    "AuthTokenResponse",
     "Confidence",
     "DataFreshnessStatus",
     "DataQualityStatus",
@@ -30,6 +33,7 @@ __all__ = [
     "HalalCheckResult",
     "HalalStatus",
     "HealthResponse",
+    "InstrumentSummary",
     "JournalEntryBase",
     "JournalEntryRead",
     "JournalEntrySummary",
@@ -42,5 +46,6 @@ __all__ = [
     "RiskProfile",
     "RiskVerdict",
     "Theme",
+    "TelegramAuthRequest",
     "UserLevel",
 ]

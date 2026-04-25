@@ -26,3 +26,12 @@ export type AssetSummary = {
   dataQuality?: DataQualityStatus;
   dataFreshness?: DataFreshnessStatus;
 };
+
+export type InstrumentSummary = {
+  id: string;
+  code: string;
+  name: string;
+  category: string;
+  isAbsoluteRestriction: boolean;
+  restrictionReason?: string;
+};

@@ -9,4 +9,4 @@ class WatchlistItem(IdMixin, TimestampMixin, SoftDeleteMixin, Base):
     __tablename__ = "watchlist_items"
 
     user_id: Mapped[str] = mapped_column(ForeignKey("users.id"), index=True, nullable=False)
-    instrument_id: Mapped[str] = mapped_column(ForeignKey("instruments.id"), index=True, nullable=False)
+    asset_id: Mapped[str] = mapped_column(ForeignKey("assets.id"), index=True, nullable=False)
