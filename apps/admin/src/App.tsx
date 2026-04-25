@@ -1,17 +1,21 @@
-import './App.css';
-
-const APP_NAME = 'Halal TradePilot AI';
+import { Navigate, Route, Routes } from 'react-router-dom';
+import { ProtectedRoute } from './components/routes/ProtectedRoute';
+import { DashboardPage } from './pages/DashboardPage';
+import { LoginPage } from './pages/LoginPage';
 
 export function App() {
   return (
-    <main className="admin-shell">
-      <header className="topbar">
-        <p className="eyebrow">Admin Panel</p>
-        <h1>{APP_NAME}</h1>
-      </header>
-      <section className="content" aria-label="Status">
-        Vite, React, and TypeScript admin skeleton is ready.
-      </section>
-    </main>
+    <Routes>
+      <Route path="/login" element={<LoginPage />} />
+      <Route
+        path="/"
+        element={
+          <ProtectedRoute>
+            <DashboardPage />
+          </ProtectedRoute>
+        }
+      />
+      <Route path="*" element={<Navigate to="/" replace />} />
+    </Routes>
   );
 }
