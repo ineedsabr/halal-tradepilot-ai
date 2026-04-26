@@ -1,0 +1,398 @@
+
+"PERPETUALS",
+
+"MARGIN",
+
+"SHORT_SELLING",
+
+"LEVERAGED_TOKEN",
+
+"EARN_LENDING",
++}
+
++ASSET_SYMBOLS_REQUIRED = {
+
+"BTC", "ETH", "USDT", "USDC", "BNB", "SOL", "XRP", "ADA", "DOGE", "TON",
+
+"AAPL", "MSFT", "NVDA", "TSLA", "GOOGL", "AMZN", "META", "KO", "JNJ", "PG",
++}
+
++def test_seed_json_files_exist_and_parse() -> None:
+
+files = ["instruments_seed.json", "assets_seed.json", "halal_assessments_seed.json"]
+
+for filename in files:
+
+   path = SEED_DIR / filename
+   assert path.exists()
+   with path.open("r", encoding="utf-8") as file:
+       content = json.load(file)
+   assert isinstance(content, list)
+   assert len(content) > 0
++def test_instrument_seed_constraints() -> None:
+
+instruments = load_seed_json("instruments_seed.json")
+
+instrument_codes = {item["code"] for item in instruments}
+
+assert INSTRUMENT_CODES_REQUIRED.issubset(instrument_codes)
+
+by_code = {item["code"]: item for item in instruments}
+
+for code in RESTRICTED_CODES:
+
+   assert by_code[code]["is_absolute_restriction"] is True
+assert by_code["SPOT_STOCK"]["is_absolute_restriction"] is False
+
+assert by_code["SPOT_CRYPTO"]["is_absolute_restriction"] is False
+
++def test_seed_script_idempotency_and_data_quality() -> None:
+
+engine = create_engine(
+
+   "sqlite:///:memory:",
+   connect_args={"check_same_thread": False},
+   poolclass=StaticPool,
+)
+
+TestingSessionLocal = sessionmaker(bind=engine, autocommit=False, autoflush=False)
+
+Base.metadata.create_all(bind=engine)
+
+with TestingSessionLocal() as db:
+
+   first = run_seed(db)
+   db.commit()
+   second = run_seed(db)
+   db.commit()
+   assert first.instruments_created > 0
+   assert first.assets_created > 0
+   assert first.assessments_created > 0
+   assert second.instruments_created == 0
+   assert second.assets_created == 0
+   assert second.assessments_created == 0
+   instruments = db.scalars(select(Instrument)).all()
+   assets = db.scalars(select(Asset)).all()
+   assessments = db.scalars(select(HalalAssessment).where(HalalAssessment.is_current.is_(True))).all()
+assert INSTRUMENT_CODES_REQUIRED.issubset({i.code for i in instruments})
+
+assert ASSET_SYMBOLS_REQUIRED.issubset({a.symbol for a in assets})
+
+assets_by_id = {asset.id: asset.symbol for asset in assets}
+
+stock_symbols = {"AAPL", "MSFT", "NVDA", "TSLA", "GOOGL", "AMZN", "META", "KO", "JNJ", "PG"}
+
+for assessment in assessments:
+
+   assert assessment.methodology
+   assert assessment.asset_status
+   assert assessment.source_name
+   assert assessment.confidence
+   assert assessment.data_quality_status
+   assert assessment.data_freshness_status
+   assert assessment.summary
+   symbol = assets_by_id[assessment.asset_id]
+   if symbol in stock_symbols:
+       assert assessment.asset_status != "HALAL"
+   if symbol == "BTC":
+       assert assessment.asset_status != "HALAL"
++diff --git a/backend/tests/integration/test_settings.py b/backend/tests/integration/test_settings.py
++new file mode 100644
++index 0000000..32781bd
++--- /dev/null
+++++ b/backend/tests/integration/test_settings.py
++@@ -0,0 +1,197 @@
+++import hashlib
+++import hmac
+++import json
+++from datetime import datetime, timezone
+++import time
+++from urllib.parse import urlencode
+++
+++from fastapi.testclient import TestClient
+++
+++from backend.app.core.config import settings
+++from backend.app.main import app
+++
+++BOT_TOKEN = "test-bot-token"
+++JWT_SECRET = "test-jwt-secret-with-enough-length"
+++
+++
+++def build_init_data(user_id: int, username: str = "alice") -> str:
+++ payload = {
+++ "auth_date": str(int(datetime.now(tz=timezone.utc).timestamp())),
+++ "query_id": f"query-{user_id}",
+++ "user": json.dumps({"id": user_id, "username": username, "language_code": "en"}, separators=(",", ":")),
+++ }
+++ data_check_string = "\n".join(f"{key}={value}" for key, value in sorted(payload.items()))
+++ secret_key = hmac.new(b"WebAppData", BOT_TOKEN.encode(), hashlib.sha256).digest()
+++ payload["hash"] = hmac.new(secret_key, data_check_string.encode(), hashlib.sha256).hexdigest()
+++ return urlencode(payload)
+++
+++
+++def unique_user_id() -> int:
+++ return int(time.time_ns() % 2_000_000_000)
+++
+++
+++def auth_headers(client: TestClient, user_id: int = 123456) -> dict[str, str]:
+++ response = client.post("/auth/telegram", json={"init_data": build_init_data(user_id=user_id)})
+++ assert response.status_code == 200
+++ token = response.json()["access_token"]
+++ return {"Authorization": f"Bearer {token}"}
+++
+++
+++def setup_module() -> None:
+++ settings.telegram_bot_token = BOT_TOKEN
+++ settings.jwt_secret = JWT_SECRET
+++
+++
+++def test_get_settings_requires_auth() -> None:
+++ with TestClient(app) as client:
+++ response = client.get("/me/settings")
+++ assert response.status_code == 401
+++
+++
+++def test_put_settings_requires_auth() -> None:
+++ with TestClient(app) as client:
+++ response = client.put("/me/settings", json={"preferred_language": "en"})
+++ assert response.status_code == 401
+++
+++
+++def test_invalid_language_theme_methodology_risk_profile_rejected() -> None:
+++ with TestClient(app) as client:
+++ headers = auth_headers(client, user_id=unique_user_id())
+++ for payload in [
+++ {"preferred_language": "fr"},
+++ {"theme": "system"},
+++ {"methodology": "aaoifi"},
+++ {"risk_profile": "aggressive"},
+++ ]:
+++ response = client.put("/me/settings", json=payload, headers=headers)
+++ assert response.status_code == 422
+++
+++
+++def test_invalid_demo_deposit_rejected() -> None:
+++ with TestClient(app) as client:
+++ headers = auth_headers(client)
+++ invalid_values = [0, -5, 99, 10_000_001, "abc"]
+++ for value in invalid_values:
+++ response = client.put("/me/settings", json={"demo_deposit": value}, headers=headers)
+++ assert response.status_code == 422
+++
+++
+++def test_onboarding_requires_consents_and_sets_timestamps() -> None:
+++ with TestClient(app) as client:
+++ headers = auth_headers(client, user_id=unique_user_id())
+++ base_payload = {
+++ "preferred_language": "en",
+++ "theme": "telegram",
+++ "level": "learner",
+++ "goal": "learn",
+++ "methodology": "conservative",
+++ "risk_profile": "moderate",
+++ "demo_deposit": 10000,
+++ "notifications_enabled": True,
+++ }
+++
+++ response = client.put("/me/settings", json=base_payload, headers=headers)
+++ assert response.status_code == 200
+++ assert response.json()["onboarding_completed"] is False
+++
+++ consent_response = client.put(
+++ "/me/settings",
+++ json={"disclaimer_consent": True, "privacy_consent": True},
+++ headers=headers,
+++ )
+++ assert consent_response.status_code == 200
+++ body = consent_response.json()
+++ assert body["onboarding_completed"] is True
+++ assert body["disclaimer_accepted_at"] is not None
+++ assert body["privacy_accepted_at"] is not None
+++
+++
+++def test_consent_timestamps_persist_and_revocation_rejected() -> None:
+++ with TestClient(app) as client:
+++ headers = auth_headers(client, user_id=555)
+++ accept_response = client.put(
+++ "/me/settings",
+++ json={"disclaimer_consent": True, "privacy_consent": True},
+++ headers=headers,
+++ )
+++ assert accept_response.status_code == 200
+++ first = accept_response.json()
+++
+++ update_response = client.put("/me/settings", json={"notifications_enabled": True}, headers=headers)
+++ assert update_response.status_code == 200
+++ second = update_response.json()
+++ assert second["disclaimer_accepted_at"] == first["disclaimer_accepted_at"]
+++ assert second["privacy_accepted_at"] == first["privacy_accepted_at"]
+++
+++ revoke_response = client.put("/me/settings", json={"disclaimer_consent": False}, headers=headers)
+++ assert revoke_response.status_code == 422
+++
+++
+++def test_risk_profile_maps_to_max_risk_per_trade() -> None:
+++ with TestClient(app) as client:
+++ headers = auth_headers(client, user_id=777)
+++
+++ mapping = {
+++ "conservative": "0.0050",
+++ "moderate": "0.0100",
+++ "active": "0.0200",
+++ }
+++
+++ for profile, expected in mapping.items():
+++ response = client.put("/me/settings", json={"risk_profile": profile}, headers=headers)
+++ assert response.status_code == 200
+++ assert response.json()["max_risk_per_trade"] == expected
+++
+++
+++def test_saved_settings_load_after_auth() -> None:
+++ with TestClient(app) as client:
+++ headers = auth_headers(client, user_id=888)
+++ put_response = client.put(
+++ "/me/settings",
+++ json={
+++ "preferred_language": "de",
+++ "theme": "dark",
+++ "level": "trader",
+++ "goal": "invest",
+++ "methodology": "balanced",
+++ "risk_profile": "active",
+++ "demo_deposit": 20000,
+++ "disclaimer_consent": True,
+++ "privacy_consent": True,
+++ },
+++ headers=headers,
+++ )
+++ assert put_response.status_code == 200
+++
+++ get_response = client.get("/me/settings", headers=headers)
+++ assert get_response.status_code == 200
+++ body = get_response.json()
+++ assert body["preferred_language"] == "de"
+++ assert body["theme"] == "dark"
+++ assert body["goal"] == "invest"
+++ assert body["methodology"] == "balanced"
+++ assert body["risk_profile"] == "active"
+++
+++
+++
+++
+++def test_user_cannot_update_another_user() -> None:
+++ with TestClient(app) as client:
+++ headers_user_a = auth_headers(client, user_id=2020)
+++ headers_user_b = auth_headers(client, user_id=3030)
+++
+++ response_a = client.put("/me/settings", json={"theme": "dark"}, headers=headers_user_a)
+++ assert response_a.status_code == 200
+++
+++ response_b = client.get("/me/settings", headers=headers_user_b)
+++ assert response_b.status_code == 200
+++ assert response_b.json()["theme"] == "telegram"
+++def test_body_cannot_target_another_user() -> None:
+++ with TestClient(app) as client:
+++ headers = auth_headers(client, user_id=999)
+++ response = client.put("/me/settings", json={"user_id": "someone-else", "theme": "dark"}, headers=headers)
+++ assert response.status_code == 422
+++
+++ current = client.get("/me/settings", headers=headers)
+++ assert current.status_code == 200
+++ assert current.json()["theme"] in {"telegram", "dark", "light"}
++diff --git a/backend/tests/integration/test_telegram_auth.py b/backend/tests/integration/test_telegram_auth.py
++index 53fc555..45c4252 100644
++--- a/backend/tests/integration/test_telegram_auth.py
+++++ b/backend/tests/integration/test_telegram_auth.py
++@@ -1,7 +1,7 @@
+
+import hashlib
+
+import hmac
+
+import json
++-from datetime import UTC, datetime, timedelta
+++from datetime import datetime, timezone, timedelta
+
+from urllib.parse import parse_qsl, urlencode
+
+import jwt
++@@ -31,7 +31,7 @@ def build_init_data(
+
+user_payload: dict | None = None,
+raw_user_payload: str | None = None,
+) -> str:
++- auth_datetime = auth_date or datetime.now(tz=UTC)
+++ auth_datetime = auth_date or datetime.now(tz=timezone.utc)
+
+if raw_user_payload is not None:
+    user_data = raw_user_payload
+else:
++@@ -142,7 +142,7 @@ def test_telegram_auth_rejects_malformed_auth_date(client) -> None:
++
+
+def test_telegram_auth_rejects_expired_init_data(client) -> None:
+
+test_client, _ = client
++- expired_auth_date = datetime.now(tz=UTC) - timedelta(hours=25)
+++ expired_auth_date = datetime.now(tz=timezone.utc) - timedelta(hours=25)
++
+
+response = test_client.post(
+    "/auth/telegram",
++diff --git a/backend/tests/unit/test_halal_check_engine.py b/backend/tests/unit/test_halal_check_engine.py
++new file mode 100644
++index 0000000..21ab6ab
++--- /dev/null
+++++ b/backend/tests/unit/test_halal_check_engine.py
++@@ -0,0 +1,51 @@
+++from backend.app.models.asset import Asset
+++from backend.app.models.halal_assessment import HalalAssessment
+++from backend.app.models.instrument import Instrument
+++from backend.app.modules.halal.check_engine import compute_halal_check
+++
+++
+++def test_restricted_instrument_overrides_asset_status() -> None:
+++ asset = Asset(id="a1", symbol="BTC", name="Bitcoin", asset_type="crypto", is_active=True, is_public=True)
+++ instrument = Instrument(
+++ id="i1",
+++ code="FUTURES",
+++ name="Futures",
+++ category="DERIVATIVE",
+++ is_absolute_restriction=True,
+++ restriction_reason="Restricted",
+++ )
+++ assessment = HalalAssessment(
+++ id="h1",
+++ asset_id="a1",
+++ methodology="mvp_conservative_bootstrap",
+++ asset_status="SCHOLARLY_DISAGREEMENT",
+++ summary="Summary",
+++ source_name="Internal conservative bootstrap review",
+++ data_quality_status="MANUAL_REVIEW_REQUIRED",
+++ data_freshness_status="MISSING",
+++ confidence="LOW",
+++ is_current=True,
+++ )
+++
+++ result = compute_halal_check(asset, instrument, assessment, "mvp_conservative_bootstrap")
+++
+++ assert result.instrument_status == "AVOID"
+++ assert result.combined_status == "AVOID"
+++
+++
+++def test_missing_assessment_returns_insufficient_data() -> None:
+++ asset = Asset(id="a1", symbol="AAPL", name="Apple", asset_type="stock", is_active=True, is_public=True)
+++ instrument = Instrument(
+++ id="i1",
+++ code="SPOT_STOCK",
+++ name="Spot Stock",
+++ category="SPOT",
+++ is_absolute_restriction=False,
+++ restriction_reason=None,
+++ )
+++
+++ result = compute_halal_check(asset, instrument, None, "mvp_conservative_bootstrap")
+++
+++ assert result.asset_status == "INSUFFICIENT_DATA"
+++ assert result.combined_status == "INSUFFICIENT_DATA"
+
