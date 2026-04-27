@@ -69,6 +69,10 @@ class AssetSummary(OrmSchema):
     symbol: str
     name: str
     asset_type: str
+    exchange: str | None = None
+    sector: str | None = None
+    country: str | None = None
+    currency: str | None = None
     data_quality: DataQualityStatus | None = None
     data_freshness: DataFreshnessStatus | None = None
 

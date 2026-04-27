@@ -1,0 +1,86 @@
+[
+  {
+    "code": "SPOT_STOCK",
+    "name": "Spot stock",
+    "category": "spot",
+    "is_absolute_restriction": false,
+    "restriction_reason": null
+  },
+  {
+    "code": "SPOT_CRYPTO",
+    "name": "Spot crypto",
+    "category": "spot",
+    "is_absolute_restriction": false,
+    "restriction_reason": null
+  },
+  {
+    "code": "ETF",
+    "name": "Exchange-traded fund",
+    "category": "fund",
+    "is_absolute_restriction": false,
+    "restriction_reason": null
+  },
+  {
+    "code": "CFD",
+    "name": "Contract for difference",
+    "category": "derivative",
+    "is_absolute_restriction": true,
+    "restriction_reason": "Derivative exposure is restricted in the conservative MVP baseline."
+  },
+  {
+    "code": "FUTURES",
+    "name": "Futures contract",
+    "category": "derivative",
+    "is_absolute_restriction": true,
+    "restriction_reason": "Forward derivative exposure is restricted in the conservative MVP baseline."
+  },
+  {
+    "code": "OPTIONS",
+    "name": "Options contract",
+    "category": "derivative",
+    "is_absolute_restriction": true,
+    "restriction_reason": "Optionality and derivative exposure are restricted in the conservative MVP baseline."
+  },
+  {
+    "code": "PERPETUALS",
+    "name": "Perpetual swap",
+    "category": "derivative",
+    "is_absolute_restriction": true,
+    "restriction_reason": "Perpetual derivative contracts are restricted in the conservative MVP baseline."
+  },
+  {
+    "code": "MARGIN",
+    "name": "Margin trading",
+    "category": "financing",
+    "is_absolute_restriction": true,
+    "restriction_reason": "Borrowed trading exposure is restricted in the conservative MVP baseline."
+  },
+  {
+    "code": "SHORT_SELLING",
+    "name": "Short selling",
+    "category": "financing",
+    "is_absolute_restriction": true,
+    "restriction_reason": "Selling borrowed assets is restricted in the conservative MVP baseline."
+  },
+  {
+    "code": "LEVERAGED_TOKEN",
+    "name": "Leveraged token",
+    "category": "structured_product",
+    "is_absolute_restriction": true,
+    "restriction_reason": "Embedded leverage is restricted in the conservative MVP baseline."
+  },
+  {
+    "code": "STAKING",
+    "name": "Staking",
+    "category": "yield",
+    "is_absolute_restriction": false,
+    "restriction_reason": null
+  },
+  {
+    "code": "EARN_LENDING",
+    "name": "Earn or lending product",
+    "category": "yield",
+    "is_absolute_restriction": true,
+    "restriction_reason": "Lending-yield products are restricted pending detailed review."
+  }
+]

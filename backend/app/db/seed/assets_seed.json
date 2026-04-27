@@ -1,0 +1,222 @@
+[
+  {
+    "symbol": "BTC",
+    "name": "Bitcoin",
+    "asset_type": "crypto",
+    "exchange": "crypto",
+    "sector": "Digital assets",
+    "country": "Global",
+    "currency": "USD",
+    "is_active": true,
+    "is_public": true
+  },
+  {
+    "symbol": "ETH",
+    "name": "Ethereum",
+    "asset_type": "crypto",
+    "exchange": "crypto",
+    "sector": "Digital assets",
+    "country": "Global",
+    "currency": "USD",
+    "is_active": true,
+    "is_public": true
+  },
+  {
+    "symbol": "USDT",
+    "name": "Tether USDt",
+    "asset_type": "crypto",
+    "exchange": "crypto",
+    "sector": "Stablecoin",
+    "country": "Global",
+    "currency": "USD",
+    "is_active": true,
+    "is_public": true
+  },
+  {
+    "symbol": "USDC",
+    "name": "USDC",
+    "asset_type": "crypto",
+    "exchange": "crypto",
+    "sector": "Stablecoin",
+    "country": "Global",
+    "currency": "USD",
+    "is_active": true,
+    "is_public": true
+  },
+  {
+    "symbol": "BNB",
+    "name": "BNB",
+    "asset_type": "crypto",
+    "exchange": "crypto",
+    "sector": "Digital assets",
+    "country": "Global",
+    "currency": "USD",
+    "is_active": true,
+    "is_public": true
+  },
+  {
+    "symbol": "SOL",
+    "name": "Solana",
+    "asset_type": "crypto",
+    "exchange": "crypto",
+    "sector": "Digital assets",
+    "country": "Global",
+    "currency": "USD",
+    "is_active": true,
+    "is_public": true
+  },
+  {
+    "symbol": "XRP",
+    "name": "XRP",
+    "asset_type": "crypto",
+    "exchange": "crypto",
+    "sector": "Digital assets",
+    "country": "Global",
+    "currency": "USD",
+    "is_active": true,
+    "is_public": true
+  },
+  {
+    "symbol": "ADA",
+    "name": "Cardano",
+    "asset_type": "crypto",
+    "exchange": "crypto",
+    "sector": "Digital assets",
+    "country": "Global",
+    "currency": "USD",
+    "is_active": true,
+    "is_public": true
+  },
+  {
+    "symbol": "DOGE",
+    "name": "Dogecoin",
+    "asset_type": "crypto",
+    "exchange": "crypto",
+    "sector": "Digital assets",
+    "country": "Global",
+    "currency": "USD",
+    "is_active": true,
+    "is_public": true
+  },
+  {
+    "symbol": "TON",
+    "name": "Toncoin",
+    "asset_type": "crypto",
+    "exchange": "crypto",
+    "sector": "Digital assets",
+    "country": "Global",
+    "currency": "USD",
+    "is_active": true,
+    "is_public": true
+  },
+  {
+    "symbol": "AAPL",
+    "name": "Apple Inc.",
+    "asset_type": "stock",
+    "exchange": "NASDAQ",
+    "sector": "Technology",
+    "country": "US",
+    "currency": "USD",
+    "is_active": true,
+    "is_public": true
+  },
+  {
+    "symbol": "MSFT",
+    "name": "Microsoft Corporation",
+    "asset_type": "stock",
+    "exchange": "NASDAQ",
+    "sector": "Technology",
+    "country": "US",
+    "currency": "USD",
+    "is_active": true,
+    "is_public": true
+  },
+  {
+    "symbol": "NVDA",
+    "name": "NVIDIA Corporation",
+    "asset_type": "stock",
+    "exchange": "NASDAQ",
+    "sector": "Technology",
+    "country": "US",
+    "currency": "USD",
+    "is_active": true,
+    "is_public": true
+  },
+  {
+    "symbol": "TSLA",
+    "name": "Tesla, Inc.",
+    "asset_type": "stock",
+    "exchange": "NASDAQ",
+    "sector": "Consumer discretionary",
+    "country": "US",
+    "currency": "USD",
+    "is_active": true,
+    "is_public": true
+  },
+  {
+    "symbol": "GOOGL",
+    "name": "Alphabet Inc.",
+    "asset_type": "stock",
+    "exchange": "NASDAQ",
+    "sector": "Communication services",
+    "country": "US",
+    "currency": "USD",
+    "is_active": true,
+    "is_public": true
+  },
+  {
+    "symbol": "AMZN",
+    "name": "Amazon.com, Inc.",
+    "asset_type": "stock",
+    "exchange": "NASDAQ",
+    "sector": "Consumer discretionary",
+    "country": "US",
+    "currency": "USD",
+    "is_active": true,
+    "is_public": true
+  },
+  {
+    "symbol": "META",
+    "name": "Meta Platforms, Inc.",
+    "asset_type": "stock",
+    "exchange": "NASDAQ",
+    "sector": "Communication services",
+    "country": "US",
+    "currency": "USD",
+    "is_active": true,
+    "is_public": true
+  },
+  {
+    "symbol": "KO",
+    "name": "The Coca-Cola Company",
+    "asset_type": "stock",
+    "exchange": "NYSE",
+    "sector": "Consumer staples",
+    "country": "US",
+    "currency": "USD",
+    "is_active": true,
+    "is_public": true
+  },
+  {
+    "symbol": "JNJ",
+    "name": "Johnson & Johnson",
+    "asset_type": "stock",
+    "exchange": "NYSE",
+    "sector": "Healthcare",
+    "country": "US",
+    "currency": "USD",
+    "is_active": true,
+    "is_public": true
+  },
+  {
+    "symbol": "PG",
+    "name": "Procter & Gamble Company",
+    "asset_type": "stock",
+    "exchange": "NYSE",
+    "sector": "Consumer staples",
+    "country": "US",
+    "currency": "USD",
+    "is_active": true,
+    "is_public": true
+  }
+]
