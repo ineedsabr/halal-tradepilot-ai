@@ -74,7 +74,18 @@ JWT_SECRET=replace_me
 JWT_EXPIRES_MINUTES=30
 ```
 
-In production, `JWT_SECRET` must be configured, must not be `replace_me`, and must be at least 32 characters. The secret is not logged.
+In production, `JWT_SECRET` must be configured, must not be `replace_me`, and must be at least 32 characters. `TELEGRAM_BOT_TOKEN` must also be configured and must not be a placeholder. Secrets are not logged.
+
+## Current API
+
+```text
+POST /auth/telegram
+GET /api/v1/assets/search
+GET /api/v1/assets/{asset_id}
+GET /api/v1/halal/check
+```
+
+The asset and halal check endpoints use conservative bootstrap seed data. Halal check responses include asset status, instrument status, combined status, trust metadata, and an educational disclaimer.
 
 All services with Docker Compose:
 
@@ -92,9 +103,9 @@ pytest backend/tests
 
 ## Known Limitations
 
-- This is still an early backend foundation.
-- Task 2 contains no business logic.
-- No business logic is implemented.
-- No signals functionality is implemented.
-- No AI functionality is implemented.
-- No production migration setup, admin auth, Telegram SDK integration, or deployment pipeline is configured.
+- Conservative seed data exists, but it is not final halal certification.
+- The Halal Check API exists and returns educational screening only.
+- No frontend Halal Screener UI exists yet.
+- No AI, signals, risk engine, trading, payments, paper trading, or market data are implemented.
+- No Alembic migrations exist yet; SQLite `create_all` is local/test only.
+- No production migration setup, admin auth, full Telegram SDK integration, or deployment pipeline is configured.

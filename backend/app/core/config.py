@@ -24,6 +24,9 @@ class Settings(BaseSettings):
             jwt_secret = self.jwt_secret.strip()
             if jwt_secret == "replace_me" or len(jwt_secret) < 32:
                 raise ValueError("JWT_SECRET must be configured for production")
+            telegram_bot_token = self.telegram_bot_token.strip()
+            if telegram_bot_token == "replace_me" or len(telegram_bot_token) < 16:
+                raise ValueError("TELEGRAM_BOT_TOKEN must be configured for production")
         return self
 
     @property
