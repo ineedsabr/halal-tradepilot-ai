@@ -38,12 +38,16 @@ export const resources = {
       home: {
         hero: {
           eyebrow: 'Premium Islamic fintech',
-          title: 'Mizan',
-          tagline: 'Crypto clarity with halal principles and risk control.',
-          primaryCta: 'Analyze crypto - coming next',
+          title: 'Understand crypto before you risk money.',
+          tagline: 'Halal-first AI market guidance, built for clarity.',
+          primaryCta: 'Open AI Verdict preview',
           comingNext: 'Coming next',
           description:
-            'Ask about a crypto asset and get a simple halal, risk, and market-readiness view.',
+            'Ask Mizan about a crypto asset and receive a clear halal, risk, and market guidance verdict.',
+        },
+        ask: {
+          eyebrow: 'AI Verdicts preview',
+          placeholder: 'Ask about BTC, ETH, SOL...',
         },
         trust: {
           halal: 'Halal layer',
@@ -54,10 +58,16 @@ export const resources = {
           next: 'Next',
         },
         marketMood: {
-          eyebrow: 'Market Mood',
-          title: 'Honest MVP status',
+          eyebrow: 'Market Guidance',
+          title: 'Live market read is coming next',
           description:
-            'Live market mood is coming next. Current MVP uses halal screening, watchlist, and risk calculation.',
+            'Live market read is coming next. No live market data is shown yet.',
+        },
+        verdicts: {
+          eyebrow: 'AI Verdicts',
+          title: 'Clear verdict labels, no hype',
+          description:
+            'Coming next: clear verdicts with halal status, risk, sources, and market context.',
         },
         actions: {
           analyze: {
@@ -70,13 +80,23 @@ export const resources = {
             description: 'Check an asset and instrument with conservative backend screening.',
           },
           risk: {
-            title: 'Risk Calculator',
+            title: 'Risk Check',
             description: 'Run an educational risk calculation from your own numbers.',
           },
           watchlist: {
-            title: 'Watchlist',
+            title: 'Study List',
             description: 'Keep assets in a study list for later review.',
           },
+        },
+        avoid: {
+          eyebrow: 'What to avoid',
+          title: 'Built around clear boundaries',
+          description: 'Mizan keeps restricted structures visible before any future market read.',
+          futures: 'Futures',
+          margin: 'Margin',
+          leverage: 'Leverage',
+          yield: 'Interest/yield products',
+          speculation: 'Extreme speculation',
         },
         how: {
           eyebrow: 'How Mizan works',
@@ -94,7 +114,60 @@ export const resources = {
           conservative: 'Conservative halal check.',
           watchlist: 'Watchlist for saved assets.',
           risk: 'Risk calculator.',
-          next: 'AI Verdicts and live market data coming next.',
+          next: 'AI Verdicts and live market read are coming next.',
+        },
+      },
+      verdict: {
+        back: 'Back to Home',
+        screen: {
+          eyebrow: 'AI Verdicts preview',
+          title: 'Market guidance without unsupported claims',
+          description:
+            'This preview shows how Mizan will organize future AI Verdicts. No analysis is generated yet.',
+        },
+        search: {
+          eyebrow: 'Search coming soon',
+          placeholder: 'Ask about BTC, ETH, SOL...',
+          description:
+            'Future search will request a backend report. The current app does not generate crypto analysis.',
+        },
+        statuses: {
+          eyebrow: 'Verdict language',
+          title: 'Simple labels for future reports',
+          description:
+            'Verdicts will combine halal status, instrument restrictions, risk, sources, and market context.',
+        },
+        labels: {
+          STRONG_STUDY: 'Strong Study',
+          WATCH: 'Watch',
+          WAIT: 'Wait',
+          CAUTION: 'Caution',
+          AVOID: 'Avoid',
+          NO_TRADE: 'No-Trade',
+          INSUFFICIENT_DATA: 'Insufficient Data',
+        },
+        meanings: {
+          eyebrow: 'What each verdict means',
+          title: 'Educational guidance vocabulary',
+          STRONG_STUDY: 'Worth deeper study when data, halal screening, and risk context are clearer.',
+          WATCH: 'Keep under review while waiting for stronger evidence or cleaner conditions.',
+          WAIT: 'Pause and gather more context before forming a view.',
+          CAUTION: 'Important uncertainty or risk needs attention before any further study.',
+          AVOID: 'A restriction, conflict, or concern makes this unsuitable for the current methodology.',
+          NO_TRADE: 'Do not act on this setup; future reports will explain the blocking reason.',
+          INSUFFICIENT_DATA: 'Mizan does not have enough reliable information to form a clear view.',
+        },
+        report: {
+          eyebrow: 'Future report structure',
+          title: 'What a future report will include',
+          description:
+            'No live report is available yet. These sections describe the planned educational structure.',
+          halal: 'Halal status',
+          instrument: 'Instrument status',
+          risk: 'Risk level',
+          market: 'Market context',
+          sources: 'Sources',
+          avoid: 'What to avoid',
         },
       },
       halal: {
@@ -341,12 +414,16 @@ export const resources = {
       home: {
         hero: {
           eyebrow: 'Премиальный исламский финтех',
-          title: 'Mizan',
-          tagline: 'Ясность в крипто с халяль-принципами и контролем риска.',
-          primaryCta: 'Analyze crypto - скоро',
+          title: 'Понимайте крипто до того, как рисковать деньгами.',
+          tagline: 'Халяль-first AI market guidance, созданный для ясности.',
+          primaryCta: 'Открыть preview AI Verdicts',
           comingNext: 'Скоро',
           description:
-            'Спросите о криптоактиве и получите простой взгляд на халяль-статус, риск и готовность к рыночному разбору.',
+            'Спросите Mizan о криптоактиве и получите ясный взгляд на халяль-статус, риск и market guidance.',
+        },
+        ask: {
+          eyebrow: 'Preview AI Verdicts',
+          placeholder: 'Спросите о BTC, ETH, SOL...',
         },
         trust: {
           halal: 'Халяль-слой',
@@ -357,10 +434,16 @@ export const resources = {
           next: 'Далее',
         },
         marketMood: {
-          eyebrow: 'Рыночное настроение',
-          title: 'Честный статус MVP',
+          eyebrow: 'Market Guidance',
+          title: 'Live market read появится следующим шагом',
           description:
-            'Живое рыночное настроение появится следующим шагом. Сейчас MVP использует халяль-скрининг, watchlist и калькулятор риска.',
+            'Live market read появится следующим шагом. Сейчас live market data не показываются.',
+        },
+        verdicts: {
+          eyebrow: 'AI Verdicts',
+          title: 'Понятные verdict labels без хайпа',
+          description:
+            'Скоро: ясные verdicts с халяль-статусом, риском, источниками и рыночным контекстом.',
         },
         actions: {
           analyze: {
@@ -373,13 +456,23 @@ export const resources = {
             description: 'Проверьте актив и инструмент через консервативный backend-скрининг.',
           },
           risk: {
-            title: 'Калькулятор риска',
+            title: 'Проверка риска',
             description: 'Запустите образовательный расчёт риска на основе своих чисел.',
           },
           watchlist: {
-            title: 'Watchlist',
+            title: 'Study List',
             description: 'Сохраняйте активы в учебный список для дальнейшего просмотра.',
           },
+        },
+        avoid: {
+          eyebrow: 'Чего избегать',
+          title: 'Построено вокруг ясных границ',
+          description: 'Mizan показывает ограниченные структуры до любого будущего market read.',
+          futures: 'Futures',
+          margin: 'Margin',
+          leverage: 'Leverage',
+          yield: 'Процентные/yield-продукты',
+          speculation: 'Крайняя спекуляция',
         },
         how: {
           eyebrow: 'Как работает Mizan',
@@ -397,7 +490,60 @@ export const resources = {
           conservative: 'Консервативная халяль-проверка.',
           watchlist: 'Watchlist для сохранённых активов.',
           risk: 'Калькулятор риска.',
-          next: 'AI Verdicts и live market data появятся следующим шагом.',
+          next: 'AI Verdicts и live market read появятся следующим шагом.',
+        },
+      },
+      verdict: {
+        back: 'Назад на главную',
+        screen: {
+          eyebrow: 'Preview AI Verdicts',
+          title: 'Market guidance без неподтверждённых обещаний',
+          description:
+            'Этот preview показывает, как Mizan будет организовывать будущие AI Verdicts. Анализ пока не генерируется.',
+        },
+        search: {
+          eyebrow: 'Поиск скоро',
+          placeholder: 'Спросите о BTC, ETH, SOL...',
+          description:
+            'Будущий поиск будет запрашивать отчёт с backend. Сейчас приложение не генерирует криптоанализ.',
+        },
+        statuses: {
+          eyebrow: 'Язык verdicts',
+          title: 'Простые labels для будущих отчётов',
+          description:
+            'Verdicts будут объединять халяль-статус, ограничения инструмента, риск, источники и рыночный контекст.',
+        },
+        labels: {
+          STRONG_STUDY: 'Strong Study',
+          WATCH: 'Watch',
+          WAIT: 'Wait',
+          CAUTION: 'Caution',
+          AVOID: 'Avoid',
+          NO_TRADE: 'No-Trade',
+          INSUFFICIENT_DATA: 'Insufficient Data',
+        },
+        meanings: {
+          eyebrow: 'Что значит каждый verdict',
+          title: 'Словарь образовательной навигации',
+          STRONG_STUDY: 'Стоит изучить глубже, когда данные, халяль-скрининг и риск-контекст яснее.',
+          WATCH: 'Оставить под наблюдением, пока не появятся более сильные данные или более чистые условия.',
+          WAIT: 'Пауза: сначала собрать больше контекста.',
+          CAUTION: 'Важная неопределённость или риск требуют внимания перед дальнейшим изучением.',
+          AVOID: 'Ограничение, конфликт или проблема делают вариант неподходящим для текущей методологии.',
+          NO_TRADE: 'Не действовать по этому setup; будущие отчёты объяснят блокирующую причину.',
+          INSUFFICIENT_DATA: 'У Mizan недостаточно надёжной информации для ясного взгляда.',
+        },
+        report: {
+          eyebrow: 'Структура будущего отчёта',
+          title: 'Что будет включать будущий отчёт',
+          description:
+            'Live-отчёт пока недоступен. Эти разделы описывают планируемую образовательную структуру.',
+          halal: 'Халяль-статус',
+          instrument: 'Статус инструмента',
+          risk: 'Уровень риска',
+          market: 'Рыночный контекст',
+          sources: 'Источники',
+          avoid: 'Чего избегать',
         },
       },
       halal: {
@@ -644,12 +790,16 @@ export const resources = {
       home: {
         hero: {
           eyebrow: 'Premium Islamic Fintech',
-          title: 'Mizan',
-          tagline: 'Krypto-Klarheit mit Halal-Prinzipien und Risikokontrolle.',
-          primaryCta: 'Analyze crypto - kommt bald',
+          title: 'Verstehe Krypto, bevor du Geld riskierst.',
+          tagline: 'Halal-first AI Market Guidance, gebaut fuer Klarheit.',
+          primaryCta: 'AI Verdict Preview oeffnen',
           comingNext: 'Kommt bald',
           description:
-            'Frage nach einem Krypto-Asset und erhalte eine einfache Sicht auf Halal-Status, Risiko und Marktbereitschaft.',
+            'Frage Mizan nach einem Krypto-Asset und erhalte einen klaren Blick auf Halal, Risiko und Market Guidance.',
+        },
+        ask: {
+          eyebrow: 'AI Verdicts Preview',
+          placeholder: 'Frage nach BTC, ETH, SOL...',
         },
         trust: {
           halal: 'Halal-Ebene',
@@ -660,10 +810,16 @@ export const resources = {
           next: 'Naechstes',
         },
         marketMood: {
-          eyebrow: 'Market Mood',
-          title: 'Ehrlicher MVP-Status',
+          eyebrow: 'Market Guidance',
+          title: 'Live Market Read kommt als Naechstes',
           description:
-            'Live Market Mood kommt als Naechstes. Das aktuelle MVP nutzt Halal-Screening, Watchlist und Risikoberechnung.',
+            'Live Market Read kommt als Naechstes. Es werden noch keine Live-Marktdaten angezeigt.',
+        },
+        verdicts: {
+          eyebrow: 'AI Verdicts',
+          title: 'Klare Verdict Labels ohne Hype',
+          description:
+            'Kommt als Naechstes: klare Verdicts mit Halal-Status, Risiko, Quellen und Marktkontext.',
         },
         actions: {
           analyze: {
@@ -676,13 +832,23 @@ export const resources = {
             description: 'Pruefe Asset und Instrument mit konservativem Backend-Screening.',
           },
           risk: {
-            title: 'Risk Calculator',
+            title: 'Risk Check',
             description: 'Fuehre eine bildende Risikoberechnung mit deinen eigenen Zahlen aus.',
           },
           watchlist: {
-            title: 'Watchlist',
+            title: 'Study List',
             description: 'Speichere Assets in einer Studienliste fuer spaetere Pruefung.',
           },
+        },
+        avoid: {
+          eyebrow: 'Was zu vermeiden ist',
+          title: 'Auf klare Grenzen ausgelegt',
+          description: 'Mizan macht eingeschraenkte Strukturen sichtbar, bevor ein zukuenftiger Market Read erscheint.',
+          futures: 'Futures',
+          margin: 'Margin',
+          leverage: 'Leverage',
+          yield: 'Zins-/Yield-Produkte',
+          speculation: 'Extreme Spekulation',
         },
         how: {
           eyebrow: 'So funktioniert Mizan',
@@ -700,7 +866,60 @@ export const resources = {
           conservative: 'Konservativer Halal Check.',
           watchlist: 'Watchlist fuer gespeicherte Assets.',
           risk: 'Risk Calculator.',
-          next: 'AI Verdicts und Live-Marktdaten kommen als Naechstes.',
+          next: 'AI Verdicts und Live Market Read kommen als Naechstes.',
+        },
+      },
+      verdict: {
+        back: 'Zurueck zu Home',
+        screen: {
+          eyebrow: 'AI Verdicts Preview',
+          title: 'Market Guidance ohne unbelegte Behauptungen',
+          description:
+            'Diese Preview zeigt, wie Mizan zukuenftige AI Verdicts strukturieren wird. Es wird noch keine Analyse erzeugt.',
+        },
+        search: {
+          eyebrow: 'Suche kommt bald',
+          placeholder: 'Frage nach BTC, ETH, SOL...',
+          description:
+            'Die zukuenftige Suche wird einen Backend-Bericht anfordern. Die aktuelle App erzeugt keine Kryptoanalyse.',
+        },
+        statuses: {
+          eyebrow: 'Verdict Sprache',
+          title: 'Einfache Labels fuer zukuenftige Berichte',
+          description:
+            'Verdicts werden Halal-Status, Instrumentenbeschraenkungen, Risiko, Quellen und Marktkontext kombinieren.',
+        },
+        labels: {
+          STRONG_STUDY: 'Strong Study',
+          WATCH: 'Watch',
+          WAIT: 'Wait',
+          CAUTION: 'Caution',
+          AVOID: 'Avoid',
+          NO_TRADE: 'No-Trade',
+          INSUFFICIENT_DATA: 'Insufficient Data',
+        },
+        meanings: {
+          eyebrow: 'Was jedes Verdict bedeutet',
+          title: 'Bildendes Guidance-Vokabular',
+          STRONG_STUDY: 'Geeignet fuer tieferes Studium, wenn Daten, Halal-Screening und Risikokontext klarer sind.',
+          WATCH: 'Weiter beobachten, bis staerkere Belege oder sauberere Bedingungen vorliegen.',
+          WAIT: 'Pausieren und mehr Kontext sammeln, bevor sich eine Sicht bildet.',
+          CAUTION: 'Wichtige Unsicherheit oder Risiko braucht Aufmerksamkeit vor weiterem Studium.',
+          AVOID: 'Eine Einschraenkung, ein Konflikt oder ein Problem macht dies fuer die aktuelle Methodik ungeeignet.',
+          NO_TRADE: 'Nicht auf dieses Setup handeln; zukuenftige Berichte erklaeren den blockierenden Grund.',
+          INSUFFICIENT_DATA: 'Mizan hat nicht genug verlaessliche Informationen fuer eine klare Sicht.',
+        },
+        report: {
+          eyebrow: 'Zukuenftige Berichtsstruktur',
+          title: 'Was ein zukuenftiger Bericht enthalten wird',
+          description:
+            'Noch ist kein Live-Bericht verfuegbar. Diese Bereiche beschreiben die geplante Bildungsstruktur.',
+          halal: 'Halal-Status',
+          instrument: 'Instrumentenstatus',
+          risk: 'Risikostufe',
+          market: 'Marktkontext',
+          sources: 'Quellen',
+          avoid: 'Was vermeiden',
         },
       },
       halal: {
@@ -947,12 +1166,16 @@ export const resources = {
       home: {
         hero: {
           eyebrow: 'تقنية مالية إسلامية راقية',
-          title: 'Mizan',
-          tagline: 'وضوح في الكريبتو مع مبادئ الحلال وضبط المخاطر.',
-          primaryCta: 'تحليل الكريبتو - قريباً',
+          title: 'افهم الكريبتو قبل أن تخاطر بالمال.',
+          tagline: 'إرشاد سوقي بالذكاء الاصطناعي يبدأ بالحلال ومبني للوضوح.',
+          primaryCta: 'افتح معاينة AI Verdicts',
           comingNext: 'قريباً',
           description:
-            'اسأل عن أصل كريبتو واحصل على نظرة بسيطة للحالة الشرعية والمخاطر وجاهزية قراءة السوق.',
+            'اسأل Mizan عن أصل كريبتو واحصل على نظرة واضحة للحلال والمخاطر والإرشاد السوقي.',
+        },
+        ask: {
+          eyebrow: 'معاينة AI Verdicts',
+          placeholder: 'اسأل عن BTC أو ETH أو SOL...',
         },
         trust: {
           halal: 'طبقة الحلال',
@@ -963,10 +1186,16 @@ export const resources = {
           next: 'التالي',
         },
         marketMood: {
-          eyebrow: 'مزاج السوق',
-          title: 'حالة MVP بوضوح',
+          eyebrow: 'إرشاد السوق',
+          title: 'قراءة السوق المباشرة قادمة لاحقاً',
           description:
-            'مزاج السوق المباشر قادم لاحقاً. يستخدم MVP الحالي فحص الحلال وقائمة المتابعة وحساب المخاطر.',
+            'قراءة السوق المباشرة قادمة لاحقاً. لا يتم عرض بيانات سوق مباشرة الآن.',
+        },
+        verdicts: {
+          eyebrow: 'AI Verdicts',
+          title: 'تسميات واضحة بلا ضجيج',
+          description:
+            'قريباً: verdicts واضحة مع حالة الحلال والمخاطر والمصادر وسياق السوق.',
         },
         actions: {
           analyze: {
@@ -979,13 +1208,23 @@ export const resources = {
             description: 'افحص الأصل والأداة عبر فحص backend محافظ.',
           },
           risk: {
-            title: 'حاسبة المخاطر',
+            title: 'فحص المخاطر',
             description: 'شغل حساب مخاطر تعليمي باستخدام أرقامك.',
           },
           watchlist: {
-            title: 'قائمة المتابعة',
+            title: 'قائمة الدراسة',
             description: 'احتفظ بالأصول في قائمة دراسة للمراجعة لاحقاً.',
           },
+        },
+        avoid: {
+          eyebrow: 'ما يجب تجنبه',
+          title: 'مصمم حول حدود واضحة',
+          description: 'يعرض Mizan الهياكل المقيّدة قبل أي قراءة سوقية مستقبلية.',
+          futures: 'العقود الآجلة',
+          margin: 'الهامش',
+          leverage: 'الرافعة المالية',
+          yield: 'منتجات الفائدة/العائد',
+          speculation: 'المضاربة الشديدة',
         },
         how: {
           eyebrow: 'كيف يعمل Mizan',
@@ -1003,7 +1242,60 @@ export const resources = {
           conservative: 'فحص حلال محافظ.',
           watchlist: 'قائمة متابعة للأصول المحفوظة.',
           risk: 'حاسبة مخاطر.',
-          next: 'AI Verdicts وبيانات السوق المباشرة قادمة لاحقاً.',
+          next: 'AI Verdicts وقراءة السوق المباشرة قادمة لاحقاً.',
+        },
+      },
+      verdict: {
+        back: 'رجوع إلى الرئيسية',
+        screen: {
+          eyebrow: 'معاينة AI Verdicts',
+          title: 'إرشاد سوقي بلا ادعاءات غير مدعومة',
+          description:
+            'تعرض هذه المعاينة كيف سينظم Mizan تقارير AI Verdicts مستقبلاً. لا يتم توليد أي تحليل الآن.',
+        },
+        search: {
+          eyebrow: 'البحث قادم قريباً',
+          placeholder: 'اسأل عن BTC أو ETH أو SOL...',
+          description:
+            'سيطلب البحث المستقبلي تقريراً من backend. التطبيق الحالي لا يولد تحليلاً للكريبتو.',
+        },
+        statuses: {
+          eyebrow: 'لغة verdicts',
+          title: 'تسميات بسيطة للتقارير المستقبلية',
+          description:
+            'ستجمع verdicts بين حالة الحلال وقيود الأداة والمخاطر والمصادر وسياق السوق.',
+        },
+        labels: {
+          STRONG_STUDY: 'Strong Study',
+          WATCH: 'Watch',
+          WAIT: 'Wait',
+          CAUTION: 'Caution',
+          AVOID: 'Avoid',
+          NO_TRADE: 'No-Trade',
+          INSUFFICIENT_DATA: 'Insufficient Data',
+        },
+        meanings: {
+          eyebrow: 'ماذا تعني كل verdict',
+          title: 'مفردات إرشاد تعليمية',
+          STRONG_STUDY: 'يستحق دراسة أعمق عندما تكون البيانات والفحص الشرعي وسياق المخاطر أوضح.',
+          WATCH: 'ابقه تحت المراجعة حتى تظهر أدلة أقوى أو ظروف أوضح.',
+          WAIT: 'توقف واجمع مزيداً من السياق قبل تكوين نظرة.',
+          CAUTION: 'توجد درجة مهمة من عدم اليقين أو المخاطر تحتاج إلى انتباه قبل أي دراسة إضافية.',
+          AVOID: 'وجود قيد أو تعارض أو مشكلة يجعله غير مناسب للمنهجية الحالية.',
+          NO_TRADE: 'لا تتصرف بناءً على هذا الإعداد؛ ستشرح التقارير المستقبلية سبب المنع.',
+          INSUFFICIENT_DATA: 'لا يملك Mizan معلومات موثوقة كافية لتكوين نظرة واضحة.',
+        },
+        report: {
+          eyebrow: 'هيكل التقرير المستقبلي',
+          title: 'ما الذي سيتضمنه التقرير المستقبلي',
+          description:
+            'لا يوجد تقرير مباشر بعد. هذه الأقسام تصف الهيكل التعليمي المخطط له.',
+          halal: 'حالة الحلال',
+          instrument: 'حالة الأداة',
+          risk: 'مستوى المخاطر',
+          market: 'سياق السوق',
+          sources: 'المصادر',
+          avoid: 'ما يجب تجنبه',
         },
       },
       halal: {

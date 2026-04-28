@@ -10,6 +10,7 @@ import type { NavItem } from '../../components/layout/BottomNav';
 
 type HomeScreenProps = {
   onNavigate: (item: NavItem) => void;
+  onOpenVerdictPreview: () => void;
 };
 
 type ActionItem = {
@@ -22,13 +23,6 @@ type ActionItem = {
 };
 
 const ACTIONS: ActionItem[] = [
-  {
-    key: 'analyze',
-    titleKey: 'home.actions.analyze.title',
-    descriptionKey: 'home.actions.analyze.description',
-    metaKey: 'home.actions.analyze.meta',
-    icon: 'AI',
-  },
   {
     key: 'check',
     titleKey: 'home.actions.check.title',
@@ -66,7 +60,31 @@ const MVP_NOTES = [
   'home.mvp.next',
 ];
 
-export function HomeScreen({ onNavigate }: HomeScreenProps) {
+const VERDICT_LABELS = [
+  'STRONG_STUDY',
+  'WATCH',
+  'WAIT',
+  'CAUTION',
+  'AVOID',
+  'NO_TRADE',
+  'INSUFFICIENT_DATA',
+] as const;
+
+const AVOID_ITEMS = [
+  'home.avoid.futures',
+  'home.avoid.margin',
+  'home.avoid.leverage',
+  'home.avoid.yield',
+  'home.avoid.speculation',
+];
+
+function verdictTone(verdict: (typeof VERDICT_LABELS)[number]) {
+  if (verdict === 'STRONG_STUDY' || verdict === 'WATCH') return 'positive';
+  if (verdict === 'WAIT' || verdict === 'CAUTION' || verdict === 'INSUFFICIENT_DATA') return 'warning';
+  return 'danger';
+}
+
+export function HomeScreen({ onNavigate, onOpenVerdictPreview }: HomeScreenProps) {
   const { t } = useTranslation();
 
   return (
@@ -84,7 +102,7 @@ export function HomeScreen({ onNavigate }: HomeScreenProps) {
             <p className="m-0 text-xs font-semibold uppercase tracking-[0.18em] text-[rgb(var(--app-muted))]">
               {t('home.hero.eyebrow')}
             </p>
-            <h1 className="m-0 mt-2 text-5xl font-semibold tracking-normal text-[rgb(var(--app-text))]">
+            <h1 className="m-0 mt-2 text-4xl font-semibold tracking-normal text-[rgb(var(--app-text))]">
               {t('home.hero.title')}
             </h1>
             <p className="m-0 mt-3 max-w-sm text-lg font-semibold leading-7 text-[rgb(var(--app-primary))]">
@@ -99,10 +117,15 @@ export function HomeScreen({ onNavigate }: HomeScreenProps) {
         <div className="grid gap-3 p-5">
           <button
             type="button"
-            disabled
-            className="min-h-12 rounded-2xl bg-[rgb(var(--app-primary))] px-4 text-sm font-semibold text-white opacity-75"
+            onClick={onOpenVerdictPreview}
+            className="min-h-16 rounded-[1.35rem] border border-[rgb(var(--app-primary)/0.18)] bg-[rgb(var(--app-primary))] px-4 text-left text-sm font-semibold text-white shadow-[0_16px_34px_rgba(4,120,87,0.26)]"
           >
-            {t('home.hero.primaryCta')}
+            <span className="block text-xs uppercase tracking-[0.16em] text-white/70">
+              {t('home.ask.eyebrow')}
+            </span>
+            <span className="mt-1 block text-base">
+              {t('home.ask.placeholder')}
+            </span>
           </button>
           <div className="grid grid-cols-3 gap-2">
             <TrustBadge label={t('home.trust.halal')} value={t('home.trust.educational')} />
@@ -115,22 +138,34 @@ export function HomeScreen({ onNavigate }: HomeScreenProps) {
 
       <PremiumCard>
         <SectionHeader
+          eyebrow={t('home.verdicts.eyebrow')}
+          title={t('home.verdicts.title')}
+          description={t('home.verdicts.description')}
+        />
+        <div className="mt-4 flex flex-wrap gap-2">
+          {VERDICT_LABELS.map((verdict) => (
+            <StatusPill
+              key={verdict}
+              tone={verdictTone(verdict)}
+              value={t(`verdict.labels.${verdict}`)}
+            />
+          ))}
+        </div>
+      </PremiumCard>
+
+      <PremiumCard>
+        <SectionHeader
           eyebrow={t('home.marketMood.eyebrow')}
           title={t('home.marketMood.title')}
+          description={t('home.marketMood.description')}
         />
-        <p className="m-0 mt-2 text-sm leading-6 text-[rgb(var(--app-muted))]">
-          {t('home.marketMood.description')}
-        </p>
       </PremiumCard>
 
       <section className="grid grid-cols-1 gap-3 sm:grid-cols-2">
         {ACTIONS.map((action) => {
-          const isDisabled = !action.target;
-
           return (
             <ActionCard
               key={action.key}
-              disabled={isDisabled}
               title={t(action.titleKey)}
               description={t(action.descriptionKey)}
               meta={action.metaKey ? t(action.metaKey) : undefined}
@@ -142,6 +177,20 @@ export function HomeScreen({ onNavigate }: HomeScreenProps) {
           );
         })}
       </section>
+
+      <PremiumCard>
+        <SectionHeader eyebrow={t('home.avoid.eyebrow')} title={t('home.avoid.title')} description={t('home.avoid.description')} />
+        <div className="mt-4 grid gap-2">
+          {AVOID_ITEMS.map((item) => (
+            <div
+              key={item}
+              className="rounded-2xl border border-[rgb(var(--app-border))] bg-[rgb(var(--app-bg)/0.72)] p-3 text-sm font-semibold text-[rgb(var(--app-text))]"
+            >
+              {t(item)}
+            </div>
+          ))}
+        </div>
+      </PremiumCard>
 
       <PremiumCard>
         <SectionHeader eyebrow={t('home.how.eyebrow')} title={t('home.how.title')} />

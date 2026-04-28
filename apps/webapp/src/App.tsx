@@ -11,6 +11,7 @@ import { HomeScreen } from './features/home/HomeScreen';
 import { OnboardingFlow } from './features/onboarding/OnboardingFlow';
 import { RiskCalculatorScreen } from './features/risk/RiskCalculatorScreen';
 import { SettingsPanel } from './features/settings/SettingsPanel';
+import { VerdictPreviewScreen } from './features/verdict/VerdictPreviewScreen';
 import { WatchlistScreen } from './features/watchlist/WatchlistScreen';
 import { getUserSettings, type UserSettings } from './lib/api';
 import { AuthProvider, useAuth } from './providers/AuthProvider';
@@ -24,6 +25,7 @@ function AppContent() {
   const { accessToken, isAuthenticating } = useAuth();
   const { setThemeMode } = useTheme();
   const [activeItem, setActiveItem] = useState<NavItem>('home');
+  const [isVerdictPreviewOpen, setIsVerdictPreviewOpen] = useState(false);
 
   const settingsQuery = useQuery({
     queryKey: ['me-settings', accessToken],
@@ -54,9 +56,18 @@ function AppContent() {
     setThemeMode(nextSettings.theme);
   }
 
+  function handleNavigation(nextItem: NavItem) {
+    setIsVerdictPreviewOpen(false);
+    setActiveItem(nextItem);
+  }
+
   function renderScreen() {
+    if (isVerdictPreviewOpen) {
+      return <VerdictPreviewScreen onBack={() => setIsVerdictPreviewOpen(false)} />;
+    }
+
     if (activeItem === 'home') {
-      return <HomeScreen onNavigate={setActiveItem} />;
+      return <HomeScreen onNavigate={handleNavigation} onOpenVerdictPreview={() => setIsVerdictPreviewOpen(true)} />;
     }
 
     if (activeItem === 'watchlist') {
@@ -75,7 +86,7 @@ function AppContent() {
       return <SettingsPanel accessToken={accessToken} settings={settings} onSaved={handleSettingsSaved} />;
     }
 
-    return <HomeScreen onNavigate={setActiveItem} />;
+    return <HomeScreen onNavigate={handleNavigation} onOpenVerdictPreview={() => setIsVerdictPreviewOpen(true)} />;
   }
 
   if (isAuthenticating || (accessToken && settingsQuery.isPending)) {
@@ -103,7 +114,7 @@ function AppContent() {
   }
 
   return (
-    <AppShell topBar={<TopBar />} bottomNav={<BottomNav activeItem={activeItem} onChange={setActiveItem} />}>
+    <AppShell topBar={<TopBar />} bottomNav={<BottomNav activeItem={activeItem} onChange={handleNavigation} />}>
       {renderScreen()}
     </AppShell>
   );
