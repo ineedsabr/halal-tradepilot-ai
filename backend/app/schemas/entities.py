@@ -18,6 +18,7 @@ from .journal import JournalEntryBase, JournalEntryRead, JournalEntrySummary
 from .paper import PaperTradeBase, PaperTradeRead, PaperTradeStatus, PaperTradeSummary
 from .risk import RiskCalculationResult, RiskVerdict
 from .settings import MethodologyPreference, UserGoal, UserSettingsRead, UserSettingsUpdate
+from .watchlist import WatchlistItemCreate, WatchlistItemRead
 
 __all__ = [
     "AIGuardResponse",
@@ -52,4 +53,6 @@ __all__ = [
     "UserGoal",
     "UserSettingsRead",
     "UserSettingsUpdate",
+    "WatchlistItemCreate",
+    "WatchlistItemRead",
 ]
