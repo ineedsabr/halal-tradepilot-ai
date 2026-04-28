@@ -82,10 +82,20 @@ In production, `JWT_SECRET` must be configured, must not be `replace_me`, and mu
 POST /auth/telegram
 GET /api/v1/assets/search
 GET /api/v1/assets/{asset_id}
+GET /api/v1/instruments
 GET /api/v1/halal/check
+GET /api/v1/me/settings
+PUT /api/v1/me/settings
 ```
 
 The asset and halal check endpoints use conservative bootstrap seed data. Halal check responses include asset status, instrument status, combined status, trust metadata, and an educational disclaimer.
+The settings endpoints require a Bearer JWT issued by `POST /auth/telegram`; request bodies do not accept `user_id`.
+
+Current halal checks support only the `mvp_conservative_bootstrap` methodology. User settings include onboarding methodology preferences (`conservative`, `balanced`, `scholar_based`, `custom`), but only `conservative` currently maps to the bootstrap methodology. Other preference values are placeholders for future methodology work and do not enable additional screening engines.
+
+The webapp Halal Screener UI calls the backend asset, instrument, and halal check APIs. It does not calculate halal status in the frontend.
+
+For local development, the webapp API client defaults to `http://localhost:8000` when `VITE_API_URL` is not set. Configure `VITE_API_URL` explicitly for deployed environments.
 
 All services with Docker Compose:
 
@@ -105,7 +115,8 @@ pytest backend/tests
 
 - Conservative seed data exists, but it is not final halal certification.
 - The Halal Check API exists and returns educational screening only.
-- No frontend Halal Screener UI exists yet.
+- The frontend Halal Screener UI exists, but it is display-only and depends on backend responses.
 - No AI, signals, risk engine, trading, payments, paper trading, or market data are implemented.
 - No Alembic migrations exist yet; SQLite `create_all` is local/test only.
+- Existing local SQLite files such as `dev.db` created before model changes may be stale. Recreate them for local development until Alembic migrations are added.
 - No production migration setup, admin auth, full Telegram SDK integration, or deployment pipeline is configured.
