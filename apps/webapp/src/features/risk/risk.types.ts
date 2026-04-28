@@ -9,3 +9,5 @@ export type RiskCalculationResult = {
   cautionReason?: string;
   explanation: string;
 };
+
+export type RiskCalculatorVerdict = 'ALLOWED' | 'CAUTION' | 'BLOCKED' | 'INVALID';

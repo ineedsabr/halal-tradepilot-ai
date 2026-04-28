@@ -23,6 +23,7 @@ export const resources = {
       nav: {
         watchlist: 'Watchlist',
         check: 'Check',
+        risk: 'Risk',
         settings: 'Settings',
       },
       halal: {
@@ -125,6 +126,50 @@ export const resources = {
         status: 'Current backend status',
         addedAt: 'Added',
       },
+      risk: {
+        screen: {
+          eyebrow: 'Risk Calculator',
+          title: 'Educational risk calculation',
+          description:
+            'Enter your own numbers. The backend returns the calculation and verdict. This is educational only, not advice or execution guidance.',
+        },
+        form: {
+          deposit: 'Deposit',
+          entryPrice: 'Entry price',
+          stopLoss: 'Stop-loss',
+          targetValue: 'Optional target value',
+          amountPlaceholder: 'Enter amount',
+          numberPlaceholder: 'Enter number',
+          optionalNumberPlaceholder: 'Optional number',
+          percentPlaceholder: 'Decimal, e.g. 0.01',
+          targetHelper: 'Leave empty if you only need the base risk numbers.',
+          riskPercent: 'Risk percent',
+          riskPercentHelper: 'Use decimal format, for example 0.01 for 1%. Backend enforces the 2% maximum.',
+          calculate: 'Calculate risk',
+          calculating: 'Calculating',
+        },
+        validation: {
+          requiredNumber: 'Enter a valid number.',
+          optionalNumber: 'Use a valid number or leave this empty.',
+          positive: 'Value must be greater than zero.',
+        },
+        result: {
+          backendResult: 'Backend calculation',
+          riskAmount: 'Risk amount',
+          maxLoss: 'Max loss',
+          stopDistance: 'Stop distance',
+          positionSize: 'Position size',
+          riskReward: 'Risk/reward',
+          reasons: 'Backend reasons',
+          noReasons: 'No backend messages for this calculation.',
+        },
+        verdict: {
+          ALLOWED: 'Within risk limits',
+          CAUTION: 'Caution',
+          BLOCKED: 'Blocked',
+          INVALID: 'Invalid input',
+        },
+      },
       settingsPanel: {
         eyebrow: 'Settings',
         title: 'Onboarding settings',
@@ -209,6 +254,7 @@ export const resources = {
       nav: {
         watchlist: 'Watchlist',
         check: 'Проверка',
+        risk: 'Риск',
         settings: 'Настройки',
       },
       halal: {
@@ -311,6 +357,50 @@ export const resources = {
         status: 'Текущий статус backend',
         addedAt: 'Добавлено',
       },
+      risk: {
+        screen: {
+          eyebrow: 'Калькулятор риска',
+          title: 'Образовательный расчёт риска',
+          description:
+            'Введите свои числа. Backend возвращает расчёт и verdict. Это только образовательная оценка, без советов и инструкций к исполнению.',
+        },
+        form: {
+          deposit: 'Депозит',
+          entryPrice: 'Цена входа',
+          stopLoss: 'Стоп-лосс',
+          targetValue: 'Опциональное целевое значение',
+          amountPlaceholder: 'Введите сумму',
+          numberPlaceholder: 'Введите число',
+          optionalNumberPlaceholder: 'Опциональное число',
+          percentPlaceholder: 'Десятичный формат, напр. 0.01',
+          targetHelper: 'Оставьте пустым, если нужны только базовые числа риска.',
+          riskPercent: 'Процент риска',
+          riskPercentHelper: 'Используйте десятичный формат, например 0.01 для 1%. Backend ограничивает максимум 2%.',
+          calculate: 'Рассчитать риск',
+          calculating: 'Расчёт',
+        },
+        validation: {
+          requiredNumber: 'Введите корректное число.',
+          optionalNumber: 'Введите корректное число или оставьте поле пустым.',
+          positive: 'Значение должно быть больше нуля.',
+        },
+        result: {
+          backendResult: 'Расчёт backend',
+          riskAmount: 'Сумма риска',
+          maxLoss: 'Максимальная потеря',
+          stopDistance: 'Дистанция до стопа',
+          positionSize: 'Размер позиции',
+          riskReward: 'Риск/вознаграждение',
+          reasons: 'Причины от backend',
+          noReasons: 'Backend не вернул дополнительных сообщений для этого расчёта.',
+        },
+        verdict: {
+          ALLOWED: 'В пределах риска',
+          CAUTION: 'Осторожность',
+          BLOCKED: 'Заблокировано',
+          INVALID: 'Некорректный ввод',
+        },
+      },
       settingsPanel: {
         eyebrow: 'Настройки',
         title: 'Настройки онбординга',
@@ -395,6 +485,7 @@ export const resources = {
       nav: {
         watchlist: 'Watchlist',
         check: 'Check',
+        risk: 'Risiko',
         settings: 'Einstellungen',
       },
       halal: {
@@ -496,6 +587,50 @@ export const resources = {
         removing: 'Entfernen',
         status: 'Aktueller Backend-Status',
         addedAt: 'Hinzugefuegt',
+      },
+      risk: {
+        screen: {
+          eyebrow: 'Risiko-Rechner',
+          title: 'Bildende Risikoberechnung',
+          description:
+            'Gib deine eigenen Zahlen ein. Das Backend gibt Berechnung und Verdict zurueck. Dies ist nur bildend, keine Beratung oder Ausfuehrungsanleitung.',
+        },
+        form: {
+          deposit: 'Einzahlung',
+          entryPrice: 'Einstiegspreis',
+          stopLoss: 'Stop-Loss',
+          targetValue: 'Optionaler Zielwert',
+          amountPlaceholder: 'Betrag eingeben',
+          numberPlaceholder: 'Zahl eingeben',
+          optionalNumberPlaceholder: 'Optionale Zahl',
+          percentPlaceholder: 'Dezimal, z. B. 0.01',
+          targetHelper: 'Leer lassen, wenn du nur die Basis-Risikowerte brauchst.',
+          riskPercent: 'Risikoprozent',
+          riskPercentHelper: 'Dezimalformat verwenden, zum Beispiel 0.01 fuer 1%. Das Backend erzwingt maximal 2%.',
+          calculate: 'Risiko berechnen',
+          calculating: 'Berechnung laeuft',
+        },
+        validation: {
+          requiredNumber: 'Gib eine gueltige Zahl ein.',
+          optionalNumber: 'Nutze eine gueltige Zahl oder lass das Feld leer.',
+          positive: 'Der Wert muss groesser als null sein.',
+        },
+        result: {
+          backendResult: 'Backend-Berechnung',
+          riskAmount: 'Risikobetrag',
+          maxLoss: 'Maximaler Verlust',
+          stopDistance: 'Stop-Distanz',
+          positionSize: 'Positionsgroesse',
+          riskReward: 'Risiko/Ertrag',
+          reasons: 'Backend-Gruende',
+          noReasons: 'Keine Backend-Hinweise fuer diese Berechnung.',
+        },
+        verdict: {
+          ALLOWED: 'Innerhalb der Risikogrenzen',
+          CAUTION: 'Vorsicht',
+          BLOCKED: 'Blockiert',
+          INVALID: 'Ungueltige Eingabe',
+        },
       },
       settingsPanel: {
         eyebrow: 'Einstellungen',

@@ -94,6 +94,35 @@ export type WatchlistItem = {
   created_at: string;
 };
 
+export type RiskCalculationPayload = {
+  deposit: number;
+  entry_price: number;
+  stop_loss: number;
+  take_profit?: number | null;
+  risk_percent: number;
+  asset_id?: string | null;
+  instrument_id?: string | null;
+  methodology?: string;
+};
+
+export type RiskCalculationResponse = {
+  deposit: number;
+  entry_price: number;
+  stop_loss: number;
+  take_profit?: number | null;
+  risk_percent: number;
+  risk_amount: number;
+  max_loss: number;
+  stop_distance: number;
+  position_size: number;
+  risk_reward?: number | null;
+  verdict: 'ALLOWED' | 'CAUTION' | 'BLOCKED' | 'INVALID';
+  reasons: string[];
+  halal_combined_status?: string | null;
+  instrument_status?: string | null;
+  educational_disclaimer: string;
+};
+
 async function parseJsonResponse<T>(response: Response, fallbackMessage: string): Promise<T> {
   if (!response.ok) {
     let detail = fallbackMessage;
@@ -209,4 +238,19 @@ export async function checkHalal(params: {
 
   const response = await fetch(`${API_URL}/api/v1/halal/check?${query.toString()}`);
   return parseJsonResponse<HalalCheckResult>(response, 'Unable to run halal check.');
+}
+
+export async function calculateRisk(payload: RiskCalculationPayload): Promise<RiskCalculationResponse> {
+  const response = await fetch(`${API_URL}/api/v1/risk/calculate`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      ...payload,
+      methodology: payload.methodology ?? 'mvp_conservative_bootstrap',
+    }),
+  });
+
+  return parseJsonResponse<RiskCalculationResponse>(response, 'Unable to run risk calculation.');
 }

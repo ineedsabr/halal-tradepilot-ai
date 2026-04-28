@@ -8,6 +8,7 @@ import { ErrorState } from './components/states/ErrorState';
 import { SkeletonLoader } from './components/states/SkeletonLoader';
 import { HalalScreenerScreen } from './features/halal/HalalScreenerScreen';
 import { OnboardingFlow } from './features/onboarding/OnboardingFlow';
+import { RiskCalculatorScreen } from './features/risk/RiskCalculatorScreen';
 import { SettingsPanel } from './features/settings/SettingsPanel';
 import { WatchlistScreen } from './features/watchlist/WatchlistScreen';
 import { getUserSettings, type UserSettings } from './lib/api';
@@ -53,6 +54,10 @@ function AppContent() {
 
     if (activeItem === 'check') {
       return <HalalScreenerScreen />;
+    }
+
+    if (activeItem === 'risk') {
+      return <RiskCalculatorScreen />;
     }
 
     if (activeItem === 'settings') {
