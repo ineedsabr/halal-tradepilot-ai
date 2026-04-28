@@ -2,6 +2,7 @@ import { useMutation } from '@tanstack/react-query';
 import { useState } from 'react';
 import type { FormEvent } from 'react';
 import { useTranslation } from 'react-i18next';
+import { DisclaimerBanner } from '../../components/trust/DisclaimerBanner';
 import { calculateRisk, type RiskCalculationResponse } from '../../lib/api';
 
 type RiskFormState = {
@@ -163,9 +164,12 @@ function RiskResultCard({ result }: { result: RiskCalculationResponse }) {
         </ul>
       </div>
 
-      <p className="m-0 mt-4 rounded-xl border border-[rgb(var(--app-border))] bg-[rgb(var(--app-bg))] p-3 text-xs leading-5 text-[rgb(var(--app-muted))]">
-        {result.educational_disclaimer}
-      </p>
+      <div className="mt-4 grid gap-2">
+        <DisclaimerBanner type="risk" />
+        <p className="m-0 rounded-xl border border-[rgb(var(--app-border))] bg-[rgb(var(--app-bg))] p-3 text-xs leading-5 text-[rgb(var(--app-muted))]">
+          {result.educational_disclaimer}
+        </p>
+      </div>
     </section>
   );
 }

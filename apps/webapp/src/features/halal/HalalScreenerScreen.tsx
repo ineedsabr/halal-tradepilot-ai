@@ -2,6 +2,7 @@ import { useMutation, useQuery } from '@tanstack/react-query';
 import { useMemo, useState } from 'react';
 import type { FormEvent } from 'react';
 import { useTranslation } from 'react-i18next';
+import { DisclaimerBanner } from '../../components/trust/DisclaimerBanner';
 import {
   checkHalal,
   listInstruments,
@@ -185,9 +186,12 @@ function ResultCard({ result }: { result: HalalCheckResult }) {
         </div>
       ) : null}
 
-      <p className="m-0 mt-4 rounded-xl border border-[rgb(var(--app-border))] bg-[rgb(var(--app-bg))] p-3 text-xs leading-5 text-[rgb(var(--app-muted))]">
-        {result.disclaimer}
-      </p>
+      <div className="mt-4 grid gap-2">
+        <DisclaimerBanner type="halal" />
+        <p className="m-0 rounded-xl border border-[rgb(var(--app-border))] bg-[rgb(var(--app-bg))] p-3 text-xs leading-5 text-[rgb(var(--app-muted))]">
+          {result.disclaimer}
+        </p>
+      </div>
 
       <WatchlistAddButton assetId={result.asset.id} />
     </section>

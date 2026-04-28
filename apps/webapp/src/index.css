@@ -4,24 +4,24 @@
 
 :root {
   color-scheme: light;
-  --app-bg: 246 247 249;
-  --app-text: 28 32 38;
-  --app-muted: 88 101 121;
+  --app-bg: 248 250 247;
+  --app-text: 24 32 28;
+  --app-muted: 91 104 96;
   --app-surface: 255 255 255;
-  --app-border: 220 225 232;
-  --app-accent: 22 112 214;
-  --app-primary: 22 112 214;
+  --app-border: 218 226 220;
+  --app-accent: 4 120 87;
+  --app-primary: 4 120 87;
 }
 
 :root.dark {
   color-scheme: dark;
-  --app-bg: 17 21 28;
-  --app-text: 240 243 247;
-  --app-muted: 159 171 188;
-  --app-surface: 29 35 45;
-  --app-border: 57 68 84;
-  --app-accent: 83 155 245;
-  --app-primary: 83 155 245;
+  --app-bg: 15 20 18;
+  --app-text: 240 246 242;
+  --app-muted: 158 174 164;
+  --app-surface: 25 33 29;
+  --app-border: 55 69 61;
+  --app-accent: 52 211 153;
+  --app-primary: 52 211 153;
 }
 
 * {

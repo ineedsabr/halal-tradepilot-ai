@@ -5,7 +5,9 @@ export const resources = {
   en: {
     translation: {
       app: {
-        telegramMiniApp: 'Telegram Mini App',
+        telegramMiniApp: 'Mizan Mini App',
+        name: 'Mizan',
+        tagline: 'Crypto clarity with halal principles and risk control.',
       },
       empty: {
         title: 'Coming soon',
@@ -21,18 +23,76 @@ export const resources = {
         description: 'Please reopen the Mini App from Telegram.',
       },
       nav: {
-        watchlist: 'Watchlist',
+        home: 'Home',
         check: 'Check',
+        watchlist: 'Watchlist',
         risk: 'Risk',
         settings: 'Settings',
+      },
+      disclaimer: {
+        general: 'Educational information only. Not financial advice.',
+        analysis: 'Educational analysis only. Not financial advice or a profit promise.',
+        halal: 'This app does not issue fatwas. For religious rulings, consult a qualified Islamic scholar.',
+        risk: 'Risk calculations are educational estimates only. They do not recommend entering any trade.',
+      },
+      home: {
+        hero: {
+          eyebrow: 'Premium Islamic fintech',
+          title: 'Mizan',
+          tagline: 'Crypto clarity with halal principles and risk control.',
+          description:
+            'Ask about a crypto asset and get a simple halal, risk, and market-readiness view.',
+        },
+        marketMood: {
+          eyebrow: 'Market Mood',
+          title: 'Honest MVP status',
+          description:
+            'Live market mood is coming next. Current MVP uses halal screening, watchlist, and risk calculation.',
+        },
+        actions: {
+          analyze: {
+            title: 'Analyze Crypto',
+            description: 'Coming next. No generated analysis is shown until the backend is ready.',
+          },
+          check: {
+            title: 'Halal Check',
+            description: 'Check an asset and instrument with conservative backend screening.',
+          },
+          risk: {
+            title: 'Risk Calculator',
+            description: 'Run an educational risk calculation from your own numbers.',
+          },
+          watchlist: {
+            title: 'Watchlist',
+            description: 'Keep assets in a study list for later review.',
+          },
+        },
+        how: {
+          eyebrow: 'How Mizan works',
+          title: 'A simple decision rhythm',
+          steps: {
+            asset: 'Choose a crypto asset.',
+            instrument: 'Check Asset + Instrument.',
+            review: 'Review halal status and risk.',
+            decide: 'Decide: STRONG STUDY, WATCH, WAIT, CAUTION, AVOID, NO-TRADE, or INSUFFICIENT DATA.',
+          },
+        },
+        mvp: {
+          eyebrow: 'Current MVP',
+          title: 'What is available now',
+          conservative: 'Conservative halal check.',
+          watchlist: 'Watchlist for saved assets.',
+          risk: 'Risk calculator.',
+          next: 'AI Verdicts and live market data coming next.',
+        },
       },
       halal: {
         assetFallback: 'Asset',
         screen: {
-          eyebrow: 'Halal Screener',
-          title: 'Check asset + instrument',
+          eyebrow: 'Halal Check',
+          title: 'Check Asset + Instrument',
           description:
-            'This tool shows educational screening from the backend. It does not issue religious rulings or investment advice.',
+            'Mizan checks the selected asset together with the selected instrument. Results come from the backend and remain educational only.',
         },
         search: {
           label: 'Search asset',
@@ -111,8 +171,8 @@ export const resources = {
       },
       watchlist: {
         eyebrow: 'Watchlist',
-        title: 'Saved assets',
-        description: 'Track assets for later educational screening. Status values come from the backend only.',
+        title: 'Study list',
+        description: 'Monitor saved assets for later review. Status values come from the backend only and are not recommendations.',
         authRequired: 'Open the Mini App through Telegram to use your watchlist.',
         loading: 'Loading watchlist',
         empty: 'No saved assets yet. Run a check and add an asset from the result card.',
@@ -131,7 +191,7 @@ export const resources = {
           eyebrow: 'Risk Calculator',
           title: 'Educational risk calculation',
           description:
-            'Enter your own numbers. The backend returns the calculation and verdict. This is educational only, not advice or execution guidance.',
+            'Enter your own numbers. Mizan sends them to the backend for calculation. This is educational only, not advice.',
         },
         form: {
           deposit: 'Deposit',
@@ -172,7 +232,7 @@ export const resources = {
       },
       settingsPanel: {
         eyebrow: 'Settings',
-        title: 'Onboarding settings',
+        title: 'Mizan settings',
         description: 'Update saved preferences. Consent timestamps are preserved by the backend.',
         authRequired: 'Open the Mini App through Telegram to manage account settings.',
         save: 'Save settings',
@@ -202,6 +262,7 @@ export const resources = {
             en: 'English',
             ru: 'Russian',
             de: 'German',
+            ar: 'Arabic',
           },
           level: {
             learner: 'Learner',
@@ -236,7 +297,9 @@ export const resources = {
   ru: {
     translation: {
       app: {
-        telegramMiniApp: 'Telegram Mini App',
+        telegramMiniApp: 'Mizan Mini App',
+        name: 'Mizan',
+        tagline: 'Ясность в крипто с халяль-принципами и контролем риска.',
       },
       empty: {
         title: 'Скоро',
@@ -252,18 +315,76 @@ export const resources = {
         description: 'Пожалуйста, откройте Mini App заново из Telegram.',
       },
       nav: {
-        watchlist: 'Watchlist',
+        home: 'Главная',
         check: 'Проверка',
+        watchlist: 'Список',
         risk: 'Риск',
         settings: 'Настройки',
+      },
+      disclaimer: {
+        general: 'Только образовательная информация. Это не финансовый совет.',
+        analysis: 'Только образовательный анализ. Это не финансовый совет и не обещание результата.',
+        halal: 'Это приложение не выносит фетвы. За религиозными решениями обращайтесь к квалифицированному исламскому учёному.',
+        risk: 'Расчёты риска являются только образовательными оценками. Они не рекомендуют входить в сделку.',
+      },
+      home: {
+        hero: {
+          eyebrow: 'Премиальный исламский финтех',
+          title: 'Mizan',
+          tagline: 'Ясность в крипто с халяль-принципами и контролем риска.',
+          description:
+            'Спросите о криптоактиве и получите простой взгляд на халяль-статус, риск и готовность к рыночному разбору.',
+        },
+        marketMood: {
+          eyebrow: 'Рыночное настроение',
+          title: 'Честный статус MVP',
+          description:
+            'Живое рыночное настроение появится следующим шагом. Сейчас MVP использует халяль-скрининг, watchlist и калькулятор риска.',
+        },
+        actions: {
+          analyze: {
+            title: 'Analyze Crypto',
+            description: 'Появится следующим шагом. Сгенерированный анализ не показывается, пока backend не готов.',
+          },
+          check: {
+            title: 'Халяль-проверка',
+            description: 'Проверьте актив и инструмент через консервативный backend-скрининг.',
+          },
+          risk: {
+            title: 'Калькулятор риска',
+            description: 'Запустите образовательный расчёт риска на основе своих чисел.',
+          },
+          watchlist: {
+            title: 'Watchlist',
+            description: 'Сохраняйте активы в учебный список для дальнейшего просмотра.',
+          },
+        },
+        how: {
+          eyebrow: 'Как работает Mizan',
+          title: 'Простой ритм решения',
+          steps: {
+            asset: 'Выберите криптоактив.',
+            instrument: 'Проверьте Asset + Instrument.',
+            review: 'Посмотрите халяль-статус и риск.',
+            decide: 'Решите: STRONG STUDY, WATCH, WAIT, CAUTION, AVOID, NO-TRADE или INSUFFICIENT DATA.',
+          },
+        },
+        mvp: {
+          eyebrow: 'Текущий MVP',
+          title: 'Что доступно сейчас',
+          conservative: 'Консервативная халяль-проверка.',
+          watchlist: 'Watchlist для сохранённых активов.',
+          risk: 'Калькулятор риска.',
+          next: 'AI Verdicts и live market data появятся следующим шагом.',
+        },
       },
       halal: {
         assetFallback: 'Актив',
         screen: {
-          eyebrow: 'Халяль-скрининг',
-          title: 'Проверка актива и инструмента',
+          eyebrow: 'Халяль-проверка',
+          title: 'Проверка Asset + Instrument',
           description:
-            'Инструмент показывает образовательную проверку с backend. Он не выносит религиозные решения и не даёт инвестиционных советов.',
+            'Mizan проверяет выбранный актив вместе с выбранным инструментом. Результаты приходят с backend и остаются образовательными.',
         },
         search: {
           label: 'Поиск актива',
@@ -342,8 +463,8 @@ export const resources = {
       },
       watchlist: {
         eyebrow: 'Watchlist',
-        title: 'Сохранённые активы',
-        description: 'Отслеживайте активы для последующего образовательного скрининга. Статусы приходят только с backend.',
+        title: 'Учебный список',
+        description: 'Следите за сохранёнными активами для дальнейшего просмотра. Статусы приходят только с backend и не являются рекомендациями.',
         authRequired: 'Откройте Mini App через Telegram, чтобы использовать watchlist.',
         loading: 'Загрузка watchlist',
         empty: 'Пока нет сохранённых активов. Запустите проверку и добавьте актив из карточки результата.',
@@ -362,7 +483,7 @@ export const resources = {
           eyebrow: 'Калькулятор риска',
           title: 'Образовательный расчёт риска',
           description:
-            'Введите свои числа. Backend возвращает расчёт и verdict. Это только образовательная оценка, без советов и инструкций к исполнению.',
+            'Введите свои числа. Mizan отправляет их на backend для расчёта. Это только образовательная оценка, не совет.',
         },
         form: {
           deposit: 'Депозит',
@@ -403,7 +524,7 @@ export const resources = {
       },
       settingsPanel: {
         eyebrow: 'Настройки',
-        title: 'Настройки онбординга',
+        title: 'Настройки Mizan',
         description: 'Обновите сохранённые предпочтения. Время принятых согласий сохраняется backend.',
         authRequired: 'Откройте Mini App через Telegram, чтобы управлять настройками аккаунта.',
         save: 'Сохранить настройки',
@@ -433,6 +554,7 @@ export const resources = {
             en: 'Английский',
             ru: 'Русский',
             de: 'Немецкий',
+            ar: 'Арабский',
           },
           level: {
             learner: 'Ученик',
@@ -467,7 +589,9 @@ export const resources = {
   de: {
     translation: {
       app: {
-        telegramMiniApp: 'Telegram Mini App',
+        telegramMiniApp: 'Mizan Mini App',
+        name: 'Mizan',
+        tagline: 'Krypto-Klarheit mit Halal-Prinzipien und Risikokontrolle.',
       },
       empty: {
         title: 'Demnaechst',
@@ -483,18 +607,76 @@ export const resources = {
         description: 'Bitte oeffne die Mini App erneut aus Telegram.',
       },
       nav: {
-        watchlist: 'Watchlist',
+        home: 'Home',
         check: 'Check',
+        watchlist: 'Watchlist',
         risk: 'Risiko',
         settings: 'Einstellungen',
+      },
+      disclaimer: {
+        general: 'Nur Bildungsinformation. Keine Finanzberatung.',
+        analysis: 'Nur bildende Analyse. Keine Finanzberatung und kein Ergebnisversprechen.',
+        halal: 'Diese App stellt keine Fatwas aus. Fuer religioese Urteile konsultiere einen qualifizierten islamischen Gelehrten.',
+        risk: 'Risikoberechnungen sind nur bildende Schaetzungen. Sie empfehlen keinen Einstieg in einen Trade.',
+      },
+      home: {
+        hero: {
+          eyebrow: 'Premium Islamic Fintech',
+          title: 'Mizan',
+          tagline: 'Krypto-Klarheit mit Halal-Prinzipien und Risikokontrolle.',
+          description:
+            'Frage nach einem Krypto-Asset und erhalte eine einfache Sicht auf Halal-Status, Risiko und Marktbereitschaft.',
+        },
+        marketMood: {
+          eyebrow: 'Market Mood',
+          title: 'Ehrlicher MVP-Status',
+          description:
+            'Live Market Mood kommt als Naechstes. Das aktuelle MVP nutzt Halal-Screening, Watchlist und Risikoberechnung.',
+        },
+        actions: {
+          analyze: {
+            title: 'Analyze Crypto',
+            description: 'Kommt als Naechstes. Es wird keine generierte Analyse gezeigt, bis das Backend bereit ist.',
+          },
+          check: {
+            title: 'Halal Check',
+            description: 'Pruefe Asset und Instrument mit konservativem Backend-Screening.',
+          },
+          risk: {
+            title: 'Risk Calculator',
+            description: 'Fuehre eine bildende Risikoberechnung mit deinen eigenen Zahlen aus.',
+          },
+          watchlist: {
+            title: 'Watchlist',
+            description: 'Speichere Assets in einer Studienliste fuer spaetere Pruefung.',
+          },
+        },
+        how: {
+          eyebrow: 'So funktioniert Mizan',
+          title: 'Ein einfacher Entscheidungsrhythmus',
+          steps: {
+            asset: 'Waehle ein Krypto-Asset.',
+            instrument: 'Pruefe Asset + Instrument.',
+            review: 'Pruefe Halal-Status und Risiko.',
+            decide: 'Entscheide: STRONG STUDY, WATCH, WAIT, CAUTION, AVOID, NO-TRADE oder INSUFFICIENT DATA.',
+          },
+        },
+        mvp: {
+          eyebrow: 'Aktuelles MVP',
+          title: 'Was jetzt verfuegbar ist',
+          conservative: 'Konservativer Halal Check.',
+          watchlist: 'Watchlist fuer gespeicherte Assets.',
+          risk: 'Risk Calculator.',
+          next: 'AI Verdicts und Live-Marktdaten kommen als Naechstes.',
+        },
       },
       halal: {
         assetFallback: 'Asset',
         screen: {
-          eyebrow: 'Halal-Screening',
-          title: 'Asset und Instrument pruefen',
+          eyebrow: 'Halal Check',
+          title: 'Asset + Instrument pruefen',
           description:
-            'Dieses Werkzeug zeigt eine bildende Pruefung aus dem Backend. Es trifft keine religioesen Entscheidungen und gibt keine Anlageberatung.',
+            'Mizan prueft das ausgewaehlte Asset zusammen mit dem ausgewaehlten Instrument. Ergebnisse kommen aus dem Backend und bleiben bildend.',
         },
         search: {
           label: 'Asset suchen',
@@ -573,8 +755,8 @@ export const resources = {
       },
       watchlist: {
         eyebrow: 'Watchlist',
-        title: 'Gespeicherte Assets',
-        description: 'Merke Assets fuer spaeteres bildendes Screening. Statuswerte kommen nur aus dem Backend.',
+        title: 'Studienliste',
+        description: 'Beobachte gespeicherte Assets fuer spaetere Pruefung. Statuswerte kommen nur aus dem Backend und sind keine Empfehlungen.',
         authRequired: 'Oeffne die Mini App ueber Telegram, um deine Watchlist zu verwenden.',
         loading: 'Watchlist wird geladen',
         empty: 'Noch keine gespeicherten Assets. Starte eine Pruefung und fuege ein Asset aus der Ergebniskarte hinzu.',
@@ -593,7 +775,7 @@ export const resources = {
           eyebrow: 'Risiko-Rechner',
           title: 'Bildende Risikoberechnung',
           description:
-            'Gib deine eigenen Zahlen ein. Das Backend gibt Berechnung und Verdict zurueck. Dies ist nur bildend, keine Beratung oder Ausfuehrungsanleitung.',
+            'Gib deine eigenen Zahlen ein. Mizan sendet sie zur Berechnung an das Backend. Dies ist nur bildend, keine Beratung.',
         },
         form: {
           deposit: 'Einzahlung',
@@ -634,7 +816,7 @@ export const resources = {
       },
       settingsPanel: {
         eyebrow: 'Einstellungen',
-        title: 'Onboarding-Einstellungen',
+        title: 'Mizan-Einstellungen',
         description: 'Aktualisiere gespeicherte Praeferenzen. Zustimmungszeitpunkte bleiben im Backend erhalten.',
         authRequired: 'Oeffne die Mini App ueber Telegram, um Kontoeinstellungen zu verwalten.',
         save: 'Einstellungen speichern',
@@ -664,6 +846,7 @@ export const resources = {
             en: 'Englisch',
             ru: 'Russisch',
             de: 'Deutsch',
+            ar: 'Arabisch',
           },
           level: {
             learner: 'Lernend',
@@ -691,6 +874,298 @@ export const resources = {
       theme: {
         dark: 'Dunkel',
         light: 'Hell',
+        telegram: 'Telegram',
+      },
+    },
+  },
+  ar: {
+    translation: {
+      app: {
+        telegramMiniApp: 'تطبيق Mizan المصغر',
+        name: 'Mizan',
+        tagline: 'وضوح في الكريبتو مع مبادئ الحلال وضبط المخاطر.',
+      },
+      empty: {
+        title: 'قريباً',
+        description: 'قريباً',
+      },
+      error: {
+        title: 'قريباً',
+        description: 'قريباً',
+      },
+      loading: 'جار التحميل',
+      sessionExpired: {
+        title: 'انتهت الجلسة',
+        description: 'يرجى فتح التطبيق المصغر من Telegram مرة أخرى.',
+      },
+      nav: {
+        home: 'الرئيسية',
+        check: 'الفحص',
+        watchlist: 'القائمة',
+        risk: 'المخاطر',
+        settings: 'الإعدادات',
+      },
+      disclaimer: {
+        general: 'معلومات تعليمية فقط. ليست نصيحة مالية.',
+        analysis: 'تحليل تعليمي فقط. ليس نصيحة مالية ولا وعداً بالنتائج.',
+        halal: 'هذا التطبيق لا يصدر فتاوى. للأحكام الدينية، استشر عالماً إسلامياً مؤهلاً.',
+        risk: 'حسابات المخاطر تقديرات تعليمية فقط. لا توصي بالدخول في أي صفقة.',
+      },
+      home: {
+        hero: {
+          eyebrow: 'تقنية مالية إسلامية راقية',
+          title: 'Mizan',
+          tagline: 'وضوح في الكريبتو مع مبادئ الحلال وضبط المخاطر.',
+          description:
+            'اسأل عن أصل كريبتو واحصل على نظرة بسيطة للحالة الشرعية والمخاطر وجاهزية قراءة السوق.',
+        },
+        marketMood: {
+          eyebrow: 'مزاج السوق',
+          title: 'حالة MVP بوضوح',
+          description:
+            'مزاج السوق المباشر قادم لاحقاً. يستخدم MVP الحالي فحص الحلال وقائمة المتابعة وحساب المخاطر.',
+        },
+        actions: {
+          analyze: {
+            title: 'تحليل الكريبتو',
+            description: 'قادم لاحقاً. لن يظهر تحليل مولد حتى يكون backend جاهزاً.',
+          },
+          check: {
+            title: 'فحص الحلال',
+            description: 'افحص الأصل والأداة عبر فحص backend محافظ.',
+          },
+          risk: {
+            title: 'حاسبة المخاطر',
+            description: 'شغل حساب مخاطر تعليمي باستخدام أرقامك.',
+          },
+          watchlist: {
+            title: 'قائمة المتابعة',
+            description: 'احتفظ بالأصول في قائمة دراسة للمراجعة لاحقاً.',
+          },
+        },
+        how: {
+          eyebrow: 'كيف يعمل Mizan',
+          title: 'إيقاع قرار بسيط',
+          steps: {
+            asset: 'اختر أصل كريبتو.',
+            instrument: 'افحص الأصل + الأداة.',
+            review: 'راجع حالة الحلال والمخاطر.',
+            decide: 'قرر: STRONG STUDY أو WATCH أو WAIT أو CAUTION أو AVOID أو NO-TRADE أو INSUFFICIENT DATA.',
+          },
+        },
+        mvp: {
+          eyebrow: 'MVP الحالي',
+          title: 'المتاح الآن',
+          conservative: 'فحص حلال محافظ.',
+          watchlist: 'قائمة متابعة للأصول المحفوظة.',
+          risk: 'حاسبة مخاطر.',
+          next: 'AI Verdicts وبيانات السوق المباشرة قادمة لاحقاً.',
+        },
+      },
+      halal: {
+        assetFallback: 'أصل',
+        screen: {
+          eyebrow: 'فحص الحلال',
+          title: 'فحص الأصل + الأداة',
+          description:
+            'يفحص Mizan الأصل المختار مع الأداة المختارة. النتائج تأتي من backend وتبقى تعليمية فقط.',
+        },
+        search: {
+          label: 'ابحث عن أصل',
+          placeholder: 'BTC, AAPL, ETH...',
+          action: 'بحث',
+          searching: 'جار البحث',
+          empty: 'لم يتم العثور على أصول. جرب رمزاً أو اسماً آخر.',
+        },
+        instrument: {
+          label: 'اختر الأداة',
+          loading: 'جار تحميل خيارات الأدوات...',
+          placeholder: 'اختر نوع الأداة',
+          notRestricted: 'طبقة الأداة: غير مقيدة. الحالة النهائية ما زالت تعتمد على الأصل المختار.',
+        },
+        check: {
+          action: 'تشغيل الفحص',
+          checking: 'جار الفحص',
+          empty: 'اختر أصلاً وأداة لرؤية نتيجة الفحص المجمعة.',
+        },
+        result: {
+          backendResult: 'نتيجة backend',
+          asset: 'الأصل',
+          instrument: 'الأداة',
+          combined: 'المجمعة',
+          methodology: 'المنهجية',
+          confidence: 'الثقة',
+          dataQuality: 'جودة البيانات',
+          dataFreshness: 'حداثة البيانات',
+          lastReviewed: 'آخر مراجعة',
+          notAvailable: 'غير متاح',
+          summary: 'الملخص',
+          blockingReason: 'سبب المنع',
+        },
+        status: {
+          instrumentNotRestricted: 'طبقة الأداة: غير مقيدة',
+        },
+        hints: {
+          avoid: 'ينبغي تجنب هذه التركيبة بسبب قيود في الأداة أو الأصل.',
+          underReview: 'التقييم قيد المراجعة. تعامل مع النتيجة كغير مؤكدة.',
+          scholarlyDisagreement: 'توجد اختلافات بين آراء العلماء في هذه الحالة؛ تجنب الثقة الزائدة.',
+          doubtful: 'الحالة محل شك؛ يلزم الحذر ما دامت الأدلة غير واضحة.',
+          insufficientData: 'لا توجد بيانات موثوقة كافية بعد لحالة واثقة.',
+          sourceConflict: 'المصادر متعارضة؛ تبقى الحالة غير مؤكدة حتى يتم حل التعارض.',
+          default: 'طبقة الأداة غير مقيدة. الحالة النهائية ما زالت تعتمد على تقييم الأصل.',
+        },
+      },
+      onboarding: {
+        eyebrow: 'الخطوة {{current}} من {{total}}',
+        back: 'رجوع',
+        next: 'التالي',
+        finish: 'إنهاء',
+        saving: 'جار الحفظ',
+        steps: {
+          0: {
+            title: 'اختر اللغة والمظهر',
+            description: 'يتم حفظ هذه التفضيلات في إعدادات حسابك.',
+          },
+          1: {
+            title: 'حدد ملفك التعليمي',
+            description: 'هذا يؤثر فقط على الصياغة التعليمية. لا يفعّل نصائح أو أتمتة.',
+          },
+          2: {
+            title: 'أكد التفضيلات والموافقات',
+            description: 'يتاح الإنهاء بعد قبول جميع مربعات الموافقة المطلوبة.',
+          },
+        },
+        consent: {
+          disclaimer: 'أفهم أن التطبيق يقدم فحصاً تعليمياً فقط ولا يصدر أحكاماً دينية.',
+          terms: 'أقبل الشروط الحالية.',
+          privacy: 'أقبل إشعار الخصوصية الحالي.',
+        },
+      },
+      settings: {
+        language: 'اللغة',
+        theme: 'المظهر',
+      },
+      watchlist: {
+        eyebrow: 'قائمة المتابعة',
+        title: 'قائمة الدراسة',
+        description: 'راقب الأصول المحفوظة للمراجعة لاحقاً. قيم الحالة تأتي من backend فقط وليست توصيات.',
+        authRequired: 'افتح التطبيق المصغر عبر Telegram لاستخدام قائمة المتابعة.',
+        loading: 'جار تحميل قائمة المتابعة',
+        empty: 'لا توجد أصول محفوظة بعد. شغل فحصاً وأضف أصلاً من بطاقة النتيجة.',
+        limit: 'تم بلوغ حد MVP المجاني لقائمة المتابعة: 5 أصول نشطة.',
+        add: 'إضافة إلى القائمة',
+        adding: 'جار الإضافة',
+        added: 'تمت الإضافة إلى القائمة.',
+        alreadyAdded: 'هذا الأصل موجود بالفعل في قائمتك.',
+        remove: 'إزالة',
+        removing: 'جار الإزالة',
+        status: 'حالة backend الحالية',
+        addedAt: 'أضيف',
+      },
+      risk: {
+        screen: {
+          eyebrow: 'حاسبة المخاطر',
+          title: 'حساب مخاطر تعليمي',
+          description:
+            'أدخل أرقامك. يرسلها Mizan إلى backend للحساب. هذا تعليمي فقط وليس نصيحة.',
+        },
+        form: {
+          deposit: 'الإيداع',
+          entryPrice: 'سعر الدخول',
+          stopLoss: 'وقف الخسارة',
+          targetValue: 'قيمة هدف اختيارية',
+          amountPlaceholder: 'أدخل مبلغاً',
+          numberPlaceholder: 'أدخل رقماً',
+          optionalNumberPlaceholder: 'رقم اختياري',
+          percentPlaceholder: 'صيغة عشرية مثل 0.01',
+          targetHelper: 'اتركه فارغاً إذا كنت تحتاج فقط إلى أرقام المخاطر الأساسية.',
+          riskPercent: 'نسبة المخاطر',
+          riskPercentHelper: 'استخدم الصيغة العشرية، مثلاً 0.01 لـ 1%. يفرض backend حداً أقصى 2%.',
+          calculate: 'احسب المخاطر',
+          calculating: 'جار الحساب',
+        },
+        validation: {
+          requiredNumber: 'أدخل رقماً صالحاً.',
+          optionalNumber: 'استخدم رقماً صالحاً أو اترك هذا الحقل فارغاً.',
+          positive: 'يجب أن تكون القيمة أكبر من صفر.',
+        },
+        result: {
+          backendResult: 'حساب backend',
+          riskAmount: 'مبلغ المخاطر',
+          maxLoss: 'أقصى خسارة',
+          stopDistance: 'مسافة الوقف',
+          positionSize: 'حجم المركز',
+          riskReward: 'المخاطر/العائد',
+          reasons: 'أسباب backend',
+          noReasons: 'لا توجد رسائل backend إضافية لهذا الحساب.',
+        },
+        verdict: {
+          ALLOWED: 'ضمن حدود المخاطر',
+          CAUTION: 'حذر',
+          BLOCKED: 'محظور',
+          INVALID: 'إدخال غير صالح',
+        },
+      },
+      settingsPanel: {
+        eyebrow: 'الإعدادات',
+        title: 'إعدادات Mizan',
+        description: 'حدّث التفضيلات المحفوظة. يحافظ backend على أوقات الموافقات.',
+        authRequired: 'افتح التطبيق المصغر عبر Telegram لإدارة إعدادات الحساب.',
+        save: 'حفظ الإعدادات',
+        saving: 'جار الحفظ',
+        saved: 'تم حفظ الإعدادات.',
+        methodologyNote:
+          'حالياً conservative فقط مرتبط بـ mvp_conservative_bootstrap. balanced و scholar_based و custom عناصر مؤقتة؛ لا توجد محركات إضافية مفعلة، وهذا ليس اعتماداً أو حكماً دينياً.',
+        fields: {
+          language: 'اللغة',
+          theme: 'المظهر',
+          level: 'مستوى الخبرة',
+          goal: 'هدف التعلم',
+          methodology: 'تفضيل المنهجية',
+          riskProfile: 'تفضيل المخاطر',
+          demoDeposit: 'رصيد تدريبي',
+          notifications: 'الإشعارات مفعلة',
+          maxRisk: 'تفضيل حد المخاطر التعليمي',
+        },
+        consents: {
+          title: 'الموافقات المقبولة',
+          disclaimer: 'إخلاء المسؤولية',
+          terms: 'الشروط',
+          privacy: 'الخصوصية',
+        },
+        options: {
+          language: {
+            en: 'الإنجليزية',
+            ru: 'الروسية',
+            de: 'الألمانية',
+            ar: 'العربية',
+          },
+          level: {
+            learner: 'متعلم',
+            trader: 'ممارس',
+            pro: 'متقدم',
+          },
+          goal: {
+            learn: 'تعلم',
+            invest: 'تعليم الاستثمار طويل الأجل',
+            trade: 'تدريب على التخطيط',
+          },
+          methodology: {
+            conservative: 'محافظة',
+            balanced: 'متوازنة',
+            scholar_based: 'مبنية على العلماء',
+            custom: 'مخصصة',
+          },
+          riskProfile: {
+            conservative: 'محافظ',
+            moderate: 'متوسط',
+            active: 'نشط',
+          },
+        },
+      },
+      theme: {
+        dark: 'داكن',
+        light: 'فاتح',
         telegram: 'Telegram',
       },
     },

@@ -7,6 +7,7 @@ import { TopBar } from './components/layout/TopBar';
 import { ErrorState } from './components/states/ErrorState';
 import { SkeletonLoader } from './components/states/SkeletonLoader';
 import { HalalScreenerScreen } from './features/halal/HalalScreenerScreen';
+import { HomeScreen } from './features/home/HomeScreen';
 import { OnboardingFlow } from './features/onboarding/OnboardingFlow';
 import { RiskCalculatorScreen } from './features/risk/RiskCalculatorScreen';
 import { SettingsPanel } from './features/settings/SettingsPanel';
@@ -22,7 +23,7 @@ function AppContent() {
   const { i18n } = useTranslation();
   const { accessToken, isAuthenticating } = useAuth();
   const { setThemeMode } = useTheme();
-  const [activeItem, setActiveItem] = useState<NavItem>('check');
+  const [activeItem, setActiveItem] = useState<NavItem>('home');
 
   const settingsQuery = useQuery({
     queryKey: ['me-settings', accessToken],
@@ -39,6 +40,12 @@ function AppContent() {
     setThemeMode(settings.theme);
   }, [i18n, setThemeMode, settings]);
 
+  useEffect(() => {
+    const language = i18n.resolvedLanguage ?? i18n.language;
+    document.documentElement.lang = language;
+    document.documentElement.dir = language === 'ar' ? 'rtl' : 'ltr';
+  }, [i18n.language, i18n.resolvedLanguage]);
+
   function handleSettingsSaved(nextSettings: UserSettings) {
     if (accessToken) {
       queryClientContext.setQueryData(['me-settings', accessToken], nextSettings);
@@ -48,6 +55,10 @@ function AppContent() {
   }
 
   function renderScreen() {
+    if (activeItem === 'home') {
+      return <HomeScreen onNavigate={setActiveItem} />;
+    }
+
     if (activeItem === 'watchlist') {
       return <WatchlistScreen />;
     }
@@ -64,7 +75,7 @@ function AppContent() {
       return <SettingsPanel accessToken={accessToken} settings={settings} onSaved={handleSettingsSaved} />;
     }
 
-    return <HalalScreenerScreen />;
+    return <HomeScreen onNavigate={setActiveItem} />;
   }
 
   if (isAuthenticating || (accessToken && settingsQuery.isPending)) {
