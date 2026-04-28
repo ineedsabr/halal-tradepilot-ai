@@ -1,6 +1,7 @@
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { useMemo, useState } from 'react';
 import type { FormEvent } from 'react';
+import { useTranslation } from 'react-i18next';
 import {
   checkHalal,
   listInstruments,
@@ -30,14 +31,15 @@ function statusIcon(tone: StatusTone) {
   return 'ℹ️';
 }
 
-function displayStatus(label: string, status: string) {
-  if (label === 'Instrument' && status === 'HALAL') {
-    return 'HALAL — not restricted type';
+function displayStatus(labelKey: string, status: string, t: (key: string) => string) {
+  if (labelKey === 'halal.result.instrument' && status === 'HALAL') {
+    return t('halal.status.instrumentNotRestricted');
   }
   return status;
 }
 
-function StatusBadge({ label, status }: { label: string; status: string }) {
+function StatusBadge({ labelKey, status }: { labelKey: string; status: string }) {
+  const { t } = useTranslation();
   const tone = getTone(status);
   const toneClass =
     tone === 'ok'
@@ -52,38 +54,40 @@ function StatusBadge({ label, status }: { label: string; status: string }) {
     <p className={`m-0 inline-flex items-center gap-2 rounded-md border px-2 py-1 text-xs font-semibold ${toneClass}`}>
       <span aria-hidden>{statusIcon(tone)}</span>
       <span>
-        {label}: {displayStatus(label, status)}
+        {t(labelKey)}: {displayStatus(labelKey, status, t)}
       </span>
     </p>
   );
 }
 
 function CombinedStatusHint({ status }: { status: string }) {
+  const { t } = useTranslation();
+
   if (status === 'AVOID') {
-    return <p className="m-0 text-sm">This combination should be avoided due to instrument or asset restrictions.</p>;
+    return <p className="m-0 text-sm">{t('halal.hints.avoid')}</p>;
   }
   if (status === 'UNDER_REVIEW') {
-    return <p className="m-0 text-sm">Assessment is under review. Please treat this as uncertain.</p>;
+    return <p className="m-0 text-sm">{t('halal.hints.underReview')}</p>;
   }
   if (status === 'SCHOLARLY_DISAGREEMENT') {
-    return <p className="m-0 text-sm">Scholarly views differ on this case; avoid overconfidence.</p>;
+    return <p className="m-0 text-sm">{t('halal.hints.scholarlyDisagreement')}</p>;
   }
   if (status === 'DOUBTFUL') {
-    return <p className="m-0 text-sm">Status is doubtful; caution is advised while evidence is unclear.</p>;
+    return <p className="m-0 text-sm">{t('halal.hints.doubtful')}</p>;
   }
   if (status === 'INSUFFICIENT_DATA') {
-    return <p className="m-0 text-sm">There is not enough reliable data yet for a confident status.</p>;
+    return <p className="m-0 text-sm">{t('halal.hints.insufficientData')}</p>;
   }
   if (status === 'SOURCE_CONFLICT') {
-    return <p className="m-0 text-sm">Sources conflict; this status remains uncertain until resolved.</p>;
+    return <p className="m-0 text-sm">{t('halal.hints.sourceConflict')}</p>;
   }
-  return <p className="m-0 text-sm">Instrument layer is not restricted. The final status still depends on the asset assessment.</p>;
+  return <p className="m-0 text-sm">{t('halal.hints.default')}</p>;
 }
 
-function formatDate(value?: string | null) {
-  if (!value) return 'Not available';
+function formatDate(value: string | null | undefined, fallback: string) {
+  if (!value) return fallback;
   const date = new Date(value);
-  if (Number.isNaN(date.getTime())) return 'Not available';
+  if (Number.isNaN(date.getTime())) return fallback;
   return date.toLocaleDateString();
 }
 
@@ -96,6 +100,8 @@ function AssetResultButton({
   isSelected: boolean;
   onSelect: (asset: AssetSummary) => void;
 }) {
+  const { t } = useTranslation();
+
   return (
     <button
       type="button"
@@ -110,17 +116,19 @@ function AssetResultButton({
         {asset.symbol} · {asset.name}
       </span>
       <span className="mt-1 block text-xs text-[rgb(var(--app-muted))]">
-        {[asset.asset_type, asset.exchange, asset.currency].filter(Boolean).join(' · ') || 'Asset'}
+        {[asset.asset_type, asset.exchange, asset.currency].filter(Boolean).join(' · ') || t('halal.assetFallback')}
       </span>
     </button>
   );
 }
 
 function ResultCard({ result }: { result: HalalCheckResult }) {
+  const { t } = useTranslation();
+
   return (
     <section className="rounded-2xl border border-[rgb(var(--app-border))] bg-[rgb(var(--app-surface))] p-4 shadow-sm">
       <div className="flex flex-col gap-2">
-        <p className="m-0 text-xs uppercase tracking-wide text-[rgb(var(--app-muted))]">Backend result</p>
+        <p className="m-0 text-xs uppercase tracking-wide text-[rgb(var(--app-muted))]">{t('halal.result.backendResult')}</p>
         <h2 className="m-0 text-xl font-semibold text-[rgb(var(--app-text))]">
           {result.asset.symbol} + {result.instrument.code}
         </h2>
@@ -130,9 +138,9 @@ function ResultCard({ result }: { result: HalalCheckResult }) {
       </div>
 
       <div className="mt-4 flex flex-wrap gap-2">
-        <StatusBadge label="Asset" status={result.asset_status} />
-        <StatusBadge label="Instrument" status={result.instrument_status} />
-        <StatusBadge label="Combined" status={result.combined_status} />
+        <StatusBadge labelKey="halal.result.asset" status={result.asset_status} />
+        <StatusBadge labelKey="halal.result.instrument" status={result.instrument_status} />
+        <StatusBadge labelKey="halal.result.combined" status={result.combined_status} />
       </div>
 
       <div className="mt-4 rounded-xl border border-[rgb(var(--app-border))] bg-[rgb(var(--app-bg))] p-3 text-[rgb(var(--app-text))]">
@@ -141,37 +149,37 @@ function ResultCard({ result }: { result: HalalCheckResult }) {
 
       <dl className="mt-4 grid gap-3 text-sm">
         <div>
-          <dt className="text-xs uppercase tracking-wide text-[rgb(var(--app-muted))]">Methodology</dt>
+          <dt className="text-xs uppercase tracking-wide text-[rgb(var(--app-muted))]">{t('halal.result.methodology')}</dt>
           <dd className="m-0 text-[rgb(var(--app-text))]">{result.methodology}</dd>
         </div>
         <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
           <div>
-            <dt className="text-xs uppercase tracking-wide text-[rgb(var(--app-muted))]">Confidence</dt>
+            <dt className="text-xs uppercase tracking-wide text-[rgb(var(--app-muted))]">{t('halal.result.confidence')}</dt>
             <dd className="m-0 text-[rgb(var(--app-text))]">{result.confidence}</dd>
           </div>
           <div>
-            <dt className="text-xs uppercase tracking-wide text-[rgb(var(--app-muted))]">Data quality</dt>
+            <dt className="text-xs uppercase tracking-wide text-[rgb(var(--app-muted))]">{t('halal.result.dataQuality')}</dt>
             <dd className="m-0 text-[rgb(var(--app-text))]">{result.data_quality_status}</dd>
           </div>
           <div>
-            <dt className="text-xs uppercase tracking-wide text-[rgb(var(--app-muted))]">Data freshness</dt>
+            <dt className="text-xs uppercase tracking-wide text-[rgb(var(--app-muted))]">{t('halal.result.dataFreshness')}</dt>
             <dd className="m-0 text-[rgb(var(--app-text))]">{result.data_freshness_status}</dd>
           </div>
           <div>
-            <dt className="text-xs uppercase tracking-wide text-[rgb(var(--app-muted))]">Last reviewed</dt>
-            <dd className="m-0 text-[rgb(var(--app-text))]">{formatDate(result.last_reviewed_at)}</dd>
+            <dt className="text-xs uppercase tracking-wide text-[rgb(var(--app-muted))]">{t('halal.result.lastReviewed')}</dt>
+            <dd className="m-0 text-[rgb(var(--app-text))]">{formatDate(result.last_reviewed_at, t('halal.result.notAvailable'))}</dd>
           </div>
         </div>
       </dl>
 
       <div className="mt-4">
-        <p className="m-0 text-xs uppercase tracking-wide text-[rgb(var(--app-muted))]">Summary</p>
+        <p className="m-0 text-xs uppercase tracking-wide text-[rgb(var(--app-muted))]">{t('halal.result.summary')}</p>
         <p className="m-0 mt-1 text-sm text-[rgb(var(--app-text))]">{result.summary}</p>
       </div>
 
       {result.blocking_reason ? (
         <div className="mt-4 rounded-xl border border-rose-200 bg-rose-50 p-3 text-sm text-rose-950 dark:border-rose-900 dark:bg-rose-950 dark:text-rose-100">
-          <p className="m-0 font-semibold">Blocking reason</p>
+          <p className="m-0 font-semibold">{t('halal.result.blockingReason')}</p>
           <p className="m-0 mt-1">{result.blocking_reason}</p>
         </div>
       ) : null}
@@ -184,6 +192,7 @@ function ResultCard({ result }: { result: HalalCheckResult }) {
 }
 
 export function HalalScreenerScreen() {
+  const { t } = useTranslation();
   const [query, setQuery] = useState('');
   const [selectedAsset, setSelectedAsset] = useState<AssetSummary | null>(null);
   const [selectedInstrumentId, setSelectedInstrumentId] = useState('');
@@ -231,24 +240,24 @@ export function HalalScreenerScreen() {
   return (
     <main className="mx-auto flex w-full max-w-2xl flex-col gap-4">
       <section className="rounded-2xl border border-[rgb(var(--app-border))] bg-[rgb(var(--app-surface))] p-4 shadow-sm">
-        <p className="m-0 text-xs uppercase tracking-wide text-[rgb(var(--app-muted))]">Halal Screener</p>
-        <h1 className="m-0 mt-1 text-2xl font-semibold text-[rgb(var(--app-text))]">Check asset + instrument</h1>
+        <p className="m-0 text-xs uppercase tracking-wide text-[rgb(var(--app-muted))]">{t('halal.screen.eyebrow')}</p>
+        <h1 className="m-0 mt-1 text-2xl font-semibold text-[rgb(var(--app-text))]">{t('halal.screen.title')}</h1>
         <p className="m-0 mt-2 text-sm leading-6 text-[rgb(var(--app-muted))]">
-          This tool shows educational screening from the backend. It does not issue religious rulings or trading advice.
+          {t('halal.screen.description')}
         </p>
       </section>
 
       <section className="rounded-2xl border border-[rgb(var(--app-border))] bg-[rgb(var(--app-surface))] p-4 shadow-sm">
         <form className="flex flex-col gap-3" onSubmit={submitSearch}>
           <label className="text-sm font-semibold text-[rgb(var(--app-text))]" htmlFor="asset-search">
-            Search asset
+            {t('halal.search.label')}
           </label>
           <div className="flex gap-2">
             <input
               id="asset-search"
               value={query}
               onChange={(event) => setQuery(event.target.value)}
-              placeholder="BTC, AAPL, ETH..."
+              placeholder={t('halal.search.placeholder')}
               className="min-h-11 flex-1 rounded-xl border border-[rgb(var(--app-border))] bg-[rgb(var(--app-bg))] px-3 text-base text-[rgb(var(--app-text))] outline-none focus:border-[rgb(var(--app-primary))]"
             />
             <button
@@ -256,7 +265,7 @@ export function HalalScreenerScreen() {
               className="min-h-11 rounded-xl bg-[rgb(var(--app-primary))] px-4 text-sm font-semibold text-white disabled:opacity-50"
               disabled={searchMutation.isPending}
             >
-              {searchMutation.isPending ? 'Searching' : 'Search'}
+              {searchMutation.isPending ? t('halal.search.searching') : t('halal.search.action')}
             </button>
           </div>
         </form>
@@ -269,7 +278,7 @@ export function HalalScreenerScreen() {
 
         {searchMutation.isSuccess && assets.length === 0 ? (
           <p className="m-0 mt-3 rounded-xl border border-[rgb(var(--app-border))] bg-[rgb(var(--app-bg))] p-3 text-sm text-[rgb(var(--app-muted))]">
-            No assets found. Try another symbol or name.
+            {t('halal.search.empty')}
           </p>
         ) : null}
 
@@ -292,11 +301,11 @@ export function HalalScreenerScreen() {
 
       <section className="rounded-2xl border border-[rgb(var(--app-border))] bg-[rgb(var(--app-surface))] p-4 shadow-sm">
         <label className="text-sm font-semibold text-[rgb(var(--app-text))]" htmlFor="instrument-select">
-          Select instrument
+          {t('halal.instrument.label')}
         </label>
 
         {instrumentsQuery.isLoading ? (
-          <p className="m-0 mt-3 text-sm text-[rgb(var(--app-muted))]">Loading instrument options...</p>
+          <p className="m-0 mt-3 text-sm text-[rgb(var(--app-muted))]">{t('halal.instrument.loading')}</p>
         ) : null}
 
         {instrumentsQuery.isError ? (
@@ -315,7 +324,7 @@ export function HalalScreenerScreen() {
             }}
             className="mt-3 min-h-11 w-full rounded-xl border border-[rgb(var(--app-border))] bg-[rgb(var(--app-bg))] px-3 text-base text-[rgb(var(--app-text))] outline-none focus:border-[rgb(var(--app-primary))]"
           >
-            <option value="">Choose instrument type</option>
+            <option value="">{t('halal.instrument.placeholder')}</option>
             {instrumentsQuery.data.map((instrument) => (
               <option key={instrument.id} value={instrument.id}>
                 {instrument.code} · {instrument.name}
@@ -330,7 +339,7 @@ export function HalalScreenerScreen() {
           </p>
         ) : selectedInstrument ? (
           <p className="m-0 mt-3 rounded-xl border border-[rgb(var(--app-border))] bg-[rgb(var(--app-bg))] p-3 text-sm text-[rgb(var(--app-muted))]">
-            Instrument layer: not restricted. Final status still depends on the selected asset.
+            {t('halal.instrument.notRestricted')}
           </p>
         ) : null}
 
@@ -340,13 +349,13 @@ export function HalalScreenerScreen() {
           disabled={!selectedAsset || !selectedInstrumentId || checkMutation.isPending}
           className="mt-4 min-h-11 w-full rounded-xl bg-[rgb(var(--app-primary))] px-4 text-sm font-semibold text-white disabled:opacity-50"
         >
-          {checkMutation.isPending ? 'Checking' : 'Run check'}
+          {checkMutation.isPending ? t('halal.check.checking') : t('halal.check.action')}
         </button>
       </section>
 
       {!selectedAsset || !selectedInstrumentId ? (
         <section className="rounded-2xl border border-[rgb(var(--app-border))] bg-[rgb(var(--app-surface))] p-4 text-sm text-[rgb(var(--app-muted))]">
-          Select both an asset and an instrument to see the combined screening result.
+          {t('halal.check.empty')}
         </section>
       ) : null}
 
