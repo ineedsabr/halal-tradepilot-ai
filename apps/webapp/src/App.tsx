@@ -4,7 +4,6 @@ import { useTranslation } from 'react-i18next';
 import { AppShell } from './components/layout/AppShell';
 import { BottomNav, type NavItem } from './components/layout/BottomNav';
 import { TopBar } from './components/layout/TopBar';
-import { EmptyState } from './components/states/EmptyState';
 import { ErrorState } from './components/states/ErrorState';
 import { SkeletonLoader } from './components/states/SkeletonLoader';
 import { HalalScreenerScreen } from './features/halal/HalalScreenerScreen';
@@ -48,7 +47,7 @@ function AppContent() {
   }
 
   function renderScreen() {
-    if (activeItem === 'home') {
+    if (activeItem === 'watchlist') {
       return <WatchlistScreen />;
     }
 
@@ -60,7 +59,7 @@ function AppContent() {
       return <SettingsPanel accessToken={accessToken} settings={settings} onSaved={handleSettingsSaved} />;
     }
 
-    return <EmptyState />;
+    return <HalalScreenerScreen />;
   }
 
   if (isAuthenticating || (accessToken && settingsQuery.isPending)) {

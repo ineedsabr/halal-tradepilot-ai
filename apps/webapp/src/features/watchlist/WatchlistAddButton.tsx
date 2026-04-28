@@ -7,6 +7,12 @@ type WatchlistAddButtonProps = {
   assetId: string;
 };
 
+function watchlistErrorMessage(message: string, t: (key: string) => string) {
+  if (message === 'Asset already in watchlist') return t('watchlist.alreadyAdded');
+  if (message === 'Watchlist limit reached') return t('watchlist.limit');
+  return message;
+}
+
 export function WatchlistAddButton({ assetId }: WatchlistAddButtonProps) {
   const { t } = useTranslation();
   const { accessToken } = useAuth();
@@ -43,7 +49,7 @@ export function WatchlistAddButton({ assetId }: WatchlistAddButtonProps) {
 
       {mutation.isError ? (
         <p className="m-0 mt-2 rounded-xl border border-amber-200 bg-amber-50 p-3 text-xs text-amber-950 dark:border-amber-900 dark:bg-amber-950 dark:text-amber-100">
-          {(mutation.error as Error).message}
+          {watchlistErrorMessage((mutation.error as Error).message, t)}
         </p>
       ) : null}
 
