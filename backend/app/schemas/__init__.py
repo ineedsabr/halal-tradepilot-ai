@@ -18,7 +18,7 @@ from .halal import HalalAssessmentBase, HalalAssessmentRead, HalalCheckResult, H
 from .health import HealthResponse
 from .journal import JournalEntryBase, JournalEntryRead, JournalEntrySummary
 from .paper import PaperTradeBase, PaperTradeRead, PaperTradeStatus, PaperTradeSummary
-from .risk import RiskCalculationResult, RiskVerdict
+from .risk import RiskCalculationRequest, RiskCalculationResult, RiskCalculatorResponse, RiskCalculatorVerdict, RiskVerdict
 from .settings import MethodologyPreference, UserGoal, UserSettingsRead, UserSettingsUpdate
 from .watchlist import WatchlistItemCreate, WatchlistItemRead
 
@@ -49,6 +49,9 @@ __all__ = [
     "PaperTradeStatus",
     "PaperTradeSummary",
     "RiskCalculationResult",
+    "RiskCalculationRequest",
+    "RiskCalculatorResponse",
+    "RiskCalculatorVerdict",
     "RiskProfile",
     "RiskVerdict",
     "MethodologyPreference",
