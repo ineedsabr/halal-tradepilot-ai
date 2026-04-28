@@ -20,6 +20,8 @@ const DEFAULT_THEME_TOKENS = {
     '--app-border': '218 226 220',
     '--app-accent': '4 120 87',
     '--app-primary': '4 120 87',
+    '--app-gold': '176 137 62',
+    '--app-gold-strong': '126 92 32',
   },
   dark: {
     '--app-bg': '15 20 18',
@@ -29,6 +31,8 @@ const DEFAULT_THEME_TOKENS = {
     '--app-border': '55 69 61',
     '--app-accent': '52 211 153',
     '--app-primary': '52 211 153',
+    '--app-gold': '217 180 96',
+    '--app-gold-strong': '244 211 133',
   },
 };
 

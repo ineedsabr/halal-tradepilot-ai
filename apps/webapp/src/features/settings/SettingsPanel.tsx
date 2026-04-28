@@ -1,6 +1,8 @@
 import { useMutation } from '@tanstack/react-query';
 import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { PremiumCard } from '../../components/ui/PremiumCard';
+import { SectionHeader } from '../../components/ui/SectionHeader';
 import { updateUserSettings, type UserSettings } from '../../lib/api';
 import { useTheme } from '../../providers/TelegramProvider';
 import {
@@ -52,7 +54,7 @@ function SelectField<T extends string>({
         id={id}
         value={value}
         onChange={(event) => onChange(event.target.value as T)}
-        className="min-h-11 rounded-xl border border-[rgb(var(--app-border))] bg-[rgb(var(--app-bg))] px-3 text-base font-normal text-[rgb(var(--app-text))]"
+        className="min-h-12 rounded-2xl border border-[rgb(var(--app-border))] bg-[rgb(var(--app-bg)/0.72)] px-3 text-base font-normal text-[rgb(var(--app-text))]"
       >
         {options.map((option) => (
           <option key={option} value={option}>
@@ -106,30 +108,23 @@ export function SettingsPanel({ accessToken, settings, onSaved }: SettingsPanelP
 
   if (!settings || !values) {
     return (
-      <section className="rounded-2xl border border-[rgb(var(--app-border))] bg-[rgb(var(--app-surface))] p-4 text-sm text-[rgb(var(--app-muted))]">
+      <PremiumCard className="text-sm text-[rgb(var(--app-muted))]">
         {t('settingsPanel.authRequired')}
-      </section>
+      </PremiumCard>
     );
   }
 
   return (
-    <main className="mx-auto flex w-full max-w-2xl flex-col gap-4">
-      <section className="rounded-2xl border border-[rgb(var(--app-border))] bg-[rgb(var(--app-surface))] p-4 shadow-sm">
-        <p className="m-0 text-xs uppercase tracking-wide text-[rgb(var(--app-muted))]">
-          {t('settingsPanel.eyebrow')}
-        </p>
-        <h1 className="m-0 mt-1 text-2xl font-semibold text-[rgb(var(--app-text))]">
-          {t('settingsPanel.title')}
-        </h1>
-        <p className="m-0 mt-2 text-sm leading-6 text-[rgb(var(--app-muted))]">
-          {t('settingsPanel.description')}
-        </p>
-      </section>
+    <main className="mx-auto flex w-full max-w-2xl flex-col gap-5">
+      <PremiumCard>
+        <SectionHeader
+          eyebrow={t('settingsPanel.eyebrow')}
+          title={t('settingsPanel.title')}
+          description={t('settingsPanel.description')}
+        />
+      </PremiumCard>
 
-      <form
-        className="rounded-2xl border border-[rgb(var(--app-border))] bg-[rgb(var(--app-surface))] p-4 shadow-sm"
-        onSubmit={submitSettings}
-      >
+      <PremiumCard as="form" onSubmit={submitSettings}>
         <div className="grid gap-4">
           <SelectField
             id="settings-language"
@@ -171,7 +166,7 @@ export function SettingsPanel({ accessToken, settings, onSaved }: SettingsPanelP
             value={values.methodology}
             onChange={(value) => updateValue('methodology', value)}
           />
-          <p className="m-0 rounded-xl border border-[rgb(var(--app-border))] bg-[rgb(var(--app-bg))] p-3 text-xs leading-5 text-[rgb(var(--app-muted))]">
+          <p className="m-0 rounded-2xl border border-[rgb(var(--app-border))] bg-[rgb(var(--app-bg)/0.72)] p-3 text-xs leading-5 text-[rgb(var(--app-muted))]">
             {t('settingsPanel.methodologyNote')}
           </p>
           <SelectField
@@ -191,10 +186,10 @@ export function SettingsPanel({ accessToken, settings, onSaved }: SettingsPanelP
               max="10000000"
               value={values.demo_deposit}
               onChange={updateDeposit}
-              className="min-h-11 rounded-xl border border-[rgb(var(--app-border))] bg-[rgb(var(--app-bg))] px-3 text-base font-normal text-[rgb(var(--app-text))]"
+              className="min-h-12 rounded-2xl border border-[rgb(var(--app-border))] bg-[rgb(var(--app-bg)/0.72)] px-3 text-base font-normal text-[rgb(var(--app-text))]"
             />
           </label>
-          <label className="flex items-start gap-3 rounded-xl border border-[rgb(var(--app-border))] bg-[rgb(var(--app-bg))] p-3 text-sm text-[rgb(var(--app-text))]">
+          <label className="flex items-start gap-3 rounded-2xl border border-[rgb(var(--app-border))] bg-[rgb(var(--app-bg)/0.72)] p-3 text-sm text-[rgb(var(--app-text))]">
             <input
               type="checkbox"
               checked={values.notifications_enabled}
@@ -205,7 +200,7 @@ export function SettingsPanel({ accessToken, settings, onSaved }: SettingsPanelP
           </label>
         </div>
 
-        <dl className="mt-5 grid gap-3 rounded-xl border border-[rgb(var(--app-border))] bg-[rgb(var(--app-bg))] p-3 text-sm">
+        <dl className="mt-5 grid gap-3 rounded-2xl border border-[rgb(var(--app-border))] bg-[rgb(var(--app-bg)/0.72)] p-3 text-sm">
           <div>
             <dt className="text-xs uppercase tracking-wide text-[rgb(var(--app-muted))]">
               {t('settingsPanel.fields.maxRisk')}
@@ -227,13 +222,13 @@ export function SettingsPanel({ accessToken, settings, onSaved }: SettingsPanelP
         </dl>
 
         {mutation.isError ? (
-          <p className="m-0 mt-4 rounded-xl border border-rose-200 bg-rose-50 p-3 text-sm text-rose-950 dark:border-rose-900 dark:bg-rose-950 dark:text-rose-100">
+          <p className="m-0 mt-4 rounded-2xl border border-rose-200 bg-rose-50 p-3 text-sm text-rose-950 dark:border-rose-900 dark:bg-rose-950 dark:text-rose-100">
             {(mutation.error as Error).message}
           </p>
         ) : null}
 
         {mutation.isSuccess ? (
-          <p className="m-0 mt-4 rounded-xl border border-emerald-200 bg-emerald-50 p-3 text-sm text-emerald-950 dark:border-emerald-900 dark:bg-emerald-950 dark:text-emerald-100">
+          <p className="m-0 mt-4 rounded-2xl border border-emerald-200 bg-emerald-50 p-3 text-sm text-emerald-950 dark:border-emerald-900 dark:bg-emerald-950 dark:text-emerald-100">
             {t('settingsPanel.saved')}
           </p>
         ) : null}
@@ -241,11 +236,11 @@ export function SettingsPanel({ accessToken, settings, onSaved }: SettingsPanelP
         <button
           type="submit"
           disabled={mutation.isPending}
-          className="mt-5 min-h-11 w-full rounded-xl bg-[rgb(var(--app-primary))] px-4 text-sm font-semibold text-white disabled:opacity-50"
+          className="mt-5 min-h-12 w-full rounded-2xl bg-[rgb(var(--app-primary))] px-4 text-sm font-semibold text-white shadow-[0_10px_24px_rgba(4,120,87,0.2)] disabled:opacity-50"
         >
           {mutation.isPending ? t('settingsPanel.saving') : t('settingsPanel.save')}
         </button>
-      </form>
+      </PremiumCard>
     </main>
   );
 }

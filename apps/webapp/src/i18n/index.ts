@@ -40,8 +40,18 @@ export const resources = {
           eyebrow: 'Premium Islamic fintech',
           title: 'Mizan',
           tagline: 'Crypto clarity with halal principles and risk control.',
+          primaryCta: 'Analyze crypto - coming next',
+          comingNext: 'Coming next',
           description:
             'Ask about a crypto asset and get a simple halal, risk, and market-readiness view.',
+        },
+        trust: {
+          halal: 'Halal layer',
+          risk: 'Risk layer',
+          market: 'Market read',
+          educational: 'Educational',
+          backend: 'Backend',
+          next: 'Next',
         },
         marketMood: {
           eyebrow: 'Market Mood',
@@ -52,6 +62,7 @@ export const resources = {
         actions: {
           analyze: {
             title: 'Analyze Crypto',
+            meta: 'Coming next',
             description: 'Coming next. No generated analysis is shown until the backend is ready.',
           },
           check: {
@@ -332,8 +343,18 @@ export const resources = {
           eyebrow: 'Премиальный исламский финтех',
           title: 'Mizan',
           tagline: 'Ясность в крипто с халяль-принципами и контролем риска.',
+          primaryCta: 'Analyze crypto - скоро',
+          comingNext: 'Скоро',
           description:
             'Спросите о криптоактиве и получите простой взгляд на халяль-статус, риск и готовность к рыночному разбору.',
+        },
+        trust: {
+          halal: 'Халяль-слой',
+          risk: 'Слой риска',
+          market: 'Market read',
+          educational: 'Образование',
+          backend: 'Backend',
+          next: 'Далее',
         },
         marketMood: {
           eyebrow: 'Рыночное настроение',
@@ -344,6 +365,7 @@ export const resources = {
         actions: {
           analyze: {
             title: 'Analyze Crypto',
+            meta: 'Скоро',
             description: 'Появится следующим шагом. Сгенерированный анализ не показывается, пока backend не готов.',
           },
           check: {
@@ -624,8 +646,18 @@ export const resources = {
           eyebrow: 'Premium Islamic Fintech',
           title: 'Mizan',
           tagline: 'Krypto-Klarheit mit Halal-Prinzipien und Risikokontrolle.',
+          primaryCta: 'Analyze crypto - kommt bald',
+          comingNext: 'Kommt bald',
           description:
             'Frage nach einem Krypto-Asset und erhalte eine einfache Sicht auf Halal-Status, Risiko und Marktbereitschaft.',
+        },
+        trust: {
+          halal: 'Halal-Ebene',
+          risk: 'Risiko-Ebene',
+          market: 'Market read',
+          educational: 'Bildend',
+          backend: 'Backend',
+          next: 'Naechstes',
         },
         marketMood: {
           eyebrow: 'Market Mood',
@@ -636,6 +668,7 @@ export const resources = {
         actions: {
           analyze: {
             title: 'Analyze Crypto',
+            meta: 'Kommt bald',
             description: 'Kommt als Naechstes. Es wird keine generierte Analyse gezeigt, bis das Backend bereit ist.',
           },
           check: {
@@ -916,8 +949,18 @@ export const resources = {
           eyebrow: 'تقنية مالية إسلامية راقية',
           title: 'Mizan',
           tagline: 'وضوح في الكريبتو مع مبادئ الحلال وضبط المخاطر.',
+          primaryCta: 'تحليل الكريبتو - قريباً',
+          comingNext: 'قريباً',
           description:
             'اسأل عن أصل كريبتو واحصل على نظرة بسيطة للحالة الشرعية والمخاطر وجاهزية قراءة السوق.',
+        },
+        trust: {
+          halal: 'طبقة الحلال',
+          risk: 'طبقة المخاطر',
+          market: 'قراءة السوق',
+          educational: 'تعليمي',
+          backend: 'Backend',
+          next: 'التالي',
         },
         marketMood: {
           eyebrow: 'مزاج السوق',
@@ -928,6 +971,7 @@ export const resources = {
         actions: {
           analyze: {
             title: 'تحليل الكريبتو',
+            meta: 'قريباً',
             description: 'قادم لاحقاً. لن يظهر تحليل مولد حتى يكون backend جاهزاً.',
           },
           check: {

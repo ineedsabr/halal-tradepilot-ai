@@ -1,6 +1,11 @@
 import { useTranslation } from 'react-i18next';
 import { MizanLogo } from '../../components/brand/MizanLogo';
 import { DisclaimerBanner } from '../../components/trust/DisclaimerBanner';
+import { ActionCard } from '../../components/ui/ActionCard';
+import { PremiumCard } from '../../components/ui/PremiumCard';
+import { SectionHeader } from '../../components/ui/SectionHeader';
+import { StatusPill } from '../../components/ui/StatusPill';
+import { TrustBadge } from '../../components/ui/TrustBadge';
 import type { NavItem } from '../../components/layout/BottomNav';
 
 type HomeScreenProps = {
@@ -11,7 +16,9 @@ type ActionItem = {
   key: string;
   titleKey: string;
   descriptionKey: string;
+  metaKey?: string;
   target?: NavItem;
+  icon: string;
 };
 
 const ACTIONS: ActionItem[] = [
@@ -19,24 +26,29 @@ const ACTIONS: ActionItem[] = [
     key: 'analyze',
     titleKey: 'home.actions.analyze.title',
     descriptionKey: 'home.actions.analyze.description',
+    metaKey: 'home.actions.analyze.meta',
+    icon: 'AI',
   },
   {
     key: 'check',
     titleKey: 'home.actions.check.title',
     descriptionKey: 'home.actions.check.description',
     target: 'check',
+    icon: 'HC',
   },
   {
     key: 'risk',
     titleKey: 'home.actions.risk.title',
     descriptionKey: 'home.actions.risk.description',
     target: 'risk',
+    icon: 'R',
   },
   {
     key: 'watchlist',
     titleKey: 'home.actions.watchlist.title',
     descriptionKey: 'home.actions.watchlist.description',
     target: 'watchlist',
+    icon: 'S',
   },
 ];
 
@@ -58,20 +70,24 @@ export function HomeScreen({ onNavigate }: HomeScreenProps) {
   const { t } = useTranslation();
 
   return (
-    <main className="mx-auto flex w-full max-w-2xl flex-col gap-4">
-      <section className="overflow-hidden rounded-2xl border border-[rgb(var(--app-border))] bg-[rgb(var(--app-surface))] p-5 shadow-sm">
-        <div className="flex flex-col items-start gap-4">
-          <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-emerald-50 text-[rgb(var(--app-text))] dark:bg-emerald-950">
-            <MizanLogo size={46} />
+    <main className="mx-auto flex w-full max-w-2xl flex-col gap-5">
+      <PremiumCard className="overflow-hidden p-0">
+        <div className="border-b border-[rgb(var(--app-border))] bg-[linear-gradient(135deg,rgb(var(--app-surface))_0%,rgb(var(--app-bg))_58%,rgb(var(--app-surface))_100%)] p-5">
+          <div className="flex items-start justify-between gap-4">
+            <div className="flex h-20 w-20 items-center justify-center rounded-[1.55rem] border border-[rgb(var(--app-border))] bg-[rgb(var(--app-surface))] text-[rgb(var(--app-text))] shadow-[0_18px_38px_rgba(4,120,87,0.13)]">
+              <MizanLogo size={58} />
+            </div>
+            <StatusPill value={t('home.hero.comingNext')} tone="gold" />
           </div>
-          <div>
-            <p className="m-0 text-xs uppercase tracking-wide text-[rgb(var(--app-muted))]">
+
+          <div className="mt-5">
+            <p className="m-0 text-xs font-semibold uppercase tracking-[0.18em] text-[rgb(var(--app-muted))]">
               {t('home.hero.eyebrow')}
             </p>
-            <h1 className="m-0 mt-1 text-4xl font-semibold tracking-normal text-[rgb(var(--app-text))]">
+            <h1 className="m-0 mt-2 text-5xl font-semibold tracking-normal text-[rgb(var(--app-text))]">
               {t('home.hero.title')}
             </h1>
-            <p className="m-0 mt-2 text-base font-medium leading-7 text-[rgb(var(--app-primary))]">
+            <p className="m-0 mt-3 max-w-sm text-lg font-semibold leading-7 text-[rgb(var(--app-primary))]">
               {t('home.hero.tagline')}
             </p>
             <p className="m-0 mt-3 text-sm leading-6 text-[rgb(var(--app-muted))]">
@@ -79,85 +95,78 @@ export function HomeScreen({ onNavigate }: HomeScreenProps) {
             </p>
           </div>
         </div>
-        <div className="mt-5">
+
+        <div className="grid gap-3 p-5">
+          <button
+            type="button"
+            disabled
+            className="min-h-12 rounded-2xl bg-[rgb(var(--app-primary))] px-4 text-sm font-semibold text-white opacity-75"
+          >
+            {t('home.hero.primaryCta')}
+          </button>
+          <div className="grid grid-cols-3 gap-2">
+            <TrustBadge label={t('home.trust.halal')} value={t('home.trust.educational')} />
+            <TrustBadge label={t('home.trust.risk')} value={t('home.trust.backend')} />
+            <TrustBadge label={t('home.trust.market')} value={t('home.trust.next')} />
+          </div>
           <DisclaimerBanner type="general" />
         </div>
-      </section>
+      </PremiumCard>
 
-      <section className="rounded-2xl border border-[rgb(var(--app-border))] bg-[rgb(var(--app-surface))] p-4 shadow-sm">
-        <p className="m-0 text-xs uppercase tracking-wide text-[rgb(var(--app-muted))]">
-          {t('home.marketMood.eyebrow')}
-        </p>
-        <h2 className="m-0 mt-1 text-xl font-semibold text-[rgb(var(--app-text))]">
-          {t('home.marketMood.title')}
-        </h2>
+      <PremiumCard>
+        <SectionHeader
+          eyebrow={t('home.marketMood.eyebrow')}
+          title={t('home.marketMood.title')}
+        />
         <p className="m-0 mt-2 text-sm leading-6 text-[rgb(var(--app-muted))]">
           {t('home.marketMood.description')}
         </p>
-      </section>
+      </PremiumCard>
 
       <section className="grid grid-cols-1 gap-3 sm:grid-cols-2">
         {ACTIONS.map((action) => {
           const isDisabled = !action.target;
 
           return (
-            <button
+            <ActionCard
               key={action.key}
-              type="button"
               disabled={isDisabled}
+              title={t(action.titleKey)}
+              description={t(action.descriptionKey)}
+              meta={action.metaKey ? t(action.metaKey) : undefined}
+              icon={<span className="text-xs font-bold">{action.icon}</span>}
               onClick={() => {
                 if (action.target) onNavigate(action.target);
               }}
-              className={[
-                'min-h-28 rounded-2xl border p-4 text-left shadow-sm transition',
-                isDisabled
-                  ? 'border-[rgb(var(--app-border))] bg-[rgb(var(--app-bg))] text-[rgb(var(--app-muted))]'
-                  : 'border-[rgb(var(--app-border))] bg-[rgb(var(--app-surface))] text-[rgb(var(--app-text))] hover:border-[rgb(var(--app-primary))]',
-              ].join(' ')}
-            >
-              <span className="block text-base font-semibold">{t(action.titleKey)}</span>
-              <span className="mt-2 block text-sm leading-6 text-[rgb(var(--app-muted))]">
-                {t(action.descriptionKey)}
-              </span>
-            </button>
+            />
           );
         })}
       </section>
 
-      <section className="rounded-2xl border border-[rgb(var(--app-border))] bg-[rgb(var(--app-surface))] p-4 shadow-sm">
-        <p className="m-0 text-xs uppercase tracking-wide text-[rgb(var(--app-muted))]">
-          {t('home.how.eyebrow')}
-        </p>
-        <h2 className="m-0 mt-1 text-xl font-semibold text-[rgb(var(--app-text))]">
-          {t('home.how.title')}
-        </h2>
+      <PremiumCard>
+        <SectionHeader eyebrow={t('home.how.eyebrow')} title={t('home.how.title')} />
         <ol className="m-0 mt-4 grid gap-3 p-0">
           {WORKFLOW_STEPS.map((stepKey, index) => (
-            <li key={stepKey} className="flex gap-3 rounded-xl border border-[rgb(var(--app-border))] bg-[rgb(var(--app-bg))] p-3 text-sm text-[rgb(var(--app-text))]">
-              <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[rgb(var(--app-primary))] text-xs font-semibold text-white">
+            <li key={stepKey} className="flex gap-3 rounded-2xl border border-[rgb(var(--app-border))] bg-[rgb(var(--app-bg)/0.72)] p-3 text-sm text-[rgb(var(--app-text))]">
+              <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[rgb(var(--app-primary))] text-xs font-semibold text-white">
                 {index + 1}
               </span>
               <span className="leading-6">{t(stepKey)}</span>
             </li>
           ))}
         </ol>
-      </section>
+      </PremiumCard>
 
-      <section className="rounded-2xl border border-[rgb(var(--app-border))] bg-[rgb(var(--app-surface))] p-4 shadow-sm">
-        <p className="m-0 text-xs uppercase tracking-wide text-[rgb(var(--app-muted))]">
-          {t('home.mvp.eyebrow')}
-        </p>
-        <h2 className="m-0 mt-1 text-xl font-semibold text-[rgb(var(--app-text))]">
-          {t('home.mvp.title')}
-        </h2>
+      <PremiumCard>
+        <SectionHeader eyebrow={t('home.mvp.eyebrow')} title={t('home.mvp.title')} />
         <ul className="m-0 mt-4 grid gap-2 p-0 text-sm text-[rgb(var(--app-muted))]">
           {MVP_NOTES.map((noteKey) => (
-            <li key={noteKey} className="list-none rounded-xl border border-[rgb(var(--app-border))] bg-[rgb(var(--app-bg))] p-3">
+            <li key={noteKey} className="list-none rounded-2xl border border-[rgb(var(--app-border))] bg-[rgb(var(--app-bg)/0.72)] p-3">
               {t(noteKey)}
             </li>
           ))}
         </ul>
-      </section>
+      </PremiumCard>
     </main>
   );
 }

@@ -3,6 +3,9 @@ import { useState } from 'react';
 import type { FormEvent } from 'react';
 import { useTranslation } from 'react-i18next';
 import { DisclaimerBanner } from '../../components/trust/DisclaimerBanner';
+import { PremiumCard } from '../../components/ui/PremiumCard';
+import { SectionHeader } from '../../components/ui/SectionHeader';
+import { StatusPill } from '../../components/ui/StatusPill';
 import { calculateRisk, type RiskCalculationResponse } from '../../lib/api';
 
 type RiskFormState = {
@@ -38,17 +41,10 @@ function formatNumber(value: number | null | undefined) {
 }
 
 function verdictTone(verdict: RiskCalculationResponse['verdict']) {
-  if (verdict === 'ALLOWED') return 'border-emerald-300 bg-emerald-50 text-emerald-900 dark:border-emerald-800 dark:bg-emerald-950 dark:text-emerald-100';
-  if (verdict === 'CAUTION') return 'border-amber-300 bg-amber-50 text-amber-900 dark:border-amber-800 dark:bg-amber-950 dark:text-amber-100';
-  if (verdict === 'BLOCKED') return 'border-rose-300 bg-rose-50 text-rose-900 dark:border-rose-800 dark:bg-rose-950 dark:text-rose-100';
-  return 'border-[rgb(var(--app-border))] bg-[rgb(var(--app-bg))] text-[rgb(var(--app-text))]';
-}
-
-function verdictIcon(verdict: RiskCalculationResponse['verdict']) {
-  if (verdict === 'ALLOWED') return 'OK';
-  if (verdict === 'CAUTION') return '!';
-  if (verdict === 'BLOCKED') return 'X';
-  return 'i';
+  if (verdict === 'ALLOWED') return 'positive';
+  if (verdict === 'CAUTION') return 'warning';
+  if (verdict === 'BLOCKED') return 'danger';
+  return 'neutral';
 }
 
 function validateForm(form: RiskFormState, t: (key: string) => string) {
@@ -114,7 +110,7 @@ function NumberField({
         value={value}
         onChange={(event) => onChange(event.target.value)}
         placeholder={placeholder}
-        className="min-h-11 rounded-xl border border-[rgb(var(--app-border))] bg-[rgb(var(--app-bg))] px-3 text-base font-normal text-[rgb(var(--app-text))] outline-none focus:border-[rgb(var(--app-primary))]"
+        className="min-h-12 rounded-2xl border border-[rgb(var(--app-border))] bg-[rgb(var(--app-bg)/0.72)] px-3 text-base font-normal text-[rgb(var(--app-text))] outline-none focus:border-[rgb(var(--app-primary))]"
       />
       {helper ? <span className="text-xs font-normal text-[rgb(var(--app-muted))]">{helper}</span> : null}
       {error ? <span className="text-xs font-normal text-rose-700 dark:text-rose-300">{error}</span> : null}
@@ -124,7 +120,7 @@ function NumberField({
 
 function ResultMetric({ label, value }: { label: string; value: string }) {
   return (
-    <div className="rounded-xl border border-[rgb(var(--app-border))] bg-[rgb(var(--app-bg))] p-3">
+    <div className="rounded-2xl border border-[rgb(var(--app-border))] bg-[rgb(var(--app-bg)/0.72)] p-3">
       <dt className="text-xs uppercase tracking-wide text-[rgb(var(--app-muted))]">{label}</dt>
       <dd className="m-0 mt-1 text-lg font-semibold text-[rgb(var(--app-text))]">{value}</dd>
     </div>
@@ -136,13 +132,13 @@ function RiskResultCard({ result }: { result: RiskCalculationResponse }) {
   const reasons = result.reasons.length > 0 ? result.reasons : [t('risk.result.noReasons')];
 
   return (
-    <section className="rounded-2xl border border-[rgb(var(--app-border))] bg-[rgb(var(--app-surface))] p-4 shadow-sm">
+    <PremiumCard>
       <div className="flex flex-col gap-3">
-        <p className="m-0 text-xs uppercase tracking-wide text-[rgb(var(--app-muted))]">{t('risk.result.backendResult')}</p>
-        <p className={`m-0 inline-flex w-fit items-center gap-2 rounded-md border px-3 py-2 text-sm font-semibold ${verdictTone(result.verdict)}`}>
-          <span aria-hidden>{verdictIcon(result.verdict)}</span>
-          <span>{t(`risk.verdict.${result.verdict}`)}</span>
-        </p>
+        <p className="m-0 text-xs font-semibold uppercase tracking-[0.16em] text-[rgb(var(--app-muted))]">{t('risk.result.backendResult')}</p>
+        <StatusPill
+          tone={verdictTone(result.verdict)}
+          value={t(`risk.verdict.${result.verdict}`)}
+        />
       </div>
 
       <dl className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2">
@@ -153,7 +149,7 @@ function RiskResultCard({ result }: { result: RiskCalculationResponse }) {
         <ResultMetric label={t('risk.result.riskReward')} value={formatNumber(result.risk_reward)} />
       </dl>
 
-      <div className="mt-4 rounded-xl border border-[rgb(var(--app-border))] bg-[rgb(var(--app-bg))] p-3">
+      <div className="mt-4 rounded-2xl border border-[rgb(var(--app-border))] bg-[rgb(var(--app-bg)/0.72)] p-3">
         <p className="m-0 text-xs uppercase tracking-wide text-[rgb(var(--app-muted))]">{t('risk.result.reasons')}</p>
         <ul className="m-0 mt-2 grid gap-2 p-0 text-sm text-[rgb(var(--app-text))]">
           {reasons.map((reason) => (
@@ -166,11 +162,11 @@ function RiskResultCard({ result }: { result: RiskCalculationResponse }) {
 
       <div className="mt-4 grid gap-2">
         <DisclaimerBanner type="risk" />
-        <p className="m-0 rounded-xl border border-[rgb(var(--app-border))] bg-[rgb(var(--app-bg))] p-3 text-xs leading-5 text-[rgb(var(--app-muted))]">
+        <p className="m-0 rounded-2xl border border-[rgb(var(--app-border))] bg-[rgb(var(--app-bg)/0.72)] p-3 text-xs leading-5 text-[rgb(var(--app-muted))]">
           {result.educational_disclaimer}
         </p>
       </div>
-    </section>
+    </PremiumCard>
   );
 }
 
@@ -198,14 +194,16 @@ export function RiskCalculatorScreen() {
   }
 
   return (
-    <main className="mx-auto flex w-full max-w-2xl flex-col gap-4">
-      <section className="rounded-2xl border border-[rgb(var(--app-border))] bg-[rgb(var(--app-surface))] p-4 shadow-sm">
-        <p className="m-0 text-xs uppercase tracking-wide text-[rgb(var(--app-muted))]">{t('risk.screen.eyebrow')}</p>
-        <h1 className="m-0 mt-1 text-2xl font-semibold text-[rgb(var(--app-text))]">{t('risk.screen.title')}</h1>
-        <p className="m-0 mt-2 text-sm leading-6 text-[rgb(var(--app-muted))]">{t('risk.screen.description')}</p>
-      </section>
+    <main className="mx-auto flex w-full max-w-2xl flex-col gap-5">
+      <PremiumCard>
+        <SectionHeader
+          eyebrow={t('risk.screen.eyebrow')}
+          title={t('risk.screen.title')}
+          description={t('risk.screen.description')}
+        />
+      </PremiumCard>
 
-      <section className="rounded-2xl border border-[rgb(var(--app-border))] bg-[rgb(var(--app-surface))] p-4 shadow-sm">
+      <PremiumCard>
         <form className="grid gap-4" onSubmit={submitCalculation}>
           <NumberField
             id="risk-deposit"
@@ -255,17 +253,17 @@ export function RiskCalculatorScreen() {
           <button
             type="submit"
             disabled={riskMutation.isPending}
-            className="min-h-11 rounded-xl bg-[rgb(var(--app-primary))] px-4 text-sm font-semibold text-white disabled:opacity-50"
+            className="min-h-12 rounded-2xl bg-[rgb(var(--app-primary))] px-4 text-sm font-semibold text-white shadow-[0_10px_24px_rgba(4,120,87,0.2)] disabled:opacity-50"
           >
             {riskMutation.isPending ? t('risk.form.calculating') : t('risk.form.calculate')}
           </button>
         </form>
-      </section>
+      </PremiumCard>
 
       {riskMutation.isError ? (
-        <section className="rounded-2xl border border-rose-200 bg-rose-50 p-4 text-sm text-rose-950 dark:border-rose-900 dark:bg-rose-950 dark:text-rose-100">
+        <PremiumCard className="border-rose-200 bg-rose-50 text-sm text-rose-950 dark:border-rose-900 dark:bg-rose-950 dark:text-rose-100">
           {(riskMutation.error as Error).message}
-        </section>
+        </PremiumCard>
       ) : null}
 
       {riskMutation.data ? <RiskResultCard result={riskMutation.data} /> : null}

@@ -11,6 +11,8 @@
   --app-border: 218 226 220;
   --app-accent: 4 120 87;
   --app-primary: 4 120 87;
+  --app-gold: 176 137 62;
+  --app-gold-strong: 126 92 32;
 }
 
 :root.dark {
@@ -22,6 +24,8 @@
   --app-border: 55 69 61;
   --app-accent: 52 211 153;
   --app-primary: 52 211 153;
+  --app-gold: 217 180 96;
+  --app-gold-strong: 244 211 133;
 }
 
 * {
@@ -46,4 +50,13 @@ body {
 button,
 select {
   font: inherit;
+}
+
+input,
+select {
+  color-scheme: inherit;
+}
+
+::selection {
+  background: rgb(var(--app-primary) / 0.18);
 }

@@ -3,6 +3,9 @@ import { useMemo, useState } from 'react';
 import type { FormEvent } from 'react';
 import { useTranslation } from 'react-i18next';
 import { DisclaimerBanner } from '../../components/trust/DisclaimerBanner';
+import { PremiumCard } from '../../components/ui/PremiumCard';
+import { SectionHeader } from '../../components/ui/SectionHeader';
+import { StatusPill } from '../../components/ui/StatusPill';
 import {
   checkHalal,
   listInstruments,
@@ -15,22 +18,15 @@ import { WatchlistAddButton } from '../watchlist/WatchlistAddButton';
 
 const METHODOLOGY = 'mvp_conservative_bootstrap';
 
-type StatusTone = 'ok' | 'warn' | 'avoid' | 'neutral';
+type StatusTone = 'positive' | 'warning' | 'danger' | 'neutral';
 
 function getTone(status: string): StatusTone {
-  if (status === 'HALAL') return 'ok';
-  if (status === 'AVOID') return 'avoid';
+  if (status === 'HALAL') return 'positive';
+  if (status === 'AVOID') return 'danger';
   if (status === 'DOUBTFUL' || status === 'UNDER_REVIEW' || status === 'SCHOLARLY_DISAGREEMENT') {
-    return 'warn';
+    return 'warning';
   }
   return 'neutral';
-}
-
-function statusIcon(tone: StatusTone) {
-  if (tone === 'avoid') return '⛔';
-  if (tone === 'warn') return '⚠️';
-  if (tone === 'ok') return '✅';
-  return 'ℹ️';
 }
 
 function displayStatus(labelKey: string, status: string, t: (key: string) => string) {
@@ -42,23 +38,12 @@ function displayStatus(labelKey: string, status: string, t: (key: string) => str
 
 function StatusBadge({ labelKey, status }: { labelKey: string; status: string }) {
   const { t } = useTranslation();
-  const tone = getTone(status);
-  const toneClass =
-    tone === 'ok'
-      ? 'border-emerald-300 bg-emerald-50 text-emerald-900 dark:border-emerald-800 dark:bg-emerald-950 dark:text-emerald-100'
-      : tone === 'avoid'
-        ? 'border-rose-300 bg-rose-50 text-rose-900 dark:border-rose-800 dark:bg-rose-950 dark:text-rose-100'
-        : tone === 'warn'
-          ? 'border-amber-300 bg-amber-50 text-amber-900 dark:border-amber-800 dark:bg-amber-950 dark:text-amber-100'
-          : 'border-[rgb(var(--app-border))] bg-[rgb(var(--app-bg))] text-[rgb(var(--app-text))]';
-
   return (
-    <p className={`m-0 inline-flex items-center gap-2 rounded-md border px-2 py-1 text-xs font-semibold ${toneClass}`}>
-      <span aria-hidden>{statusIcon(tone)}</span>
-      <span>
-        {t(labelKey)}: {displayStatus(labelKey, status, t)}
-      </span>
-    </p>
+    <StatusPill
+      label={t(labelKey)}
+      tone={getTone(status)}
+      value={displayStatus(labelKey, status, t)}
+    />
   );
 }
 
@@ -108,10 +93,10 @@ function AssetResultButton({
     <button
       type="button"
       onClick={() => onSelect(asset)}
-      className={`w-full rounded-xl border p-3 text-left transition ${
+      className={`w-full rounded-2xl border p-3 text-left shadow-[0_10px_26px_rgba(15,23,18,0.04)] transition ${
         isSelected
           ? 'border-[rgb(var(--app-primary))] bg-[rgb(var(--app-primary)/0.08)]'
-          : 'border-[rgb(var(--app-border))] bg-[rgb(var(--app-surface))]'
+          : 'border-[rgb(var(--app-border))] bg-[rgb(var(--app-surface)/0.9)] hover:border-[rgb(var(--app-primary))]'
       }`}
     >
       <span className="block text-sm font-semibold text-[rgb(var(--app-text))]">
@@ -128,9 +113,9 @@ function ResultCard({ result }: { result: HalalCheckResult }) {
   const { t } = useTranslation();
 
   return (
-    <section className="rounded-2xl border border-[rgb(var(--app-border))] bg-[rgb(var(--app-surface))] p-4 shadow-sm">
+    <PremiumCard>
       <div className="flex flex-col gap-2">
-        <p className="m-0 text-xs uppercase tracking-wide text-[rgb(var(--app-muted))]">{t('halal.result.backendResult')}</p>
+        <p className="m-0 text-xs font-semibold uppercase tracking-[0.16em] text-[rgb(var(--app-muted))]">{t('halal.result.backendResult')}</p>
         <h2 className="m-0 text-xl font-semibold text-[rgb(var(--app-text))]">
           {result.asset.symbol} + {result.instrument.code}
         </h2>
@@ -145,7 +130,7 @@ function ResultCard({ result }: { result: HalalCheckResult }) {
         <StatusBadge labelKey="halal.result.combined" status={result.combined_status} />
       </div>
 
-      <div className="mt-4 rounded-xl border border-[rgb(var(--app-border))] bg-[rgb(var(--app-bg))] p-3 text-[rgb(var(--app-text))]">
+      <div className="mt-4 rounded-2xl border border-[rgb(var(--app-border))] bg-[rgb(var(--app-bg)/0.72)] p-3 text-[rgb(var(--app-text))]">
         <CombinedStatusHint status={result.combined_status} />
       </div>
 
@@ -180,7 +165,7 @@ function ResultCard({ result }: { result: HalalCheckResult }) {
       </div>
 
       {result.blocking_reason ? (
-        <div className="mt-4 rounded-xl border border-rose-200 bg-rose-50 p-3 text-sm text-rose-950 dark:border-rose-900 dark:bg-rose-950 dark:text-rose-100">
+        <div className="mt-4 rounded-2xl border border-rose-200 bg-rose-50 p-3 text-sm text-rose-950 dark:border-rose-900 dark:bg-rose-950 dark:text-rose-100">
           <p className="m-0 font-semibold">{t('halal.result.blockingReason')}</p>
           <p className="m-0 mt-1">{result.blocking_reason}</p>
         </div>
@@ -188,13 +173,13 @@ function ResultCard({ result }: { result: HalalCheckResult }) {
 
       <div className="mt-4 grid gap-2">
         <DisclaimerBanner type="halal" />
-        <p className="m-0 rounded-xl border border-[rgb(var(--app-border))] bg-[rgb(var(--app-bg))] p-3 text-xs leading-5 text-[rgb(var(--app-muted))]">
+        <p className="m-0 rounded-2xl border border-[rgb(var(--app-border))] bg-[rgb(var(--app-bg)/0.72)] p-3 text-xs leading-5 text-[rgb(var(--app-muted))]">
           {result.disclaimer}
         </p>
       </div>
 
       <WatchlistAddButton assetId={result.asset.id} />
-    </section>
+    </PremiumCard>
   );
 }
 
@@ -245,16 +230,16 @@ export function HalalScreenerScreen() {
   const assets = searchMutation.data ?? [];
 
   return (
-    <main className="mx-auto flex w-full max-w-2xl flex-col gap-4">
-      <section className="rounded-2xl border border-[rgb(var(--app-border))] bg-[rgb(var(--app-surface))] p-4 shadow-sm">
-        <p className="m-0 text-xs uppercase tracking-wide text-[rgb(var(--app-muted))]">{t('halal.screen.eyebrow')}</p>
-        <h1 className="m-0 mt-1 text-2xl font-semibold text-[rgb(var(--app-text))]">{t('halal.screen.title')}</h1>
-        <p className="m-0 mt-2 text-sm leading-6 text-[rgb(var(--app-muted))]">
-          {t('halal.screen.description')}
-        </p>
-      </section>
+    <main className="mx-auto flex w-full max-w-2xl flex-col gap-5">
+      <PremiumCard>
+        <SectionHeader
+          eyebrow={t('halal.screen.eyebrow')}
+          title={t('halal.screen.title')}
+          description={t('halal.screen.description')}
+        />
+      </PremiumCard>
 
-      <section className="rounded-2xl border border-[rgb(var(--app-border))] bg-[rgb(var(--app-surface))] p-4 shadow-sm">
+      <PremiumCard>
         <form className="flex flex-col gap-3" onSubmit={submitSearch}>
           <label className="text-sm font-semibold text-[rgb(var(--app-text))]" htmlFor="asset-search">
             {t('halal.search.label')}
@@ -265,11 +250,11 @@ export function HalalScreenerScreen() {
               value={query}
               onChange={(event) => setQuery(event.target.value)}
               placeholder={t('halal.search.placeholder')}
-              className="min-h-11 flex-1 rounded-xl border border-[rgb(var(--app-border))] bg-[rgb(var(--app-bg))] px-3 text-base text-[rgb(var(--app-text))] outline-none focus:border-[rgb(var(--app-primary))]"
+              className="min-h-12 flex-1 rounded-2xl border border-[rgb(var(--app-border))] bg-[rgb(var(--app-bg)/0.72)] px-3 text-base text-[rgb(var(--app-text))] outline-none focus:border-[rgb(var(--app-primary))]"
             />
             <button
               type="submit"
-              className="min-h-11 rounded-xl bg-[rgb(var(--app-primary))] px-4 text-sm font-semibold text-white disabled:opacity-50"
+              className="min-h-12 rounded-2xl bg-[rgb(var(--app-primary))] px-4 text-sm font-semibold text-white shadow-[0_10px_24px_rgba(4,120,87,0.2)] disabled:opacity-50"
               disabled={searchMutation.isPending}
             >
               {searchMutation.isPending ? t('halal.search.searching') : t('halal.search.action')}
@@ -278,13 +263,13 @@ export function HalalScreenerScreen() {
         </form>
 
         {searchMutation.isError ? (
-          <p className="m-0 mt-3 rounded-xl border border-rose-200 bg-rose-50 p-3 text-sm text-rose-950">
+          <p className="m-0 mt-3 rounded-2xl border border-rose-200 bg-rose-50 p-3 text-sm text-rose-950">
             {(searchMutation.error as Error).message}
           </p>
         ) : null}
 
         {searchMutation.isSuccess && assets.length === 0 ? (
-          <p className="m-0 mt-3 rounded-xl border border-[rgb(var(--app-border))] bg-[rgb(var(--app-bg))] p-3 text-sm text-[rgb(var(--app-muted))]">
+          <p className="m-0 mt-3 rounded-2xl border border-[rgb(var(--app-border))] bg-[rgb(var(--app-bg)/0.72)] p-3 text-sm text-[rgb(var(--app-muted))]">
             {t('halal.search.empty')}
           </p>
         ) : null}
@@ -304,9 +289,9 @@ export function HalalScreenerScreen() {
             ))}
           </div>
         ) : null}
-      </section>
+      </PremiumCard>
 
-      <section className="rounded-2xl border border-[rgb(var(--app-border))] bg-[rgb(var(--app-surface))] p-4 shadow-sm">
+      <PremiumCard>
         <label className="text-sm font-semibold text-[rgb(var(--app-text))]" htmlFor="instrument-select">
           {t('halal.instrument.label')}
         </label>
@@ -329,7 +314,7 @@ export function HalalScreenerScreen() {
               setSelectedInstrumentId(event.target.value);
               checkMutation.reset();
             }}
-            className="mt-3 min-h-11 w-full rounded-xl border border-[rgb(var(--app-border))] bg-[rgb(var(--app-bg))] px-3 text-base text-[rgb(var(--app-text))] outline-none focus:border-[rgb(var(--app-primary))]"
+            className="mt-3 min-h-12 w-full rounded-2xl border border-[rgb(var(--app-border))] bg-[rgb(var(--app-bg)/0.72)] px-3 text-base text-[rgb(var(--app-text))] outline-none focus:border-[rgb(var(--app-primary))]"
           >
             <option value="">{t('halal.instrument.placeholder')}</option>
             {instrumentsQuery.data.map((instrument) => (
@@ -341,11 +326,11 @@ export function HalalScreenerScreen() {
         ) : null}
 
         {selectedInstrument?.is_absolute_restriction ? (
-          <p className="m-0 mt-3 rounded-xl border border-rose-200 bg-rose-50 p-3 text-sm text-rose-950 dark:border-rose-900 dark:bg-rose-950 dark:text-rose-100">
+          <p className="m-0 mt-3 rounded-2xl border border-rose-200 bg-rose-50 p-3 text-sm text-rose-950 dark:border-rose-900 dark:bg-rose-950 dark:text-rose-100">
             {selectedInstrument.restriction_reason}
           </p>
         ) : selectedInstrument ? (
-          <p className="m-0 mt-3 rounded-xl border border-[rgb(var(--app-border))] bg-[rgb(var(--app-bg))] p-3 text-sm text-[rgb(var(--app-muted))]">
+          <p className="m-0 mt-3 rounded-2xl border border-[rgb(var(--app-border))] bg-[rgb(var(--app-bg)/0.72)] p-3 text-sm text-[rgb(var(--app-muted))]">
             {t('halal.instrument.notRestricted')}
           </p>
         ) : null}
@@ -354,16 +339,16 @@ export function HalalScreenerScreen() {
           type="button"
           onClick={runCheck}
           disabled={!selectedAsset || !selectedInstrumentId || checkMutation.isPending}
-          className="mt-4 min-h-11 w-full rounded-xl bg-[rgb(var(--app-primary))] px-4 text-sm font-semibold text-white disabled:opacity-50"
+          className="mt-4 min-h-12 w-full rounded-2xl bg-[rgb(var(--app-primary))] px-4 text-sm font-semibold text-white shadow-[0_10px_24px_rgba(4,120,87,0.2)] disabled:opacity-50"
         >
           {checkMutation.isPending ? t('halal.check.checking') : t('halal.check.action')}
         </button>
-      </section>
+      </PremiumCard>
 
       {!selectedAsset || !selectedInstrumentId ? (
-        <section className="rounded-2xl border border-[rgb(var(--app-border))] bg-[rgb(var(--app-surface))] p-4 text-sm text-[rgb(var(--app-muted))]">
+        <PremiumCard className="text-sm text-[rgb(var(--app-muted))]">
           {t('halal.check.empty')}
-        </section>
+        </PremiumCard>
       ) : null}
 
       {checkMutation.isError ? (

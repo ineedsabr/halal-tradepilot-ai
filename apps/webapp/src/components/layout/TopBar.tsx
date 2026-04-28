@@ -22,10 +22,10 @@ export function TopBar() {
   };
 
   return (
-    <header className="sticky top-0 z-10 border-b border-[rgb(var(--app-border))] bg-[rgb(var(--app-surface))] px-4 py-3">
+    <header className="sticky top-0 z-10 border-b border-[rgb(var(--app-border))] bg-[rgb(var(--app-surface)/0.86)] px-4 py-3 backdrop-blur-xl">
       <div className="flex items-center justify-between gap-3">
         <div className="flex min-w-0 items-center gap-2">
-          <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-emerald-50 text-[rgb(var(--app-text))] dark:bg-emerald-950">
+          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl border border-[rgb(var(--app-border))] bg-[rgb(var(--app-bg))] text-[rgb(var(--app-text))] shadow-[0_10px_24px_rgba(15,23,18,0.08)]">
             <MizanLogo size={24} />
           </div>
           <div className="min-w-0">
@@ -39,7 +39,7 @@ export function TopBar() {
         <div className="flex shrink-0 items-center gap-2">
           <select
             aria-label={t('settings.language')}
-            className="rounded-md border border-[rgb(var(--app-border))] bg-[rgb(var(--app-surface))] px-2 py-1 text-sm"
+            className="rounded-full border border-[rgb(var(--app-border))] bg-[rgb(var(--app-bg))] px-2 py-1 text-sm text-[rgb(var(--app-text))]"
             value={selectedLanguage}
             onChange={handleLanguageChange}
           >
@@ -52,7 +52,7 @@ export function TopBar() {
 
           <select
             aria-label={t('settings.theme')}
-            className="rounded-md border border-[rgb(var(--app-border))] bg-[rgb(var(--app-surface))] px-2 py-1 text-sm"
+            className="rounded-full border border-[rgb(var(--app-border))] bg-[rgb(var(--app-bg))] px-2 py-1 text-sm text-[rgb(var(--app-text))]"
             value={themeMode}
             onChange={handleThemeChange}
           >

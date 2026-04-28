@@ -1,5 +1,8 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useTranslation } from 'react-i18next';
+import { PremiumCard } from '../../components/ui/PremiumCard';
+import { SectionHeader } from '../../components/ui/SectionHeader';
+import { StatusPill } from '../../components/ui/StatusPill';
 import { listWatchlist, removeWatchlistItem, type WatchlistItem } from '../../lib/api';
 import { useAuth } from '../../providers/AuthProvider';
 
@@ -19,7 +22,7 @@ function WatchlistCard({ item, onRemove, isRemoving }: {
   const { t } = useTranslation();
 
   return (
-    <article className="rounded-2xl border border-[rgb(var(--app-border))] bg-[rgb(var(--app-surface))] p-4 shadow-sm">
+    <PremiumCard as="article">
       <div className="flex items-start justify-between gap-3">
         <div className="min-w-0">
           <h2 className="m-0 text-lg font-semibold text-[rgb(var(--app-text))]">
@@ -33,7 +36,7 @@ function WatchlistCard({ item, onRemove, isRemoving }: {
           type="button"
           onClick={() => onRemove(item.watchlist_item_id)}
           disabled={isRemoving}
-          className="min-h-9 shrink-0 rounded-xl border border-[rgb(var(--app-border))] px-3 text-xs font-semibold text-[rgb(var(--app-text))] disabled:opacity-50"
+          className="min-h-9 shrink-0 rounded-full border border-[rgb(var(--app-border))] bg-[rgb(var(--app-bg)/0.72)] px-3 text-xs font-semibold text-[rgb(var(--app-text))] disabled:opacity-50"
         >
           {isRemoving ? t('watchlist.removing') : t('watchlist.remove')}
         </button>
@@ -44,8 +47,11 @@ function WatchlistCard({ item, onRemove, isRemoving }: {
           <dt className="text-xs uppercase tracking-wide text-[rgb(var(--app-muted))]">
             {t('watchlist.status')}
           </dt>
-          <dd className="m-0 text-[rgb(var(--app-text))]">
-            {item.current_status ?? t('halal.result.notAvailable')}
+          <dd className="m-0 mt-1">
+            <StatusPill
+              tone={item.current_status === 'AVOID' ? 'danger' : item.current_status ? 'warning' : 'neutral'}
+              value={item.current_status ?? t('halal.result.notAvailable')}
+            />
           </dd>
         </div>
         <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
@@ -73,7 +79,7 @@ function WatchlistCard({ item, onRemove, isRemoving }: {
           <dd className="m-0 text-[rgb(var(--app-text))]">{formatDate(item.created_at)}</dd>
         </div>
       </dl>
-    </article>
+    </PremiumCard>
   );
 }
 
@@ -104,56 +110,57 @@ export function WatchlistScreen() {
 
   if (!accessToken) {
     return (
-      <section className="rounded-2xl border border-[rgb(var(--app-border))] bg-[rgb(var(--app-surface))] p-4 text-sm text-[rgb(var(--app-muted))]">
+      <PremiumCard className="text-sm text-[rgb(var(--app-muted))]">
         {t('watchlist.authRequired')}
-      </section>
+      </PremiumCard>
     );
   }
 
   const items = watchlistQuery.data ?? [];
 
   return (
-    <main className="mx-auto flex w-full max-w-2xl flex-col gap-4">
-      <section className="rounded-2xl border border-[rgb(var(--app-border))] bg-[rgb(var(--app-surface))] p-4 shadow-sm">
-        <p className="m-0 text-xs uppercase tracking-wide text-[rgb(var(--app-muted))]">
-          {t('watchlist.eyebrow')}
-        </p>
-        <h1 className="m-0 mt-1 text-2xl font-semibold text-[rgb(var(--app-text))]">
-          {t('watchlist.title')}
-        </h1>
-        <p className="m-0 mt-2 text-sm leading-6 text-[rgb(var(--app-muted))]">
-          {t('watchlist.description')}
-        </p>
-      </section>
+    <main className="mx-auto flex w-full max-w-2xl flex-col gap-5">
+      <PremiumCard>
+        <SectionHeader
+          eyebrow={t('watchlist.eyebrow')}
+          title={t('watchlist.title')}
+          description={t('watchlist.description')}
+        />
+      </PremiumCard>
 
       {watchlistQuery.isLoading ? (
-        <section className="rounded-2xl border border-[rgb(var(--app-border))] bg-[rgb(var(--app-surface))] p-4 text-sm text-[rgb(var(--app-muted))]">
+        <PremiumCard className="text-sm text-[rgb(var(--app-muted))]">
           {t('watchlist.loading')}
-        </section>
+        </PremiumCard>
       ) : null}
 
       {watchlistQuery.isError ? (
-        <section className="rounded-2xl border border-rose-200 bg-rose-50 p-4 text-sm text-rose-950 dark:border-rose-900 dark:bg-rose-950 dark:text-rose-100">
+        <PremiumCard className="border-rose-200 bg-rose-50 text-sm text-rose-950 dark:border-rose-900 dark:bg-rose-950 dark:text-rose-100">
           {(watchlistQuery.error as Error).message}
-        </section>
+        </PremiumCard>
       ) : null}
 
       {items.length >= WATCHLIST_LIMIT ? (
-        <section className="rounded-2xl border border-amber-200 bg-amber-50 p-4 text-sm text-amber-950 dark:border-amber-900 dark:bg-amber-950 dark:text-amber-100">
+        <PremiumCard className="border-amber-200 bg-amber-50 text-sm text-amber-950 dark:border-amber-900 dark:bg-amber-950 dark:text-amber-100">
           {t('watchlist.limit')}
-        </section>
+        </PremiumCard>
       ) : null}
 
       {watchlistQuery.isSuccess && items.length === 0 ? (
-        <section className="rounded-2xl border border-[rgb(var(--app-border))] bg-[rgb(var(--app-surface))] p-4 text-sm text-[rgb(var(--app-muted))]">
-          {t('watchlist.empty')}
-        </section>
+        <PremiumCard className="text-center">
+          <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-2xl border border-[rgb(var(--app-border))] bg-[rgb(var(--app-bg))] text-sm font-semibold text-[rgb(var(--app-primary))]">
+            SL
+          </div>
+          <p className="m-0 mt-3 text-sm leading-6 text-[rgb(var(--app-muted))]">
+            {t('watchlist.empty')}
+          </p>
+        </PremiumCard>
       ) : null}
 
       {removeMutation.isError ? (
-        <section className="rounded-2xl border border-rose-200 bg-rose-50 p-4 text-sm text-rose-950 dark:border-rose-900 dark:bg-rose-950 dark:text-rose-100">
+        <PremiumCard className="border-rose-200 bg-rose-50 text-sm text-rose-950 dark:border-rose-900 dark:bg-rose-950 dark:text-rose-100">
           {(removeMutation.error as Error).message}
-        </section>
+        </PremiumCard>
       ) : null}
 
       {items.length > 0 ? (
