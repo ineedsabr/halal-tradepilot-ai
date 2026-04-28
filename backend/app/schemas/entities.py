@@ -17,6 +17,7 @@ from .halal import HalalAssessmentBase, HalalAssessmentRead, HalalCheckResult, H
 from .journal import JournalEntryBase, JournalEntryRead, JournalEntrySummary
 from .paper import PaperTradeBase, PaperTradeRead, PaperTradeStatus, PaperTradeSummary
 from .risk import RiskCalculationResult, RiskVerdict
+from .settings import MethodologyPreference, UserGoal, UserSettingsRead, UserSettingsUpdate
 
 __all__ = [
     "AIGuardResponse",
@@ -44,7 +45,11 @@ __all__ = [
     "RiskCalculationResult",
     "RiskProfile",
     "RiskVerdict",
+    "MethodologyPreference",
     "SoftDeleteReadMixin",
     "Theme",
     "UserLevel",
+    "UserGoal",
+    "UserSettingsRead",
+    "UserSettingsUpdate",
 ]

@@ -19,6 +19,7 @@ from .health import HealthResponse
 from .journal import JournalEntryBase, JournalEntryRead, JournalEntrySummary
 from .paper import PaperTradeBase, PaperTradeRead, PaperTradeStatus, PaperTradeSummary
 from .risk import RiskCalculationResult, RiskVerdict
+from .settings import MethodologyPreference, UserGoal, UserSettingsRead, UserSettingsUpdate
 
 __all__ = [
     "AIGuardResponse",
@@ -49,7 +50,11 @@ __all__ = [
     "RiskCalculationResult",
     "RiskProfile",
     "RiskVerdict",
+    "MethodologyPreference",
     "Theme",
     "TelegramAuthRequest",
+    "UserGoal",
     "UserLevel",
+    "UserSettingsRead",
+    "UserSettingsUpdate",
 ]
