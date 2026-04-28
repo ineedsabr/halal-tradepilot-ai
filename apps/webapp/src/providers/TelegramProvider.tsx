@@ -19,6 +19,7 @@ const DEFAULT_THEME_TOKENS = {
     '--app-surface': '255 255 255',
     '--app-border': '220 225 232',
     '--app-accent': '22 112 214',
+    '--app-primary': '22 112 214',
   },
   dark: {
     '--app-bg': '17 21 28',
@@ -27,6 +28,7 @@ const DEFAULT_THEME_TOKENS = {
     '--app-surface': '29 35 45',
     '--app-border': '57 68 84',
     '--app-accent': '83 155 245',
+    '--app-primary': '83 155 245',
   },
 };
 
@@ -86,6 +88,7 @@ export function TelegramProvider({ children }: PropsWithChildren) {
       setCssVariable('--app-muted', telegramTheme.hint_color);
       setCssVariable('--app-surface', telegramTheme.secondary_bg_color);
       setCssVariable('--app-accent', telegramTheme.button_color);
+      setCssVariable('--app-primary', telegramTheme.button_color);
     }
   }, [telegramWebApp, themeMode]);
 

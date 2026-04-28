@@ -6,6 +6,7 @@ import { useTheme } from './TelegramProvider';
 
 type AuthContextValue = {
   accessToken: string | null;
+  isAuthenticating: boolean;
 };
 
 const AuthContext = createContext<AuthContextValue | null>(null);
@@ -15,7 +16,7 @@ export function AuthProvider({ children }: PropsWithChildren) {
   const [accessToken, setAccessToken] = useState<string | null>(null);
   const initData = telegramWebApp?.initData;
 
-  const { isError, mutate } = useMutation({
+  const { isError, isPending, mutate } = useMutation({
     mutationFn: authenticateTelegram,
     onSuccess: (response) => {
       setAccessToken(response.access_token);
@@ -28,7 +29,8 @@ export function AuthProvider({ children }: PropsWithChildren) {
     }
   }, [initData, mutate]);
 
-  const value = useMemo(() => ({ accessToken }), [accessToken]);
+  const isAuthenticating = Boolean(initData) && (isPending || (!accessToken && !isError));
+  const value = useMemo(() => ({ accessToken, isAuthenticating }), [accessToken, isAuthenticating]);
 
   if (isError) {
     return <SessionExpiredState />;

@@ -6,6 +6,40 @@ type TelegramAuthResponse = {
   expires_in: number;
 };
 
+export type UserSettings = {
+  language: 'ru' | 'en' | 'de';
+  theme: 'light' | 'dark' | 'telegram';
+  level: 'learner' | 'trader' | 'pro';
+  goal: 'learn' | 'invest' | 'trade';
+  methodology: 'conservative' | 'balanced' | 'scholar_based' | 'custom';
+  risk_profile: 'conservative' | 'moderate' | 'active';
+  max_risk_per_trade: number;
+  demo_deposit: number;
+  notifications_enabled: boolean;
+  disclaimer_accepted_at?: string | null;
+  terms_accepted_at?: string | null;
+  privacy_accepted_at?: string | null;
+  onboarding_completed: boolean;
+};
+
+export type UserSettingsUpdate = Partial<
+  Pick<
+    UserSettings,
+    | 'language'
+    | 'theme'
+    | 'level'
+    | 'goal'
+    | 'methodology'
+    | 'risk_profile'
+    | 'demo_deposit'
+    | 'notifications_enabled'
+  >
+> & {
+  disclaimer_accepted?: boolean;
+  terms_accepted?: boolean;
+  privacy_accepted?: boolean;
+};
+
 export type AssetSummary = {
   id: string;
   symbol: string;
@@ -75,6 +109,31 @@ export async function authenticateTelegram(initData: string): Promise<TelegramAu
   }
 
   return response.json() as Promise<TelegramAuthResponse>;
+}
+
+function authHeaders(accessToken: string) {
+  return {
+    Authorization: `Bearer ${accessToken}`,
+    'Content-Type': 'application/json',
+  };
+}
+
+export async function getUserSettings(accessToken: string): Promise<UserSettings> {
+  const response = await fetch(`${API_URL}/api/v1/me/settings`, {
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
+  return parseJsonResponse<UserSettings>(response, 'Unable to load settings.');
+}
+
+export async function updateUserSettings(accessToken: string, payload: UserSettingsUpdate): Promise<UserSettings> {
+  const response = await fetch(`${API_URL}/api/v1/me/settings`, {
+    method: 'PUT',
+    headers: authHeaders(accessToken),
+    body: JSON.stringify(payload),
+  });
+  return parseJsonResponse<UserSettings>(response, 'Unable to update settings.');
 }
 
 export async function listInstruments(): Promise<InstrumentSummary[]> {

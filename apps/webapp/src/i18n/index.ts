@@ -80,9 +80,91 @@ export const resources = {
           default: 'Instrument layer is not restricted. The final status still depends on the asset assessment.',
         },
       },
+      onboarding: {
+        eyebrow: 'Step {{current}} of {{total}}',
+        back: 'Back',
+        next: 'Next',
+        finish: 'Finish',
+        saving: 'Saving',
+        steps: {
+          0: {
+            title: 'Choose language and theme',
+            description: 'These preferences are saved to your account settings.',
+          },
+          1: {
+            title: 'Set your learning profile',
+            description: 'This helps shape educational wording only. It does not enable advice or automation.',
+          },
+          2: {
+            title: 'Confirm preferences and consents',
+            description: 'Finish is available after all required consent checkboxes are accepted.',
+          },
+        },
+        consent: {
+          disclaimer: 'I understand this app provides educational screening only and does not issue religious rulings.',
+          terms: 'I accept the current terms.',
+          privacy: 'I accept the current privacy notice.',
+        },
+      },
       settings: {
         language: 'Language',
         theme: 'Theme',
+      },
+      settingsPanel: {
+        eyebrow: 'Settings',
+        title: 'Onboarding settings',
+        description: 'Update saved preferences. Consent timestamps are preserved by the backend.',
+        authRequired: 'Open the Mini App through Telegram to manage account settings.',
+        save: 'Save settings',
+        saving: 'Saving',
+        saved: 'Settings saved.',
+        methodologyNote:
+          'Only conservative currently maps to the backend bootstrap methodology. Other choices are saved as preferences for future methodology work.',
+        fields: {
+          language: 'Language',
+          theme: 'Theme',
+          level: 'Experience level',
+          goal: 'Goal',
+          methodology: 'Methodology preference',
+          riskProfile: 'Risk profile',
+          demoDeposit: 'Demo deposit',
+          notifications: 'Notifications enabled',
+          maxRisk: 'Backend max risk value',
+        },
+        consents: {
+          title: 'Accepted consents',
+          disclaimer: 'Disclaimer',
+          terms: 'Terms',
+          privacy: 'Privacy',
+        },
+        options: {
+          language: {
+            en: 'English',
+            ru: 'Russian',
+            de: 'German',
+          },
+          level: {
+            learner: 'Learner',
+            trader: 'Practitioner',
+            pro: 'Advanced',
+          },
+          goal: {
+            learn: 'Learn',
+            invest: 'Long-term investing education',
+            trade: 'Practice planning',
+          },
+          methodology: {
+            conservative: 'Conservative',
+            balanced: 'Balanced',
+            scholar_based: 'Scholar-based',
+            custom: 'Custom',
+          },
+          riskProfile: {
+            conservative: 'Conservative',
+            moderate: 'Moderate',
+            active: 'Active',
+          },
+        },
       },
       theme: {
         dark: 'Dark',
@@ -169,9 +251,91 @@ export const resources = {
           default: 'Уровень инструмента не ограничен. Итоговый статус всё ещё зависит от оценки актива.',
         },
       },
+      onboarding: {
+        eyebrow: 'Шаг {{current}} из {{total}}',
+        back: 'Назад',
+        next: 'Далее',
+        finish: 'Завершить',
+        saving: 'Сохранение',
+        steps: {
+          0: {
+            title: 'Выберите язык и тему',
+            description: 'Эти предпочтения сохраняются в настройках аккаунта.',
+          },
+          1: {
+            title: 'Настройте образовательный профиль',
+            description: 'Это влияет только на образовательные формулировки. Советы и автоматизация не включаются.',
+          },
+          2: {
+            title: 'Подтвердите настройки и согласия',
+            description: 'Завершение доступно после принятия всех обязательных согласий.',
+          },
+        },
+        consent: {
+          disclaimer: 'Я понимаю, что приложение даёт только образовательный скрининг и не выносит религиозные решения.',
+          terms: 'Я принимаю текущие условия.',
+          privacy: 'Я принимаю текущее уведомление о приватности.',
+        },
+      },
       settings: {
         language: 'Язык',
         theme: 'Тема',
+      },
+      settingsPanel: {
+        eyebrow: 'Настройки',
+        title: 'Настройки онбординга',
+        description: 'Обновите сохранённые предпочтения. Время принятых согласий сохраняется backend.',
+        authRequired: 'Откройте Mini App через Telegram, чтобы управлять настройками аккаунта.',
+        save: 'Сохранить настройки',
+        saving: 'Сохранение',
+        saved: 'Настройки сохранены.',
+        methodologyNote:
+          'Сейчас только conservative связан с bootstrap-методологией backend. Остальные варианты сохраняются как предпочтения для будущей работы.',
+        fields: {
+          language: 'Язык',
+          theme: 'Тема',
+          level: 'Уровень опыта',
+          goal: 'Цель',
+          methodology: 'Предпочтение методологии',
+          riskProfile: 'Профиль риска',
+          demoDeposit: 'Демо-депозит',
+          notifications: 'Уведомления включены',
+          maxRisk: 'Значение max risk от backend',
+        },
+        consents: {
+          title: 'Принятые согласия',
+          disclaimer: 'Дисклеймер',
+          terms: 'Условия',
+          privacy: 'Приватность',
+        },
+        options: {
+          language: {
+            en: 'Английский',
+            ru: 'Русский',
+            de: 'Немецкий',
+          },
+          level: {
+            learner: 'Ученик',
+            trader: 'Практик',
+            pro: 'Продвинутый',
+          },
+          goal: {
+            learn: 'Учиться',
+            invest: 'Образование для долгосрочного инвестирования',
+            trade: 'Практика планирования',
+          },
+          methodology: {
+            conservative: 'Консервативная',
+            balanced: 'Balanced',
+            scholar_based: 'Scholar-based',
+            custom: 'Custom',
+          },
+          riskProfile: {
+            conservative: 'Консервативный',
+            moderate: 'Умеренный',
+            active: 'Активный',
+          },
+        },
       },
       theme: {
         dark: 'Тёмная',
@@ -258,9 +422,91 @@ export const resources = {
           default: 'Die Instrumentenebene ist nicht eingeschraenkt. Der Endstatus haengt weiter von der Asset-Bewertung ab.',
         },
       },
+      onboarding: {
+        eyebrow: 'Schritt {{current}} von {{total}}',
+        back: 'Zurueck',
+        next: 'Weiter',
+        finish: 'Abschliessen',
+        saving: 'Speichern',
+        steps: {
+          0: {
+            title: 'Sprache und Theme waehlen',
+            description: 'Diese Praeferenzen werden in deinen Kontoeinstellungen gespeichert.',
+          },
+          1: {
+            title: 'Bildungsprofil festlegen',
+            description: 'Dies beeinflusst nur die Bildungsformulierung. Es aktiviert keine Beratung oder Automatisierung.',
+          },
+          2: {
+            title: 'Praeferenzen und Zustimmungen bestaetigen',
+            description: 'Abschliessen ist moeglich, sobald alle erforderlichen Zustimmungen akzeptiert sind.',
+          },
+        },
+        consent: {
+          disclaimer: 'Ich verstehe, dass die App nur bildendes Screening bietet und keine religioesen Entscheidungen trifft.',
+          terms: 'Ich akzeptiere die aktuellen Bedingungen.',
+          privacy: 'Ich akzeptiere den aktuellen Datenschutzhinweis.',
+        },
+      },
       settings: {
         language: 'Sprache',
         theme: 'Theme',
+      },
+      settingsPanel: {
+        eyebrow: 'Einstellungen',
+        title: 'Onboarding-Einstellungen',
+        description: 'Aktualisiere gespeicherte Praeferenzen. Zustimmungszeitpunkte bleiben im Backend erhalten.',
+        authRequired: 'Oeffne die Mini App ueber Telegram, um Kontoeinstellungen zu verwalten.',
+        save: 'Einstellungen speichern',
+        saving: 'Speichern',
+        saved: 'Einstellungen gespeichert.',
+        methodologyNote:
+          'Derzeit ist nur conservative mit der Backend-Bootstrap-Methodik verbunden. Andere Werte werden als Praeferenzen fuer spaetere Methodikarbeit gespeichert.',
+        fields: {
+          language: 'Sprache',
+          theme: 'Theme',
+          level: 'Erfahrungsniveau',
+          goal: 'Ziel',
+          methodology: 'Methodikpraeferenz',
+          riskProfile: 'Risikoprofil',
+          demoDeposit: 'Demo-Einzahlung',
+          notifications: 'Benachrichtigungen aktiviert',
+          maxRisk: 'Backend max risk Wert',
+        },
+        consents: {
+          title: 'Akzeptierte Zustimmungen',
+          disclaimer: 'Disclaimer',
+          terms: 'Bedingungen',
+          privacy: 'Datenschutz',
+        },
+        options: {
+          language: {
+            en: 'Englisch',
+            ru: 'Russisch',
+            de: 'Deutsch',
+          },
+          level: {
+            learner: 'Lernend',
+            trader: 'Praktiker',
+            pro: 'Fortgeschritten',
+          },
+          goal: {
+            learn: 'Lernen',
+            invest: 'Bildung fuer langfristiges Investieren',
+            trade: 'Planung ueben',
+          },
+          methodology: {
+            conservative: 'Konservativ',
+            balanced: 'Balanced',
+            scholar_based: 'Scholar-based',
+            custom: 'Custom',
+          },
+          riskProfile: {
+            conservative: 'Konservativ',
+            moderate: 'Moderat',
+            active: 'Aktiv',
+          },
+        },
       },
       theme: {
         dark: 'Dunkel',

@@ -10,6 +10,7 @@
   --app-surface: 255 255 255;
   --app-border: 220 225 232;
   --app-accent: 22 112 214;
+  --app-primary: 22 112 214;
 }
 
 :root.dark {
@@ -20,6 +21,7 @@
   --app-surface: 29 35 45;
   --app-border: 57 68 84;
   --app-accent: 83 155 245;
+  --app-primary: 83 155 245;
 }
 
 * {
