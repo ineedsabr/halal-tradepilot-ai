@@ -16,11 +16,11 @@ export function ActionCard({ title, description, meta, icon, disabled = false, o
       disabled={disabled}
       onClick={onClick}
       className={[
-        'min-h-32 rounded-[1.35rem] border p-4 text-left transition',
-        'shadow-[0_16px_42px_rgba(15,23,18,0.07)] dark:shadow-[0_16px_42px_rgba(0,0,0,0.26)]',
+        'min-h-32 rounded-[1.35rem] border p-4 text-left transition active:scale-[0.98]',
+        'shadow-[0_2px_8px_rgba(17,24,39,0.04),0_14px_36px_rgba(17,24,39,0.07)] dark:shadow-[0_16px_42px_rgba(0,0,0,0.28)]',
         disabled
           ? 'border-[rgb(var(--app-border))] bg-[rgb(var(--app-bg))] text-[rgb(var(--app-muted))]'
-          : 'border-[rgb(var(--app-border))] bg-[rgb(var(--app-surface)/0.94)] text-[rgb(var(--app-text))] hover:-translate-y-0.5 hover:border-[rgb(var(--app-primary))]',
+          : 'border-[rgb(var(--app-border))] bg-[rgb(var(--app-surface)/0.96)] text-[rgb(var(--app-text))] hover:-translate-y-0.5 hover:border-[rgb(var(--app-primary)/0.42)]',
       ].join(' ')}
     >
       <span className="flex items-start justify-between gap-3">

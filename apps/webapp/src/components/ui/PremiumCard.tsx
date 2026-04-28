@@ -17,9 +17,9 @@ export function PremiumCard({
   onSubmit,
 }: PremiumCardProps) {
   const classes = [
-    'rounded-[1.35rem] border border-[rgb(var(--app-border))] bg-[rgb(var(--app-surface)/0.92)] backdrop-blur',
+    'rounded-[1.35rem] border border-[rgb(var(--app-border))] bg-[rgb(var(--app-surface)/0.94)] backdrop-blur',
     padded ? 'p-4' : '',
-    elevated ? 'shadow-[0_18px_50px_rgba(15,23,18,0.08)] dark:shadow-[0_18px_50px_rgba(0,0,0,0.28)]' : '',
+    elevated ? 'shadow-[0_2px_8px_rgba(17,24,39,0.05),0_16px_42px_rgba(17,24,39,0.07)] dark:shadow-[0_18px_50px_rgba(0,0,0,0.30)]' : '',
     className,
   ]
     .filter(Boolean)

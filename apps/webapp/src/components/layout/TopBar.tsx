@@ -22,24 +22,24 @@ export function TopBar() {
   };
 
   return (
-    <header className="sticky top-0 z-10 border-b border-[rgb(var(--app-border))] bg-[rgb(var(--app-surface)/0.86)] px-4 py-3 backdrop-blur-xl">
+    <header className="sticky top-0 z-10 border-b border-[rgb(var(--app-border)/0.72)] bg-[rgb(var(--app-bg)/0.88)] px-4 py-3 backdrop-blur-xl">
       <div className="flex items-center justify-between gap-3">
         <div className="flex min-w-0 items-center gap-2">
-          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl border border-[rgb(var(--app-border))] bg-[rgb(var(--app-bg))] text-[rgb(var(--app-text))] shadow-[0_10px_24px_rgba(15,23,18,0.08)]">
+          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-[0.95rem] border border-[rgb(var(--app-border))] bg-[rgb(var(--app-surface))] text-[rgb(var(--app-text))] shadow-[0_10px_24px_rgba(15,23,18,0.08)]">
             <MizanLogo size={24} />
           </div>
           <div className="min-w-0">
-            <p className="m-0 text-xs uppercase tracking-wide text-[rgb(var(--app-muted))]">
-              {t('app.telegramMiniApp')}
+            <p className="m-0 truncate text-[11px] font-semibold uppercase tracking-[0.12em] text-[rgb(var(--app-muted))]">
+              {t('app.tagline')}
             </p>
-            <h1 className="m-0 truncate text-lg font-semibold">{APP_NAME}</h1>
+            <h1 className="m-0 truncate text-xl font-black tracking-normal">{APP_NAME}</h1>
           </div>
         </div>
 
         <div className="flex shrink-0 items-center gap-2">
           <select
             aria-label={t('settings.language')}
-            className="rounded-full border border-[rgb(var(--app-border))] bg-[rgb(var(--app-bg))] px-2 py-1 text-sm text-[rgb(var(--app-text))]"
+            className="rounded-full border border-[rgb(var(--app-border))] bg-[rgb(var(--app-surface))] px-2 py-1 text-sm text-[rgb(var(--app-text))]"
             value={selectedLanguage}
             onChange={handleLanguageChange}
           >
@@ -52,7 +52,7 @@ export function TopBar() {
 
           <select
             aria-label={t('settings.theme')}
-            className="rounded-full border border-[rgb(var(--app-border))] bg-[rgb(var(--app-bg))] px-2 py-1 text-sm text-[rgb(var(--app-text))]"
+            className="rounded-full border border-[rgb(var(--app-border))] bg-[rgb(var(--app-surface))] px-2 py-1 text-sm text-[rgb(var(--app-text))]"
             value={themeMode}
             onChange={handleThemeChange}
           >

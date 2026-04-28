@@ -90,7 +90,8 @@ export function HomeScreen({ onNavigate, onOpenVerdictPreview }: HomeScreenProps
   return (
     <main className="mx-auto flex w-full max-w-2xl flex-col gap-5">
       <PremiumCard className="overflow-hidden p-0">
-        <div className="border-b border-[rgb(var(--app-border))] bg-[linear-gradient(135deg,rgb(var(--app-surface))_0%,rgb(var(--app-bg))_58%,rgb(var(--app-surface))_100%)] p-5">
+        <div className="relative overflow-hidden border-b border-[rgb(var(--app-border))] bg-[linear-gradient(135deg,rgb(var(--app-surface))_0%,rgb(var(--app-bg))_58%,rgb(var(--app-surface))_100%)] p-5">
+          <div className="pointer-events-none absolute -right-8 -top-8 h-32 w-32 rounded-full bg-[radial-gradient(circle,rgb(var(--app-primary)/0.14)_0%,transparent_70%)]" />
           <div className="flex items-start justify-between gap-4">
             <div className="flex h-20 w-20 items-center justify-center rounded-[1.55rem] border border-[rgb(var(--app-border))] bg-[rgb(var(--app-surface))] text-[rgb(var(--app-text))] shadow-[0_18px_38px_rgba(4,120,87,0.13)]">
               <MizanLogo size={58} />
@@ -118,13 +119,18 @@ export function HomeScreen({ onNavigate, onOpenVerdictPreview }: HomeScreenProps
           <button
             type="button"
             onClick={onOpenVerdictPreview}
-            className="min-h-16 rounded-[1.35rem] border border-[rgb(var(--app-primary)/0.18)] bg-[rgb(var(--app-primary))] px-4 text-left text-sm font-semibold text-white shadow-[0_16px_34px_rgba(4,120,87,0.26)]"
+            className="flex min-h-16 items-center gap-3 rounded-[1.15rem] border border-[rgb(var(--app-border))] bg-[rgb(var(--app-surface))] px-4 text-left text-sm font-semibold text-[rgb(var(--app-text))] shadow-[0_2px_8px_rgba(17,24,39,0.04),0_14px_34px_rgba(17,24,39,0.07)] transition hover:border-[rgb(var(--app-primary)/0.34)] active:scale-[0.98]"
           >
-            <span className="block text-xs uppercase tracking-[0.16em] text-white/70">
-              {t('home.ask.eyebrow')}
+            <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-[rgb(var(--app-bg))] text-[rgb(var(--app-muted))]">
+              AI
             </span>
-            <span className="mt-1 block text-base">
-              {t('home.ask.placeholder')}
+            <span className="min-w-0 flex-1">
+              <span className="block truncate text-base text-[rgb(var(--app-muted))]">
+                {t('home.ask.placeholder')}
+              </span>
+            </span>
+            <span className="rounded-full border border-[rgb(var(--app-border))] bg-[rgb(var(--app-bg))] px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.08em] text-[rgb(var(--app-muted))]">
+              {t('home.ask.eyebrow')}
             </span>
           </button>
           <div className="grid grid-cols-3 gap-2">
