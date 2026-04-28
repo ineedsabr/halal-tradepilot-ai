@@ -10,6 +10,7 @@ import {
   type HalalCheckResult,
   type InstrumentSummary,
 } from '../../lib/api';
+import { WatchlistAddButton } from '../watchlist/WatchlistAddButton';
 
 const METHODOLOGY = 'mvp_conservative_bootstrap';
 
@@ -187,6 +188,8 @@ function ResultCard({ result }: { result: HalalCheckResult }) {
       <p className="m-0 mt-4 rounded-xl border border-[rgb(var(--app-border))] bg-[rgb(var(--app-bg))] p-3 text-xs leading-5 text-[rgb(var(--app-muted))]">
         {result.disclaimer}
       </p>
+
+      <WatchlistAddButton assetId={result.asset.id} />
     </section>
   );
 }

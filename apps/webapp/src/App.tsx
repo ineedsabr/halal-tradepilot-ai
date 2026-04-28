@@ -10,6 +10,7 @@ import { SkeletonLoader } from './components/states/SkeletonLoader';
 import { HalalScreenerScreen } from './features/halal/HalalScreenerScreen';
 import { OnboardingFlow } from './features/onboarding/OnboardingFlow';
 import { SettingsPanel } from './features/settings/SettingsPanel';
+import { WatchlistScreen } from './features/watchlist/WatchlistScreen';
 import { getUserSettings, type UserSettings } from './lib/api';
 import { AuthProvider, useAuth } from './providers/AuthProvider';
 import { TelegramProvider, useTheme } from './providers/TelegramProvider';
@@ -47,6 +48,10 @@ function AppContent() {
   }
 
   function renderScreen() {
+    if (activeItem === 'home') {
+      return <WatchlistScreen />;
+    }
+
     if (activeItem === 'check') {
       return <HalalScreenerScreen />;
     }

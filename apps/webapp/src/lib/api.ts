@@ -80,6 +80,20 @@ export type HalalCheckResult = {
   disclaimer: string;
 };
 
+export type WatchlistItem = {
+  watchlist_item_id: string;
+  asset_id: string;
+  symbol: string;
+  name: string;
+  asset_type: string;
+  exchange?: string | null;
+  currency?: string | null;
+  current_status?: string | null;
+  confidence?: string | null;
+  data_freshness_status?: string | null;
+  created_at: string;
+};
+
 async function parseJsonResponse<T>(response: Response, fallbackMessage: string): Promise<T> {
   if (!response.ok) {
     let detail = fallbackMessage;
@@ -134,6 +148,37 @@ export async function updateUserSettings(accessToken: string, payload: UserSetti
     body: JSON.stringify(payload),
   });
   return parseJsonResponse<UserSettings>(response, 'Unable to update settings.');
+}
+
+export async function listWatchlist(accessToken: string): Promise<WatchlistItem[]> {
+  const response = await fetch(`${API_URL}/api/v1/watchlist`, {
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
+  return parseJsonResponse<WatchlistItem[]>(response, 'Unable to load watchlist.');
+}
+
+export async function addWatchlistItem(accessToken: string, assetId: string): Promise<WatchlistItem> {
+  const response = await fetch(`${API_URL}/api/v1/watchlist`, {
+    method: 'POST',
+    headers: authHeaders(accessToken),
+    body: JSON.stringify({ asset_id: assetId }),
+  });
+  return parseJsonResponse<WatchlistItem>(response, 'Unable to add asset to watchlist.');
+}
+
+export async function removeWatchlistItem(accessToken: string, watchlistItemId: string): Promise<void> {
+  const response = await fetch(`${API_URL}/api/v1/watchlist/${watchlistItemId}`, {
+    method: 'DELETE',
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
+
+  if (!response.ok) {
+    await parseJsonResponse<never>(response, 'Unable to remove asset from watchlist.');
+  }
 }
 
 export async function listInstruments(): Promise<InstrumentSummary[]> {
